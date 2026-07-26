@@ -2,28 +2,31 @@
 
 **BTBA** (Bob the Bygger - Agent) — Norwegian Construction AI Advisor
 
-⚠️ **DISCLAIMER: DEMONSTRATION TOOL ONLY**
+⚠️ **LIABILITY DISCLAIMER**
 
-**Bob the Bygger is a proof-of-concept demonstration tool created to showcase what an AI-powered Norwegian construction advisor could do. It is NOT:**
-- Official guidance from DiBK, Byantikvaren, NVE, or any regulatory authority
-- Approved by any government or professional organization
-- Guaranteed to be accurate (data may be correct or incorrect)
-- Suitable for use in official documentation, permit applications, or professional sign-offs
+**Bob the Bygger is a professional-grade AI analysis tool, NOT a substitute for licensed professionals or regulatory approval.**
 
-**Use cases:**
-- ✅ Learning resource (understand TEK17 concepts)
-- ✅ High-level project planning (early-stage exploration)
-- ✅ Research aid (spotting potential issues before consulting professionals)
-- ❌ Official permit documentation
-- ❌ Structural engineer calculations (without licensed PE review)
-- ❌ Heritage building approval (without Byantikvaren consultation)
-- ❌ Regulatory compliance certification
+**What Bob does:**
+- ✅ Analyze building drawings and identify structural issues
+- ✅ Explain Norwegian building codes (TEK17, PBL, SINTEF standards)
+- ✅ Guide you through compliance and permit processes
+- ✅ Help you ask the right questions before hiring professionals
+- ✅ Spot risks and escalate to licensed professionals when required
 
-**For any real project:** Always consult licensed professionals (structural engineers, architects, heritage consultants, municipal building departments). Bob is a thinking partner, not a replacement for professional judgment.
+**What Bob does NOT do:**
+- ❌ Replace structural engineers (ansvarlig prosjekterende) — all calculations must be stamped by licensed PE
+- ❌ Approve permits — only municipal building authorities can issue søknad approval
+- ❌ Approve heritage interventions — only Byantikvaren / Riksantikvaren can approve
+- ❌ Guarantee accuracy — verify all advice against current regulations (last checked 2026-07-26)
+- ❌ Provide legal, financial, or official guidance — consult qualified professionals for real projects
+
+**Critical:** Bob's escalation flags (🚩 WET_STAMP_REQUIRED, 🚩 SØKNAD_REQUIRED, etc.) identify when you **must** engage licensed professionals or regulatory bodies. Ignoring these flags will result in permit rejection or structural failure.
+
+**For any real project:** Consult licensed professionals (structural engineers, architects, heritage consultants, municipal building departments). Bob is a thinking partner and research aid, not a replacement for professional judgment or regulatory approval.
 
 ---
 
-*A production-grade AI assistant for Norwegian building regulation compliance, structural engineering, and architectural design guidance.*
+*A professional-grade AI reasoning system for Norwegian building analysis, code compliance research, and early-stage project assessment.*
 
 **Version:** 1.3 | **Last updated:** 2026-07-26
 
@@ -33,14 +36,14 @@
 
 **Bob the Bygger** is a specialized AI agent grounded in Norwegian building codes, Eurocode standards, and practical construction expertise. It operates as a reasoning system (ReAct protocol) with explicit escalation gates for high-risk decisions.
 
-**Designed for:**
-- Architects, structural engineers, and builders navigating TEK17 compliance
-- Heritage building restoration and energy upgrades
-- Structural assessment and sizing
-- Permit application preparation (forhåndskonferanse, søknad)
-- Project documentation and compliance audits
+**Best for:**
+- Understanding TEK17 regulations before consulting professionals
+- Early-stage building analysis and risk identification
+- Preparing questions for forhåndskonferanse (pre-application meeting)
+- Learning Norwegian building standards and best practices
+- Internal project coordination (architects, engineers, contractors working together)
 
-**Not a replacement for:** Licensed structural engineers (ansvarlig prosjekterende), building permit authorities, or heritage consultants. Bob flags when you need professional sign-off.
+**Critical boundaries:** Bob analyzes and flags issues; licensed professionals (ansvarlig prosjekterende, municipalities, Byantikvaren) make final decisions. Bob's escalation flags identify when professional involvement is mandatory.
 
 ---
 
@@ -404,14 +407,21 @@ Bob operates bilingually (Norwegian ↔ English):
 
 ---
 
-## When NOT to Use Bob
+## When to Escalate to Professionals
 
-Bob is **not designed for:**
-- ✗ Automated permitting (Bob flags requirements; humans file permits)
-- ✗ Replacing structural engineer sign-off (Bob can size a beam; engineer must verify + sign)
-- ✗ Legal advice (Bob explains regulatory requirements; lawyers handle disputes)
-- ✗ Financial advice (Bob estimates remediation scope; accountants handle costs/financing)
-- ✗ Instant answers to complex problems (Bob provides framework; detailed work requires time)
+Bob explicitly flags situations that require licensed professionals or regulatory approval:
+
+| Situation | Bob's Role | Who Must Act |
+|-----------|-----------|--------------|
+| **Structural design changes** | Analyze load paths, suggest sizing | Ansvarlig prosjekterende (PE) must stamp calculations |
+| **Building permits needed** | Guide compliance requirements | Municipality building department issues søknad approval |
+| **Heritage building work** | Identify antikvariske concerns | Byantikvaren / Riksantikvaren must approve |
+| **Geotechnical uncertainties** | Flag soil/hazard risks | Grunnundersøkelse firm must investigate |
+| **Energy/MEP systems** | Guide standards (NEK 400, NS 3031) | Licensed installer + commissioning |
+| **Legal disputes or insurance** | Explain codes/standards | Lawyer or insurance adjuster |
+| **Cost/budget decisions** | Scope work + estimate remediation | Accountant / project manager |
+
+**Do not ignore Bob's escalation flags** — they indicate decisions that require professional involvement before proceeding.
 
 ---
 
