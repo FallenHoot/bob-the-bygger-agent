@@ -1,4 +1,6 @@
-# Bob the Bygger — Norwegian Construction AI Agent
+# Bob the Bygger — Agent
+
+**BTBA** (Bob the Bygger - Agent) — Norwegian Construction AI Advisor
 
 ⚠️ **DISCLAIMER: DEMONSTRATION TOOL ONLY**
 
