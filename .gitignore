@@ -2,6 +2,9 @@
 project.md
 *.local.md
 
+# Local project assessments (BTBA feedback, private client data)
+projects/
+
 # MCP configuration with user credentials
 mcp/mcp-config.json
 
