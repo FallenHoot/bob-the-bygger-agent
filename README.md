@@ -1,81 +1,75 @@
 # Bob the Bygger — Agent
 
-**BTBA** (Bob the Bygger - Agent) — Norwegian Construction AI Advisor
+**BTBA** (Bob the Bygger - Agent) — Norwegian Construction AI Advisor  
+**Version:** 2.0 | **Last updated:** 2026-08-09
 
-⚠️ **LIABILITY DISCLAIMER**
+---
+
+## ⚠️ Liability Disclaimer
 
 **Bob the Bygger is a professional-grade AI analysis tool, NOT a substitute for licensed professionals or regulatory approval.**
 
 **What Bob does:**
-- ✅ Analyze building drawings and identify structural issues
-- ✅ Explain Norwegian building codes (TEK17, PBL, SINTEF standards)
-- ✅ Guide you through compliance and permit processes
-- ✅ Help you ask the right questions before hiring professionals
-- ✅ Spot risks and escalate to licensed professionals when required
+- ✅ Analyze building drawings (PDF, JPEG, DXF, IFC) and identify structural issues
+- ✅ Explain Norwegian building codes (TEK17, PBL, SINTEF, Eurocodes)
+- ✅ Guide permit application (søknad) preparation — document checklists, nabovarsel, ferdigattest
+- ✅ Assess geotechnical risk — quick clay, flood zones, soil investigation scope
+- ✅ Review BIM/IFC models — storey hierarchy, clash detection, IDS validation
+- ✅ Help you ask the right questions before engaging licensed professionals
+- ✅ Flag escalation points explicitly when professional sign-off is mandatory
 
 **What Bob does NOT do:**
-- ❌ Replace structural engineers (ansvarlig prosjekterende) — all calculations must be stamped by licensed PE
-- ❌ Approve permits — only municipal building authorities can issue søknad approval
+- ❌ Replace structural engineers (ansvarlig prosjekterende) — calculations for permit work must be stamped
+- ❌ Approve permits — only municipal building authorities issue søknad approval
 - ❌ Approve heritage interventions — only Byantikvaren / Riksantikvaren can approve
-- ❌ Guarantee accuracy — verify all advice against current regulations (last checked 2026-07-26)
-- ❌ Provide legal, financial, or official guidance — consult qualified professionals for real projects
+- ❌ Guarantee regulatory accuracy — verify against current laws (knowledge verified 2026-08-09)
+- ❌ Provide legal, financial, or insurance advice
 
-**Critical:** Bob's escalation flags (🚩 WET_STAMP_REQUIRED, 🚩 SØKNAD_REQUIRED, etc.) identify when you **must** engage licensed professionals or regulatory bodies. Ignoring these flags will result in permit rejection or structural failure.
-
-**For any real project:** Consult licensed professionals (structural engineers, architects, heritage consultants, municipal building departments). Bob is a thinking partner and research aid, not a replacement for professional judgment or regulatory approval.
-
----
-
-*A professional-grade AI reasoning system for Norwegian building analysis, code compliance research, and early-stage project assessment.*
-
-**Version:** 1.3 | **Last updated:** 2026-07-26
+**For any real project:** Consult licensed professionals. Bob is a thinking partner and research aid, not a replacement for professional judgment or regulatory approval.
 
 ---
 
 ## Overview
 
-**Bob the Bygger** is a specialized AI agent grounded in Norwegian building codes, Eurocode standards, and practical construction expertise. It operates as a reasoning system (ReAct protocol) with explicit escalation gates for high-risk decisions.
+Bob the Bygger is a specialized AI agent grounded in Norwegian building codes, Eurocode structural standards, and practical construction expertise. It operates with a **20-skill modular architecture**, loading only the skills relevant to each query.
 
-**Best for:**
-- Understanding TEK17 regulations before consulting professionals
-- Early-stage building analysis and risk identification
-- Preparing questions for forhåndskonferanse (pre-application meeting)
-- Learning Norwegian building standards and best practices
-- Internal project coordination (architects, engineers, contractors working together)
-
-**Critical boundaries:** Bob analyzes and flags issues; licensed professionals (ansvarlig prosjekterende, municipalities, Byantikvaren) make final decisions. Bob's escalation flags identify when professional involvement is mandatory.
+**Primary use cases:**
+- Understanding TEK17 / SAK10 requirements before engaging professionals
+- Preparing søknad document packages (tilbygg, fasadeendring, nybygg, riving)
+- Early-stage structural risk identification and load path analysis
+- Extracting and interpreting architectural drawings (PDF, JPEG, DXF, IFC)
+- Geotechnical risk assessment (quick clay, flood zones, foundation type selection)
+- BIM coordination and IFC model review
+- Preparing for forhåndskonferanse (pre-application meeting with municipality)
+- Learning Norwegian construction standards in English or Norwegian
 
 ---
 
 ## Quick Start
 
 ### Prerequisites
-- Access to Bob the Bygger system (this codebase)
-- Optional: Project context file (`project.md`) for session persistence
-- Optional: MCP server connections (structural-analysis, Catenda Hub)
+
+- An AI agent system that loads `system_prompt.md` as the system instructions
+- Optional: `project.md` per project for session persistence
+- Optional: MCP server connections for live structural calculations, drawing OCR, or Norwegian data
 
 ### Basic Usage
 
-1. **Load Bob the Bygger in your chat interface:**
-   - Point to `system_prompt.md` as the system instructions
-   - Bob will automatically load the routing skill first
-   - Load domain skills on-demand based on query classification
+1. **Configure your AI interface** — set `system_prompt.md` as system instructions. Bob routes all queries automatically.
 
 2. **Ask a question:**
    ```
-   "I have a 1952 residential building. I want to add roof insulation 
-    for energy compliance. What's required?"
+   "I have a 1952 residential building. I want to add roof insulation
+    for energy compliance. What does TEK17 require?"
    ```
 
-3. **Expect a structured response:**
-   - **ReAct trace** (for complex queries): Thought → Assessment → Code Check → Escalation → Uncertainty → Action Required
-   - **Escalation flags** (if applicable): 🚩 WET_STAMP_REQUIRED, 🚩 SØKNAD_REQUIRED, etc.
-   - **Next steps**: Clear action sequence with responsible parties
+3. **Attach drawing files** for analysis:
+   ```
+   [Attach floor-plan.pdf or floorplan.jpg]
+   "What are the structural walls in this plan?"
+   ```
 
-4. **For projects with ongoing context:**
-   - Create a `project.md` file at project root
-   - Bob loads it at session start and retains state between queries
-   - See `project.md` template for structure
+4. **Create a project.md** for ongoing projects — Bob loads it at session start and retains context.
 
 ---
 
@@ -83,457 +77,208 @@
 
 ```
 btba-agent/
-├── README.md                          # This file
-├── system_prompt.md                   # Bob's identity, ReAct protocol, escalation matrix
-├── project.md                         # [TEMPLATE] Per-project context (user fills in)
+├── README.md                              # This file
+├── system_prompt.md                       # Bob's identity, ReAct protocol, escalation matrix, skill stack
+├── project.md                             # [TEMPLATE] Per-project context — copy per project
+├── CONTRIBUTING.md                        # Development guidelines
 │
-├── skills/
-│   ├── routing.md                     # Query classifier; selects domain skills
-│   ├── structural-engineering.md      # Load paths, sizing, deflection, connections
-│   ├── building-code-tek17.md         # TEK17 regulations + amendments through 2026-07-26
-│   ├── sintef-byggforsk.md            # SINTEF Byggforsk details, moisture, insulation
-│   ├── historic-preservation.md       # SEFRAK, Byantikvaren, antikvariske krav
-│   ├── classical-architecture.md      # Vitruvian principles, proportion, composition
-│   ├── construction-execution.md      # Site sequencing, demolition, contractor coordination
-│   └── architectural-drawing-reading.md # Plantegninger, snitt, fasader, detaljer
+├── skills/                                # All skills: skills/<name>/SKILL.md
+│   ├── routing/SKILL.md                   # Query classifier — loads first, selects minimum skill set
+│   ├── structural-engineering/SKILL.md    # Load paths, beam sizing, deflection, failure modes
+│   ├── building-code-tek17/SKILL.md       # TEK17, PBL, SAK10, DOK arealanalyse (through 2026-08-09)
+│   ├── sintef-byggforsk/SKILL.md          # SINTEF Byggforsk, moisture, insulation, assemblies
+│   ├── geotechnical/SKILL.md              # Soil investigation, bearing capacity, quick clay, settlement
+│   ├── historic-preservation/SKILL.md     # SEFRAK, Byantikvaren, Riksantikvaren, heritage law
+│   ├── classical-architecture/SKILL.md    # Vitruvian principles, proportion, composition
+│   ├── construction-execution/SKILL.md    # Site sequencing, demolition, NS 8405, contractors
+│   ├── bim-ifc/SKILL.md                   # IFC, IfcOpenShell, IDS validation, BCF, clash detection
+│   ├── soknad-package/SKILL.md            # SAK10 søknad completeness — drawings and documents required
+│   ├── general-contractor-review/SKILL.md # Holistic drawing review, constructability, trade coordination
+│   ├── formulas-reference/SKILL.md        # Beam formulas, Eurocode loads, material values (on-demand)
+│   │   └── references/                    # historical-materials.md, worked-examples.md
+│   ├── technical-education-support/SKILL.md # Jargon translation, bilingual glossary
+│   ├── hvac-mechanical/SKILL.md           # Ventilation, heat pumps, NS 3031/3951, TEK17 §14
+│   ├── electrical-nek400/SKILL.md         # NEK 400, circuits, solar PV, EV charging
+│   ├── plumbing-vs6050/SKILL.md           # Water supply, drainage, VS 6050
+│   ├── architectural-drawing-reading/SKILL.md # Norwegian drawing conventions, symbols, IFC reading
+│   ├── drawing-investigation-protocol/SKILL.md # Systematic questioning before image analysis
+│   ├── drawing-reader/SKILL.md            # PDF/JPEG/DXF extraction pipeline with security fencing
+│   │   ├── references/extraction-protocol.md  # Norwegian symbol reference, dimension notation
+│   │   └── scripts/extract_drawing.py     # Production Python extractor
+│   └── session-initialization/SKILL.md    # Mandatory startup checklist and decision log
 │
 ├── mcp/
-│   ├── mcp-config.json                # Central MCP server configuration
-│   ├── tools/
-│   │   ├── structural-analysis.md     # Elandu structural-analysis-mcp integration guide
-│   │   ├── catenda-hub.md             # [TODO] Catenda Hub IFC + BCF integration
-│   │   └── norwegian-building-data.md # [SPECIFICATION] Future MCP: SEFRAK, NVE, NGU, etc.
+│   ├── mcp-config.json                    # All MCP server configurations
+│   └── tools/
+│       ├── structural-analysis.md         # structural-analysis-mcp integration guide
+│       └── norwegian-building-data.md     # Specification for future live-data MCP server
 │
-├── templates/
-│   ├── structural-assessment-memo.md  # Site visit findings + recommendations
-│   ├── pre-application-meeting-notes.md # Forhåndskonferanse output template
-│   ├── compliance-gap-analysis.md     # Regulatory audit + remediation path
-│   ├── post-approval-checklist.md     # [TODO] Post-søknad verification steps
-│   ├── construction-sequence.md       # [TODO] Phased execution + trade coordination
-│   └── heritage-assessment.md         # [TODO] Cultural significance + mitigation options
+├── templates/                             # All output templates (complete — no TODOs)
+│   ├── structural-assessment-memo.md
+│   ├── pre-application-meeting-notes.md
+│   ├── compliance-gap-analysis.md
+│   ├── post-approval-checklist.md
+│   ├── construction-sequence.md
+│   └── heritage-assessment.md
 │
-└── docs/
-    ├── ARCHITECTURE.md                # [TODO] System design + skill dependency map
-    ├── BATTLE_TEST_RESULTS.md         # [TODO] Test scenarios + performance evaluation
-    └── ROADMAP.md                     # [TODO] Future features + MCP roadmap
+└── projects/                              # Per-project working files
+    └── [project-name]/project.md
 ```
 
 ---
 
-## How Bob Thinks
+## Skill Architecture
 
-### ReAct Reasoning Protocol
+### Router + 19 Domain Skills
 
-For any non-trivial query (structural, regulatory, heritage-related), Bob uses explicit reasoning:
+| Skill | Loads when |
+|---|---|
+| `routing` | Every query — routes to domain skills |
+| `structural-engineering` | Wall removal, beam sizing, load paths, failure signs |
+| `building-code-tek17` | TEK17 compliance, permits, fire, energy, stormwater |
+| `sintef-byggforsk` | Moisture, insulation, airtightness, wall/roof assemblies |
+| `geotechnical` | Soil conditions, quick clay, foundations, flood zones |
+| `historic-preservation` | SEFRAK buildings, Byantikvaren, heritage interventions |
+| `classical-architecture` | Facade proportions, composition, design review |
+| `construction-execution` | Site sequencing, demolition, contracts, asbestos |
+| `bim-ifc` | IFC files, BIM coordination, IDS validation, BCF |
+| `soknad-package` | Søknad document checklists, nabovarsel, ferdigattest |
+| `general-contractor-review` | Holistic drawing review, trade coordination |
+| `formulas-reference` | Beam calculations, Eurocode design values (on-demand only) |
+| `technical-education-support` | "Explain this", jargon translation, learning resources |
+| `hvac-mechanical` | Ventilation systems, heat pumps, energy calculations |
+| `electrical-nek400` | NEK 400, solar, EV charging, grounding |
+| `plumbing-vs6050` | Water supply, drainage, sanitary systems |
+| `architectural-drawing-reading` | Norwegian drawing conventions, symbols, IFC reading |
+| `drawing-investigation-protocol` | Systematic questioning for images in-conversation |
+| `drawing-reader` | Technical extraction from uploaded drawing files |
+| `session-initialization` | Startup checklist, project context, decision log |
 
-```
-Thought:      What do I know? Which skill applies? What assumptions am I making?
+### Escalation Flags
 
-Assessment:   The technical answer, grounded in the loaded skill.
-
-Code Check:   What does TEK17 / PBL / SINTEF / Kulturminneloven say?
-              (Quote the governing section)
-
-Escalation:   Does this trigger any safety/compliance/heritage flags?
-              (See Escalation Matrix below)
-
-Uncertainty:
-  - Assumptions: [what did I assume?]
-  - Sensitivity: [which assumptions most affect the conclusion?]
-  - Confidence: High / Medium / Low
-  - If Low: state what additional info would change the answer
-
-Action Required: What must the user, licensed professional, or third party do next?
-```
-
-**Example output structure:**
-```
-Thought:
-  Query is about [specific domain]. Checking [applicable section].
-  Key assumption: [X]. Uncertainty: [Y].
-
-Assessment:
-  Technical answer...
-
-Code Check:
-  TEK17 §7-2: "[relevant quote]"
-  PBL §20-5: "[relevant quote]"
-
-Escalation:
-  🚩 WET_STAMP_REQUIRED — Because [reason]
-  ⚠️ NVE_CHECK_REQUIRED — Because [reason]
-
-Uncertainty:
-  - Assumptions: [list]
-  - Confidence: MEDIUM
-  - If foundation soil type changes, answer shifts to [alternative]
-  
-Action Required:
-  (1) [First step]
-  (2) [Second step]
-  (3) [Responsible party: licensed engineer / municipality / owner]
-```
-
-**For quick lookups (material specs, terminology, quick math):** Skip the trace, give direct answer.
-
----
-
-### Escalation Matrix
-
-Bob flags high-risk decisions explicitly. Flags do **not** stop the answer — they **frame** it.
-
-| Flag | Triggered By | Required Action |
+| Flag | Triggered by | Action required |
 |---|---|---|
-| **WET_STAMP_REQUIRED** | Structural modification affecting loads > 2 floors; beam span > 6 m; foundation work near boundary | Ansvarlig prosjekterende (licensed PE) must sign design + calculations |
-| **SØKNAD_REQUIRED** | Building modification requiring permit; new construction; change of use | Building permit must be granted before work begins |
-| **GEOTECHNICAL_REPORT_REQUIRED** | Foundation work on unknown soil; suspected quick clay (kvikkleire); slope > 1:2 | Grunnundersøkelse (soil investigation) by qualified geotechnical firm |
-| **NVE_CHECK_REQUIRED** | Site in flood zone; avalanche zone; landslide hazard area | Verify hazard classification via NVE maps; may require mitigation design |
-| **BYANTIKVAREN_CONSULTATION_REQUIRED** | SEFRAK-registered building; heritage zone; antikvarisk building interest | Forhåndskonferanse (pre-application meeting) with municipal heritage officer |
-| **RIKSANTIKVAREN_CONSENT_REQUIRED** | Building formally listed (fredete) under Kulturminneloven §15 | Riksantikvaren (national heritage agency) must approve before intervention |
-| **ASBESTOS_SURVEY_REQUIRED** | Building constructed 1940–1985; any disturbance planned | Accredited lab analysis before work begins |
-| **HAZARDOUS_WASTE_SURVEY_REQUIRED** | Demolition of any building | Kartlegging av farlig avfall before physical demolition |
-
-**Example escalation in response:**
-> 🚩 **WET_STAMP_REQUIRED** — Structural modification of load-bearing wall. Ansvarlig prosjekterende (licensed structural engineer) must sign beam design before construction proceeds.
+| `WET_STAMP_REQUIRED` | Structural mod affecting loads; span > 6 m; foundation near boundary | Licensed PE must sign |
+| `SØKNAD_REQUIRED` | Permit-required construction | Permit before work begins |
+| `GEOTECHNICAL_REPORT_REQUIRED` | Unknown soil; quick clay zone; significant slope | Professional grunnundersøkelse |
+| `NVE_CHECK_REQUIRED` | Flood or landslide zone | Verify Q200 level; may need mitigation |
+| `BYANTIKVAREN_CONSULTATION_REQUIRED` | SEFRAK or heritage-zone building | Forhåndskonferanse before søknad |
+| `RIKSANTIKVAREN_CONSENT_REQUIRED` | Formally listed building (fredet) | Riksantikvaren must approve |
+| `ASBESTOS_SURVEY_REQUIRED` | Building 1940–1985; physical disturbance planned | Accredited lab analysis first |
+| `HAZARDOUS_WASTE_SURVEY_REQUIRED` | Any demolition | Kartlegging before physical work |
 
 ---
 
-## Bilingual Support (Norwegian & English)
+## Drawing Analysis Pipeline
 
-**Bob operates fluently in both Norwegian and English:**
+When a drawing file is provided, Bob runs a 3-layer pipeline:
 
-### Language Detection
-- **Automatic:** Bob detects which language you use (Norwegian keywords: "varmepumpe", "TEK17", "søknad", etc.) and responds in kind
-- **Code-switching OK:** If you mix languages, Bob defaults to your primary language
-- **Manual override:** Request "svar på norsk" or "respond in English" anytime; Bob honors the request for the session
-
-### Resource Prioritization
-- **Norwegian speaker:** Bob prioritizes Norwegian resources (DiBK, SINTEF, lovdata.no, NVE, NGU, Byantikvaren)
-- **English speaker:** Bob includes international standards (Eurocode, ASHRAE, ISO) alongside Norwegian context
-- **Heritage projects:** Both languages supported for international collaboration
-
-### Technical Glossary
-- **Bilingual terminology:** Every technical skill (structural, HVAC, plumbing, electrical) includes Norwegian ↔ English term pairs
-- **Education support:** The `technical-education-support` skill provides:
-  - Plain-language explanations in both languages
-  - Real-world analogies
-  - Translated technical glossary (50+ terms)
-  - Resource links in both languages
-
-### Example (Norwegian)
 ```
-Bruker: "Hva betyr 'load path'?"
-Bob: "Load path = lastfordeling. Det betyr: hvor vekten går.
-      Som vann som renner ned en bakke, går byggvekten fra taket → ned gjennom veggene 
-      → ned til fundamentet. Hvis noe av kjeden er brutt, kollapser hele bygningen.
-      Tenk på det som domino-steiner stilt opp vertikalt — fjern en, og resten faller."
-```
+Layer 1: drawing-reader
+  → Detects format: born-digital PDF / scanned / JPEG / DXF / IFC
+  → Selects tool: PyMuPDF → Marker → ocr-skill → ezdxf → vision model
+  → Produces: title block, scale, dimensions, room labels (structured)
+  → Security: extracted text fenced as UNTRUSTED content
 
-### Example (English)
-```
-User: "What does 'lastfordeling' mean?"
-Bob: "Load path (lastfordeling) = where weight goes. Like water flowing downhill, 
-      structural loads flow from roof → walls → foundation → ground. If any part breaks, 
-      entire building fails. Think of it as dominoes stacked vertically."
+Layer 2: architectural-drawing-reading
+  → Interprets Norwegian conventions (NS-EN ISO 128, NS 3041)
+  → Confirms: scale, wall types (structural vs. partition), symbols
+
+Layer 3: domain skill (per query)
+  → structural-engineering / building-code-tek17 / soknad-package
 ```
 
 ---
 
-## Skill Map & Dependencies
+## MCP Integration
 
-### Routing Skill (`routing.md`)
-**Purpose:** Query classifier. Selects minimum necessary domain skills.
-**Always loaded first:** Every query passes through routing logic.
-**Usage:** Prevents "skill soup" (loading all skills for every question).
+Configure servers in `mcp/mcp-config.json`.
 
-**Routing logic example:**
-- Query mentions "TEK17" → load `building-code-tek17.md`
-- Query mentions "beam" or "load path" → load `structural-engineering.md`
-- Query mentions "1895 villa" + "heritage" → load `historic-preservation.md` + `building-code-tek17.md`
-- Query mentions "drawings" → load `architectural-drawing-reading.md` first, then others
+| Server | Status | Purpose |
+|---|---|---|
+| `structural-analysis-mcp` | `pip install structural-analysis-mcp` | Beam deflection, section properties, reactions |
+| `marker` | `pip install marker-pdf` | Scanned PDF / image OCR (best quality) |
+| `ocr-skill` | `npx skills add hec-ovi/ocr-skill` | Agent-native CLI OCR — DeepSeek-OCR-2 |
+| `ezdxf` | `pip install ezdxf` | DXF/DWG vector extraction — exact dimensions |
+| `ifcmcp` | `pip install ifcopenshell` | IFC model querying and editing |
+| `geonorge` | Open API (no auth) | DOK datasets, municipal plans, terrain |
+| `Catenda Hub` | Account + project URL required | IFC queries, BCF issues, quantity takeoffs |
+| `norwegian-building-data` | Specification only — not yet built | Live NVE, NGU, SEFRAK, lovdata lookups |
 
-### Domain Skills
-
-**`structural-engineering.md`**
-- Load paths, beam sizing, deflection checks
-- Timber, steel, concrete connection details
-- Eurocode 5 (timber), Eurocode 3 (steel), Eurocode 2 (concrete)
-- Cross-references: TEK17 §7-2, structural-analysis-mcp tool
-
-**`building-code-tek17.md`**
-- Complete TEK17 regulation reference (current through 01.07.2026 amendments)
-- Amendment history table (2023–2026)
-- PBL §20-5 (exemption pathways)
-- SAK10 søknadsfritak (solar panels, insulation, EV charging)
-- Cross-references: Byantikvaren, NVE, municipalities
-
-**`sintef-byggforsk.md`**
-- SINTEF Byggforsk standards + guidance
-- Moisture management, insulation specs, air tightness
-- Material selection (wood, concrete, brick properties)
-- Cross-references: TEK17 §15, manufacturer datasheets
-
-**`historic-preservation.md`**
-- SEFRAK database (registration grades A/B/C)
-- Kulturminneloven §15 (fredete buildings)
-- Byantikvaren approval process (forhåndskonferanse)
-- Heritage + modern upgrade conflicts (exemptions, compromises)
-- Cross-references: TEK17 §15-1(5), PBL §20-5
-
-**`classical-architecture.md`**
-- Vitruvian principles (Firmitas, Utilitas, Venustas)
-- Proportional systems (golden ratio, module-based design)
-- Ornamental details, composition, aesthetics
-- Cross-references: Architectural drawing reading, heritage preservation
-
-**`construction-execution.md`**
-- Site sequencing, demolition protocols
-- Trade coordination, lead times
-- Health & safety on site (AFS regulations)
-- Budget + schedule estimation
-- Cross-references: Structural assessment, building code, project management
-
-**`architectural-drawing-reading.md`**
-- Interpreting plantegninger (floor plans), snitt (sections), fasader (elevations)
-- Construction details (detaljer), dimension chains
-- Symbol conventions (Norwegian standard)
-- Cross-references: Structural engineering, construction execution
+**Highest-value MCP to build:** `norwegian-building-data` — wraps open Norwegian APIs (NVE Atlas, NGU WMS, Geonorge DOK) to make every regulatory lookup live and citable. See `mcp/tools/norwegian-building-data.md`.
 
 ---
 
-## Using Output Templates
+## Knowledge Currency
 
-Bob can format responses into professional deliverables using templates:
+| Domain | Current through | Verify at |
+|---|---|---|
+| TEK17 + SAK10 | 2026-08-09 (incl. solar/EV/insulation exemptions, §15-8 stormwater) | dibk.no |
+| Eurocode structural | NS-EN 1990–1999 + Norwegian NA | standard.no |
+| SINTEF Byggforsk | 2026 | byggforsk.no |
+| IFC / buildingSMART | IFC4x3 Add2 | buildingsmart.org |
+| Norwegian geotechnical | NGF Melding Nr. 2, NVE Veileder 7/2014 | nve.no, ngu.no |
 
-### **structural-assessment-memo.md**
-**When to use:** After site visit or existing building inspection
-**Contains:** 
-- Building summary (age, materials, condition)
-- Findings (structural, material, safety concerns)
-- Recommendations (repairs, upgrades, further investigation)
-- Risk assessment + escalations
-**Output:** Professional memo for contractor/owner
+**Pending TEK17 amendments (not yet enacted):** Chapter 14 energy basis (vektet levert energi) and Chapter 17 CO₂ grenseverdier — consultations closed May 2026.
 
-### **pre-application-meeting-notes.md**
-**When to use:** After forhåndskonferanse with municipality / Byantikvaren
-**Contains:**
-- Attendees, date, project scope
-- Officer feedback (concerns, requirements, approval path)
-- Agreed approach (design direction, exemptions, conditions)
-- Next steps + action items
-**Output:** Shared record between parties
-
-### **compliance-gap-analysis.md**
-**When to use:** Auditing existing building against TEK17 / local plan
-**Contains:**
-- Standard / regulation section
-- Current building performance (measured)
-- Required level (code requirement)
-- Gap size (numeric or qualitative)
-- Remediation cost/timeline estimate
-- Priority (critical / high / medium / low)
-**Output:** Roadmap for upgrades
-
-### **[TODO] post-approval-checklist.md**
-**When to use:** After søknad is approved, before construction starts
-**Contains:**
-- Permit conditions (special requirements from municipality)
-- Key inspections (foundation, structural, fire, final)
-- Sign-off requirements (engineer, foreman, building inspector)
-**Output:** Construction phase checklist
-
-### **[TODO] construction-sequence.md**
-**When to use:** Phased demolition / renovation projects
-**Contains:**
-- Phase-by-phase timeline
-- Trade dependencies (what must finish before next trade starts)
-- Lead times (material delivery, permits, inspections)
-- Risk points (utilities, temporary support, weather)
-**Output:** Contractor's execution plan
-
-### **[TODO] heritage-assessment.md**
-**When to use:** Before any intervention on SEFRAK / antikvariske buildings
-**Contains:**
-- Heritage significance (cultural, architectural, material)
-- Elements at risk (if proposed work proceeds)
-- Alternatives (mitigation options)
-- Byantikvaren impact assessment
-**Output:** Heritage impact statement for forhåndskonferanse
+**Institutional change:** DiBK merges with Husbanken → Bolig- og bygningsdirektoratet effective 01.01.2027. Update authority references after that date.
 
 ---
 
-## MCP Integration (Optional)
+## Bilingual Support
 
-Bob can connect to external Model Context Protocol (MCP) servers for live data + specialized tools.
-
-### **Configured MCP Servers**
-
-**Status: Available**
-- **structural-analysis-mcp** (Elandu)
-  - Tools: Beam deflection, section properties, concrete sizing
-  - When to invoke: Span > 4 m, complex load case
-  - See `mcp/tools/structural-analysis.md`
-
-**Status: Requires User Setup**
-- **Catenda Hub** (IFC model queries, BCF issues, quantity takeoffs)
-  - Requires: Catenda account + project URL
-  - See `project.md` for configuration
-  - Not yet tested with Bob
-
-**Status: Specification Only (TODO)**
-- **norwegian-building-data-mcp** (SEFRAK, NVE, NGU, regulatory APIs)
-  - Tools: Hazard lookup, heritage registry, zoning, ground conditions
-  - Would enable: Real-time compliance checking
-  - See `mcp/tools/norwegian-building-data.md` for spec
-
-### **Enabling MCP Connections**
-
-1. Edit `mcp/mcp-config.json` with server details (endpoints, auth)
-2. In `project.md`, add `mcp_servers: [...]` section
-3. On session load, Bob reads config and registers tool availability
-4. Bob mentions available tools in responses (e.g., "I can check NVE hazards for you if you give me coordinates")
+- Auto-detects language from the user's message
+- Responds in the same language throughout the session
+- Override: "svar på norsk" or "respond in English" at any time
+- Default: Norwegian (primary domain)
+- Bilingual technical glossary (50+ terms) in `technical-education-support`
 
 ---
 
-## Language & Terminology
+## Development
 
-Bob operates bilingually (Norwegian ↔ English):
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
 
-- **Responds in the language user writes in** (Norwegian queries → Norwegian responses)
-- **Uses correct technical terminology:**
-  - Norwegian: søknad, forhåndskonferanse, ansvarlig prosjekterende, wienerberks, takskifte, kvikkleire
-  - English: permit application, pre-application meeting, licensed PE, brick, roof replacement, quick clay
-- **Regulatory terms** (TEK17, PBL, SEFRAK) used without translation (standard in both languages)
+**Adding a new skill:**
+1. Create `skills/<name>/SKILL.md` with required frontmatter
+2. Add routing rule to `skills/routing/SKILL.md`
+3. Add to skill stack table in `system_prompt.md`
+4. Update this README
 
----
-
-## When to Escalate to Professionals
-
-Bob explicitly flags situations that require licensed professionals or regulatory approval:
-
-| Situation | Bob's Role | Who Must Act |
-|-----------|-----------|--------------|
-| **Structural design changes** | Analyze load paths, suggest sizing | Ansvarlig prosjekterende (PE) must stamp calculations |
-| **Building permits needed** | Guide compliance requirements | Municipality building department issues søknad approval |
-| **Heritage building work** | Identify antikvariske concerns | Byantikvaren / Riksantikvaren must approve |
-| **Geotechnical uncertainties** | Flag soil/hazard risks | Grunnundersøkelse firm must investigate |
-| **Energy/MEP systems** | Guide standards (NEK 400, NS 3031) | Licensed installer + commissioning |
-| **Legal disputes or insurance** | Explain codes/standards | Lawyer or insurance adjuster |
-| **Cost/budget decisions** | Scope work + estimate remediation | Accountant / project manager |
-
-**Do not ignore Bob's escalation flags** — they indicate decisions that require professional involvement before proceeding.
-
----
-
-## Configuration & Project Setup
-
-### Default Project Context (`project.md`)
-
-Create a `project.md` file at project root. Bob reads this at session start:
-
+**Frontmatter format:**
 ```yaml
 ---
-project_name: "Renovation Project — [Address]"
-location:
-  address: "[Street address]"
-  municipality: "[Kommune]"
-  latitude: [52.XX]
-  longitude: [12.XX]
-  county: "Trøndelag / Viken / etc."
-
-building:
-  year_constructed: [YYYY]
-  sefrak_status: "Listed / Not listed / Unknown"
-  sefrak_grade: "[A/B/C if listed]"
-  building_type: "[Residential / Commercial / Heritage / Other]"
-  area_bra: "[m²]"
-
-site:
-  soil_type: "[Clay / Sand / Rock / Unknown]"
-  slope: "[percentage or description]"
-  hazards: "[Flood / Avalanche / Landslide / Asbestos / None known]"
-
-permit_status: "[Under review / Approved / Not started / Exempt]"
-permit_number: "[if applicable]"
-
-project_scope: "[Description of work: renovation, structural mod, energy upgrade, etc.]"
-
-contacts:
-  owner: "[Name, phone]"
-  architect: "[Name, firm, contact]"
-  engineer: "[Name, firm, contact]"
-  contractor: "[Name, firm, contact]"
-
-notes: "[Any additional context for Bob (prior issues, constraints, decisions)]"
+name: skill-name
+description: What it does and when to load it. Include specific trigger keywords.
+license: Proprietary
+metadata:
+  triggers: keyword1, keyword2, keyword3
+  load_with: other-skill-name
+  safety_level: low | medium | high | critical
 ---
 ```
 
-On load, Bob will confirm: *"Loaded: [Project Name] at [Address], [Municipality]. Heritage status: [X]. Permit status: [X]. Ready."*
-
 ---
 
-## Troubleshooting & Feedback
+## Roadmap
 
-### "Bob gives generic advice, not specific to my project"
-→ Create/load `project.md`. Bob uses project context to tailor responses.
+**Completed (v2.0, 2026-08-09):**
+- ✅ 20-skill modular architecture (directory format, agentskills.io compliant)
+- ✅ TEK17 current through all 2026 amendments + §15-8 stormwater + DOK arealanalyse
+- ✅ Geotechnical skill — quick clay, EN 1997, bearing capacity, settlement, frost
+- ✅ Søknad package skill — SAK10 completeness checklist by project type
+- ✅ BIM/IFC skill — IfcOpenShell, IDS, BCF, Norwegian BIM mandate
+- ✅ Drawing reader — PDF/JPEG/DXF extraction with security fencing
+- ✅ Structural failure modes — crack pattern diagnosis, timber and concrete distress
+- ✅ Decision log persistence across sessions via project.md
+- ✅ All 6 output templates complete
+- ✅ MCP config: Marker, ocr-skill, ezdxf, ifcmcp, Geonorge
 
-### "Bob cites a regulation I don't think is correct"
-→ Report the issue. TEK17 amendments are frequent (last checked 2026-07-26). Verification welcome.
-
-### "Bob doesn't know about [specific rule / regional variation]"
-→ Bob has knowledge through 2026-07-26. Regional variations exist; Bob typically flags these ("Check with [municipality]").
-
-### "I need a feature Bob doesn't have"
-→ See ROADMAP.md. Consider filing an enhancement request.
-
----
-
-## Roadmap (Next Priorities)
-
-**Completed (v1.3):**
-- ✅ ReAct reasoning protocol with explicit uncertainty
-- ✅ Escalation matrix (8 high-risk condition flags)
-- ✅ Bilingual support (Norwegian ↔ English)
-- ✅ TEK17 amendments current through 2026-07-26
-- ✅ structural-analysis-mcp integration (specification)
-- ✅ Output templates (3 of 6 complete)
-
-**In Progress (v1.4, next week):**
-- [ ] Complete output templates (3 more: post-approval, construction-sequence, heritage-assessment)
-- [ ] Implement Norwegian Building Data MCP (Tools 1–3: SEFRAK, NVE, NGU)
-- [ ] Add worked examples to building-code-tek17.md
-
-**Planned (v1.5, later):**
-- [ ] Catenda Hub integration (IFC model queries)
-- [ ] Structural skill enhancement (connection detail tables, section database)
-- [ ] Norwegian Building Data MCP (Tools 4–7: regulatory plans, radon, standards)
-- [ ] Performance dashboard (usage analytics, escalation tracking)
-
----
-
-## Attribution & Sources
-
-**Regulatory authority:**
-- TEK17 (Teknisk forskrift 2017-06-01-840)
-- PBL (Planleggings- og bygningsloven)
-- Eurocode standards (EN 1990–1999, national annexes)
-- SINTEF Byggforsk guidelines
-- Kulturminneloven (Heritage Protection Act)
-- NVE flood/hazard mapping
-- NGU geology + ground conditions
-
-**Data last verified:** 2026-07-26
-
-**Disclaimer:** Bob the Bygger provides professional-level guidance but does not replace licensed engineers, building inspectors, or heritage consultants. For permit-required work, always engage qualified professionals.
-
----
-
-## Support & Questions
-
-For issues, feature requests, or documentation improvements:
-- Check the built-in help (ask Bob for clarification)
-- Review ARCHITECTURE.md for system design questions
-- Consult regulatory sources directly (lovdata.no, dibk.no, nve.no)
+**Next (v2.1):**
+- [ ] `norwegian-building-data` MCP server — NVE + NGU + SEFRAK (all open APIs)
+- [ ] Cost estimation skill — Kalkulasjonsnøkkelen, BOF index, rough cost/m²
+- [ ] Accessibility depth — TEK17 §12 UU: door clearances, maneuvering space, ramp gradients
+- [ ] Energy certification skill — NS 3031, Simien input, energikarakter
 
 ---
 

@@ -1,9 +1,10 @@
----
+﻿---
 name: plumbing-vs6050
 description: Norwegian plumbing and sanitary systems — water supply (cold/hot water), drainage, waste systems, pipe sizing, pressure, water quality, maintenance, hygiene codes, VS 6050 standard, SINTEF guidelines, accessibility, winterization.
 triggers: [plumbing, rør, pipes, vann, water, avløp, drainage, sanitær, sanitary, toalett, toilet, baderom, bathroom, kjøkken, kitchen, vannforsyning, water supply, varmtvann, hot water, drikkevannskvalitet, drinking water quality, trykk, pressure, vannmengde, flow, lekasje, leak, blokkering, blockage, rørleggeri, plumbing, VS 6050, NS 3940, vannbeskyttelse, water protection, frostfri, frost-free, sifon, trap, ventilasjon, ventilation, returledning, return line]
 load_with: [building-code-tek17]
 safety_level: high
+license: Proprietary
 ---
 
 # Skill: Plumbing & Sanitary Systems (VS 6050, NS 3940)

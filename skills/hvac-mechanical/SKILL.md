@@ -1,9 +1,10 @@
----
+﻿---
 name: hvac-mechanical
 description: Norwegian HVAC and mechanical systems — ventilation (mechanical, natural), heating (heat pumps, district heating, radiators), cooling, ductwork design, commissioning, energy efficiency, TEK17 Chapter 14 compliance, noise control, maintenance.
 triggers: [HVAC, ventilation, ventilasjonsanlegg, varme, heating, kjøling, cooling, varmepumpe, heat pump, lufting, lufing, luftkvalitet, air quality, energi, energy, TEK17, Chapter 14, U-verdi, U-value, inneklima, indoor climate, komfort, comfort, lydnivå, noise, støy, vedlikehold, maintenance, NS 3031, NS 3951, FVF, friskluftsystemer, fläktventilation, eksoss, exhaust, tilluft, supply air, avluft, extract air, filter, filtrering, varmegjenvinding, heat recovery, ERV, MVHR, radiator, radiatorovn, termostat, thermostatic valve, trykktap, pressure drop, luftmengde, air flow, lufthastighet, air velocity, lyddemping, sound attenuation]
 load_with: [building-code-tek17, electrical-nek400]
 safety_level: high
+license: Proprietary
 ---
 
 # Skill: HVAC & Mechanical Systems (NS 3031, NS 3951)

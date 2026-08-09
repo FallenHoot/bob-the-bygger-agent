@@ -1,0 +1,40 @@
+This is a Norwegian architectural drawing. Apply NS-EN ISO 128 and NS 3041 drawing conventions.
+
+Extract in this exact order — do not skip any category:
+
+1. TITLE BLOCK (tegningshode) — HIGHEST PRIORITY, always in a corner:
+   Prosjekt (project name) | Tegningsnummer (e.g., A-101, K-101) |
+   Tegningsnavn (drawing title) | Målestokk (scale, e.g., 1:100) — CRITICAL |
+   Dato (date) | Rev (revision letter + date) | Tegnet av / Kontrollert av
+
+2. DRAWING TYPE — state which one:
+   Plantegning (floor plan) | Snitt / Tverrsnitt (section) | Fasadetegning (elevation) |
+   Detaljtegning (detail) | Situasjonsplan (site plan) | Konstruksjonstegning (structural) |
+   Bjelkeplan (floor structure plan) | Fundamentplan (foundation plan)
+
+3. SCALE CONFIRMATION:
+   Confirmed scale from title block. Is a scale bar present? Calculate:
+   1 mm on this drawing = [X] mm in reality.
+
+4. ALL DIMENSION STRINGS — every visible measurement:
+   Format: [value] [unit] — [what it measures]
+   Norwegian notation: ca. = approximately | min. = minimum | fri åpning = clear opening
+   UK = underkant (underside) | OK = overkant (top) | FH = ferdig gulvhøyde (finished floor)
+   Dimensions in mm unless drawing states otherwise.
+
+5. ROOM LABELS AND AREAS:
+   Room name | m² (area if shown) | ceiling height if noted
+   Key Norwegian names: Stue, Kjøkken, Soverom, Bad/Baderom, WC, Gang/Entre,
+   Bod, Garasje, Kjeller, Loft, Vaskerom, Trapperom, Teknisk rom
+
+6. STRUCTURAL ANNOTATIONS:
+   BV / Bærende vegg = load-bearing wall | SV / Skillevegg = partition wall
+   Beam profiles: HEB [size], HEA [size], IPE [size], GL [grade] [size]
+   Dense hatching (45° diagonal) = concrete | Brick-course hatching = masonry
+   Column symbol (circle or rectangle with X)
+   H-40, B400 = rebar grade | B200, C30 = concrete grade
+
+7. ALL TEXT NOTES AND ANNOTATIONS — every string of text visible on the drawing
+
+8. WHAT I CANNOT READ — explicitly list unreadable or uncertain items.
+   Mark uncertain values with (?). Never invent values. Uncertainty is information.

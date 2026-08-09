@@ -1,9 +1,10 @@
----
+﻿---
 name: classical-architecture
 description: Vitruvian principles (Firmitas, Utilitas, Venustas), proportion systems, classical orders, facade composition, ornament, and Norwegian vernacular building grammar. Load for design review and appearance questions.
 triggers: [proportion, proporsjon, facade, fasade, composition, komposisjon, beauty, estetikk, ornament, vitruvius, classical, klassisk, window proportion, vindusproporsjon, golden ratio, gylne snitt, roof pitch, takvinkel, overhang, takutstikk, style, stil, character, karakter, design review, aesthetics, appearance, utseende, sveitserstil trim, vergeboard, does this look right, streetscape, neighbourhood fit, gatebildet]
 load_with: []
 safety_level: low
+license: Proprietary
 ---
 
 # Skill: Classical Architecture — The Vitruvian Framework

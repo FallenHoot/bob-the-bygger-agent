@@ -1,9 +1,10 @@
----
+﻿---
 name: electrical-nek400
 description: Norwegian electrical installation standards (NEK 400, IEC 60364), circuit design, grounding, protection, renewable energy integration, EV charging, solar electrical systems, heat pump electrical requirements, inspection protocols.
 triggers: [NEK 400, electrical, strøm, spenning, krets, circuit, cable, kabel, grounding, jording, RCD, RCCB, overcurrent, overstrøm, fault, feil, EV charging, ladestasjoner, solar, solceller, heat pump, varmepumpe, ventilasjonsanlegg, elektrisk installasjon, inspeksjon, testing, IP rating, feuchtigkeitsmessung, wet room, våtrom, distribution, fordeling, earthing, jordforbindelse, surge protection, overspenningsvern, harmonics, resonance]
 load_with: [building-code-tek17]
 safety_level: critical
+license: Proprietary
 ---
 
 # Skill: Electrical — NEK 400 (IEC 60364 Norwegian)
