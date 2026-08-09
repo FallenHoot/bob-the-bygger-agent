@@ -1,9 +1,10 @@
----
+﻿---
 name: historic-preservation
 description: Norwegian heritage law — SEFRAK, Byantikvaren, Riksantikvaren, Kulturminneloven, antikvariske krav, and heritage-compatible construction. Load whenever a building is pre-1940 or SEFRAK-registered.
 triggers: [SEFRAK, heritage, antikvar, Byantikvaren, Riksantikvaren, listed, fredet, historic, gammelt hus, old building, eldre bygg, Kulturminneloven, preservation, bevaring, 1900, pre-1900, sveitserstil, jugend, funksjonalisme, laft, restoration, restaurering, original vinduer, original material, paint, farge, NCS, replica window, reversible, reversibel, archaeological, arkeologisk, dispensasjon heritage]
 load_with: [building-code-tek17]
 safety_level: medium
+license: Proprietary
 ---
 
 # Skill: Historic Preservation

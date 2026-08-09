@@ -88,7 +88,7 @@ Gross rectangular concrete section summary (no reinforcement, no cracking, no ca
 - No unit conversion (inputs must match field names exactly)
 - No interaction with Norwegian National Annexes
 
-**Halvard workflow with this limitation**: Use the tool for deterministic statics, then apply Eurocode checks manually from `skills/structural-engineering.md`. The tool gives numbers; Halvard applies the code.
+**BTBA workflow with this limitation**: Use the tool for deterministic statics, then apply Eurocode checks manually from `skills/structural-engineering/SKILL.md`. The tool gives numbers; Bob applies the code.
 
 ---
 

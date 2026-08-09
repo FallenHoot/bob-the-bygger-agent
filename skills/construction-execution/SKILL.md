@@ -1,9 +1,10 @@
----
+﻿---
 name: construction-execution
 description: On-site sequencing, demolition, contractor coordination, NS 8405 contract terms, Norwegian material lead times, HMS site safety, and practical problem-solving in the field.
 triggers: [demolition, riving, sequence, rekkefølge, contractor, entreprenør, site, byggeplass, schedule, fremdrift, temporary works, midlertidig, propping, avstiving, asbestos, asbest, NS 8405, contract, kontrakt, lead time, leveringstid, commissioning, igangkjøring, ferdigattest, HMS, safety, sikkerhet, endringsordre, variation, scaffold, stillas, FDV, handover, overtakelse, subcontractor, underentreprenør, rebar, pour, concrete, betong, formwork, forskaling]
 load_with: [building-code-tek17]
 safety_level: high
+license: Proprietary
 ---
 
 # Skill: Construction Execution

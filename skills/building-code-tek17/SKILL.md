@@ -1,9 +1,10 @@
----
+﻿---
 name: building-code-tek17
 description: Norwegian TEK17, PBL, SAK10 — permit process, energy requirements, fire safety, structural class, zoning, søknad, and the ansvarssystem. The legal minimum floor for all Norwegian construction.
 triggers: [TEK17, PBL, SAK10, søknad, permit, byggetillatelse, fire, brann, energy, energi, U-value, U-verdi, zoning, regulering, setback, avstand, ceiling height, takhøyde, stair, trapp, ansvarlig, dispensasjon, ferdigattest, bruksendring, tilbygg, påbygg, byggesak, kommune, DiBK, igangsettingstillatelse, radon, accessibility, universell utforming, brannklasse, overvann, stormwater, klima, livsløp, ombruk, reuse, klimagass, EPD, LCA, carbon, frittliggende, 30 m²]
 load_with: [structural-engineering]
 safety_level: high
+license: Proprietary
 ---
 
 # Skill: Building Code TEK17 (Teknisk Forskrift 2017)
@@ -347,6 +348,48 @@ All roles require formal qualification (sentral godkjenning from DiBK or lokal g
 
 ---
 
+## DOK Arealanalyse — Norwegian Area Analysis
+
+Before a building permit application is submitted, Norwegian municipalities require a **DOK arealanalyse** (area analysis based on Det offentlige kartgrunnlaget — the public map foundation). This is a standardized digital check of the plot against all relevant public datasets.
+
+### What DOK Arealanalyse Checks
+The national specification (Nasjonal spesifikasjon for DOK arealanalyse v1.0, published February 2025 by Kartverket) defines a standardized set of analyses that must be performed. Relevant checks for building permits:
+
+| Dataset | Check | Authority | TEK17 Link |
+|---|---|---|---|
+| NVE flomsonekart | Distance from 200-year flood level | NVE | §7-2 |
+| NVE skredkart | Landslide/avalanche probability zones | NVE | §7-3 |
+| NGU kvikkleirekart | Quick clay sensitivity zones | NGU | §7-3 geotechnical |
+| DSA radonkart | Radon risk classification | DSA | §13 radon |
+| Kulturminner | Distance from registered cultural monuments | Riksantikvaren | KML |
+| Naturbase | Protected nature areas (naturreservat, biotop) | Miljødirektoratet | PBL §1-8 |
+| Støysoner | Noise zone classification (Gul/Rød) | SSB/Vegdirektoratet | §13-5 |
+| Vegkart | Road reserve and setbacks | Vegdirektoratet | §6 |
+| Kommunalt VA-nett | Proximity to public water and sewer | Municipality | §15-8 |
+| Arealplan | Municipal zoning and land use | Municipality | All |
+
+### Accessing DOK Data
+- **Geonorge.no**: The national spatial data portal — download datasets or use WMS/WFS services
+- **NVE Atlas (atlas.nve.no)**: Flood, landslide, and quick clay maps
+- **NGU kart (geo.ngu.no)**: Geological data including løsmassekart (soil types) and kvikkleirekart
+- **Kulturminnesøk (kulturminnesok.no)**: Search SEFRAK and listed monument databases
+- **Kartverket API**: The Kartverket DOK arealanalyse API (published 2025) allows programmatic area analysis via OGC Processes API. Demonstration available at dok-arealanalyse.azurewebsites.net
+- **ByggSøk / eByggeSøk**: DiBK's digital permit portal checks many DOK datasets automatically at søknad submission
+
+### When to Advise a DOK Check
+Always recommend a DOK arealanalyse before:
+- Any new building on an undeveloped plot
+- Extensions that significantly increase footprint
+- Change of use (bruksendring)
+- Projects near watercourses, steep terrain, or coastal areas
+- Projects involving basement excavation or significant earthworks
+
+### Quick Clay — Escalation Trigger
+If the plot is in a mapped kvikkleire area (any NGU sensitivity class), Bob must escalate:
+> "This plot is in a quick clay zone. A professional geotechnical investigation (grunnundersøkelse) by a qualified geotechnical engineer is mandatory before any foundation design or excavation. Do not rely solely on this analysis — commission a site-specific report."
+
+---
+
 ## Interaction with Other Skills
 - **Structural Engineering**: TEK17 §10 mandates Eurocode compliance. Structural drawings and calculations are required in søknad documentation.
 - **SINTEF Byggforsk**: Provides execution details (anvisninger) that document how to meet TEK17's energy, moisture, and construction requirements in practice.
@@ -359,4 +402,4 @@ All roles require formal qualification (sentral godkjenning from DiBK or lokal g
 *Norwegian authoritative text: [dibk.no/regelverk/byggteknisk-forskrift-tek17](https://www.dibk.no/regelverk/byggteknisk-forskrift-tek17)*
 *DiBK English translation status: Last updated July 2017 — does not reflect amendments made 2017–2026*
 *Institutional note: DiBK merges with Husbanken → Bolig- og bygningsdirektoratet from 01.01.2027. URLs and authority name will change.*
-*This skill last verified against DiBK news and høringer: 2026-07-26 (TEK17 current through §15-8 01.01.2024; SAK10 current through søknadsfritak 01.07.2026; two major amendments pending)*
+*This skill last verified against DiBK news and høringer: 2026-08-09 (TEK17 current through §15-8 01.01.2024; SAK10 current through søknadsfritak 01.07.2026; two major amendments pending)*

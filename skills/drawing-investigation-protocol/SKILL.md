@@ -1,12 +1,24 @@
----
+﻿---
 name: drawing-investigation-protocol
 description: Systematic questioning framework for drawings/images — gather missing data before analysis. When user shares image (drawing, photo, sketch), Bob asks targeted questions to collect structural properties, load info, site conditions, material specs, existing drawings, photos, constraints before making any statements or recommendations.
 triggers: [image analysis, drawing analysis, photo review, what about, tell me about, analyze this, look at this, what's wrong with, can you review, need help with, drawing question, is this right, will it work, load analysis, structural review, image question]
 load_with: [general-contractor-review, structural-engineering, building-code-tek17]
 safety_level: high
+license: Proprietary
 ---
 
 # Skill: Drawing Investigation Protocol — Smart Questioning Framework
+
+## Scope and Relationship to drawing-reader
+
+**This skill** handles images shared **within the conversation** — photos, screenshots, or drawings pasted directly into the chat. It asks systematic questions to gather missing data before any analysis.
+
+**The `drawing-reader` skill** handles actual **file uploads** (PDF, JPEG, PNG, DXF attachments). It runs a technical extraction pipeline first (PyMuPDF, Marker, ocr-skill, or ezdxf) and produces a structured summary before handing off to this protocol for gap-filling.
+
+**Routing:**
+- Image in conversation → this skill
+- PDF/JPEG/DXF file attached → `drawing-reader` first, then this skill for gap questions
+- IFC file → `bim-ifc` skill
 
 ## Purpose
 

@@ -1,10 +1,11 @@
----
+﻿---
 name: architectural-drawing-reading
 description: Reading Norwegian architectural and structural drawings — plantegninger, snitt, fasader, detaljer, konstruksjonstegninger. Includes symbol libraries, hatching conventions, søknad drawing package completeness, and vision-based analysis protocol. Load whenever a drawing or image is shared.
 triggers: [drawing, tegning, floor plan, plantegning, section, snitt, elevation, fasade, detail, detalj, blueprint, scale, målestokk, title block, tegningshode, hatch, skravur, symbol, IFC, BIM, dimension, mål, beam notation, bjelke notation, reading drawings, tolke tegninger, drawing package, tegningspakke, søknad drawings, situasjonsplan, image uploaded, photo of drawing, scan, PDF drawing]
 load_with: []
 safety_level: low
 auto_load_on: [image_upload, drawing_reference]
+license: Proprietary
 ---
 
 # Skill: Architectural Drawing Reading
@@ -324,5 +325,37 @@ When reviewing drawings on behalf of a client, BTBA asks:
 
 ---
 
-*Authority: NS-EN ISO 128 (Technical drawings), NS 3940 (Area measurements), SAK10 §5-4 (Drawing requirements for søknad), NS 3041 (Architectural symbols), NS-EN 81346 (Reference designation), IFC ISO 16739*
-*Last reviewed: 2026-07-26*
+## IFC / BIM File Reading
+
+When the user provides an IFC file (or data extracted from one) instead of a 2D drawing:
+
+**Before reading IFC data, check:**
+1. **File version** — IFC2x3 TC1 (legacy, most common), IFC4 Add2 (current), IFC4x3 (infrastructure only)
+2. **Units** — confirm meter or millimeter from `IfcProject.UnitsInContext`. Norwegian standard: millimeters.
+3. **Storey structure** — `IfcBuildingStorey` names and elevations. Are all elements assigned to storeys?
+4. **Coordinate system** — Norwegian projects use ETRS89 / UTM zone 33N (EPSG:25833). Check `IfcSite.RefLatitude / RefLongitude`.
+
+**Extracting the same information as a 2D drawing:**
+
+| 2D Drawing | IFC Equivalent |
+|---|---|
+| Floor plan (plantegning) | `IfcBuildingStorey` + all elements at that level |
+| Room list | `IfcSpace` with `LongName` and area from `Qto_SpaceBaseQuantities.NetFloorArea` |
+| Wall schedule | `IfcWall` + `Pset_WallCommon` (LoadBearing, IsExternal, FireRating) |
+| Window schedule | `IfcWindow` + `Pset_WindowCommon` (OperationType, U-value) |
+| Structural beams | `IfcBeam` + `Pset_BeamCommon` + `IfcMaterialProfileSet` (cross-section) |
+| Door schedule | `IfcDoor` + `Pset_DoorCommon` (FireExit, SecurityRating) |
+
+**Red flags in IFC models:**
+- All elements at elevation 0.0 (missing storey assignment)
+- `LoadBearing = False` on all walls (likely not filled in)
+- No `IfcSpace` entities (rooms not modelled — can't extract areas)
+- Duplicate GUIDs (model merge error — elements may be doubled)
+- No materials assigned (can't extract U-values or structural properties)
+
+**For full BIM/IFC guidance** (clash detection, IDS validation, IfcOpenShell tools), load the `bim-ifc` skill.
+
+---
+
+*Authority: NS-EN ISO 128 (Technical drawings), NS 3940 (Area measurements), SAK10 §5-4 (Drawing requirements for søknad), NS 3041 (Architectural symbols), NS-EN 81346 (Reference designation), IFC ISO 16739-1*
+*Last reviewed: 2026-08-09*

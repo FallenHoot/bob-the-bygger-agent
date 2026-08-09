@@ -1,9 +1,10 @@
----
+﻿---
 name: general-contractor-review
 description: General contractor drawing analysis — load paths, structural support verification, dimensional coordination, trade dependencies, constructability assessment, common modification pitfalls, risk identification, sequencing implications, cost/scope impacts.
 triggers: [drawing analysis, code review, design review, modification feasibility, wall removal, beam addition, opening, aperture, load path, support, post, column, foundation, coordination, constructability, what if, what's wrong, needs improvement, things to consider, trade coordination, sequencing, dependencies, site impact, feasibility assessment]
 load_with: [structural-engineering, building-code-tek17, architectural-drawing-reading, electrical-nek400, hvac-mechanical, plumbing-vs6050]
 safety_level: critical
+license: Proprietary
 ---
 
 # Skill: General Contractor Review & Drawing Analysis
