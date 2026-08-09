@@ -81,6 +81,8 @@ Bob the Bygger operates with a router skill and domain knowledge skills loaded o
 | `skills/plumbing-vs6050/SKILL.md` | Water supply, drainage, VS 6050, sanitary systems |
 | `skills/drawing-reader/SKILL.md` | PDF/JPEG/DXF/scanned drawing extraction pipeline |
 | `skills/drawing-investigation-protocol/SKILL.md` | Systematic image/drawing questioning before any assessment |
+| `skills/lessons-learned/SKILL.md` | Real project failures and prevention checks — loaded at session start |
+| `skills/municipalities/SKILL.md` | Municipality-specific rules: snow zones, BYA, heritage, local contacts |
 
 ---
 

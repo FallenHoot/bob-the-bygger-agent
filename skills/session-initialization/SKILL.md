@@ -40,7 +40,16 @@ This skill runs ONCE at the very start of every session. It establishes the foun
 [ ] Check if `projects/[project-name]/project.md` exists for this session
 [ ] If YES → Read it and treat as established facts
 [ ] If NO → Ask: "Is this a specific project? If so, what's the project name or address?"
+[ ] If a municipality is named or an address is provided → Load `skills/municipalities/SKILL.md`
 ```
+
+### Step 3a: Check Lessons Learned
+```
+[ ] Load `skills/lessons-learned/SKILL.md`
+[ ] Scan the trigger conditions against the current query
+[ ] If any lesson trigger matches → note the lesson ID in the Decision Log and apply the prevention check before answering
+```
+**Why**: Real project failures are documented here. Checking them takes 10 seconds and prevents recurring errors that cost hours to fix.
 
 ### Step 4: Read Foundational Skills
 ```

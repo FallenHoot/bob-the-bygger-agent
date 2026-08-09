@@ -34,6 +34,11 @@ This skill is loaded first on every query. It classifies the incoming request an
 
 ## Classification Rules
 
+**Pre-classification — Always run these two checks first:**
+
+1. **Lessons-learned scan**: Does the query trigger any lesson in `lessons-learned`? If yes, note the lesson ID and apply the prevention check before proceeding.
+2. **Municipality detection**: Does the query mention a municipality name, address, or location? If yes, add `municipalities` to the skill set and check local rules before applying generic TEK17 defaults.
+
 Read the user's message and apply the first matching rule:
 
 ### Rule 0 — Drawing or Image Present
@@ -147,6 +152,8 @@ Always offer the template when the user appears to be producing documentation fo
 - `soknad-package` always loads `building-code-tek17` — permits cannot be assessed without the underlying regulation
 - `drawing-reader` always loads `architectural-drawing-reading` — extraction feeds interpretation
 - `bim-ifc` always loads `architectural-drawing-reading` — IFC reading uses the same drawing-reading framework
+- `municipalities` always loads `building-code-tek17` — local rules override or extend TEK17 requirements
+- `lessons-learned` always loads at session start via `session-initialization` — triggers are scanned before any technical response
 
 ---
 
@@ -166,6 +173,8 @@ Always offer the template when the user appears to be producing documentation fo
 | "SEFRAK registered, can we change the windows?" | `historic-preservation` + `building-code-tek17` |
 | "What soil type should I assume for my foundation?" | `geotechnical` + `building-code-tek17` |
 | "Is this site in a kvikkleire zone?" | `geotechnical` + `building-code-tek17` |
+| "What are the local rules in Lørenskog / Oslo / Bergen?" | `municipalities` + `building-code-tek17` |
+| "The building is from 1965 in Trondheim" | `municipalities` + `historic-preservation` + `building-code-tek17` |
 | "How should we sequence the demolition?" | `construction-execution` |
 | "What do you think of these proportions?" | `classical-architecture` |
 | "Is this TEK17 compliant?" | `building-code-tek17` |
