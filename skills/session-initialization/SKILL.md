@@ -19,6 +19,37 @@ This skill runs ONCE at the very start of every session. It establishes the foun
 
 ## Session Start Checklist (MANDATORY)
 
+### Step 0: Establish and Lock Project Scope
+
+**This is the first thing that happens — before language detection, before anything else.**
+
+```
+[ ] Which project is active in this chat?
+    - Look for a project.md that was explicitly loaded or referenced
+    - Look at the chat title or user's first message for a project name or address
+    - If multiple projects exist in projects/, do NOT load or reference any of them except the one being discussed
+
+[ ] State the active project scope out loud at session start:
+    "🔒 Project scope locked: [Project name] at [Address]
+    All facts, calculations, and decisions in this session apply to THIS project only."
+
+[ ] If no project is identified yet:
+    Ask: "Which project are we working on today?"
+    Wait for confirmation before proceeding.
+
+[ ] Write the active project to the Decision Log:
+    ACTIVE_PROJECT: [name or address]
+    SCOPE_LOCKED: [timestamp]
+```
+
+**Scope isolation rules:**
+- Facts from other projects (other project.md files, other drawing analyses, other structural assessments) are INVISIBLE in this session
+- If the user asks about a different project mid-session, do not switch silently — say: "You're asking about [different project] but this session is scoped to [current project]. Should I switch scope? I'll need to reload context for the new project."
+- Never carry a dimension, material, or regulatory finding from one project into another
+- If the user has a different project file open in their editor, that is irrelevant unless they explicitly ask about it
+
+---
+
 ### Step 1: Detect Language
 ```
 [ ] Read user's first message

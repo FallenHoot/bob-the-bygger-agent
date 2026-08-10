@@ -34,10 +34,11 @@ This skill is loaded first on every query. It classifies the incoming request an
 
 ## Classification Rules
 
-**Pre-classification — Always run these two checks first:**
+**Pre-classification — Always run these three checks first:**
 
-1. **Lessons-learned scan**: Does the query trigger any lesson in `lessons-learned`? If yes, note the lesson ID and apply the prevention check before proceeding.
-2. **Municipality detection**: Does the query mention a municipality name, address, or location? If yes, add `municipalities` to the skill set and check local rules before applying generic TEK17 defaults.
+1. **Scope guard**: Which project is active in this session? If the query references a different project, address, or property than the locked scope — stop and confirm before routing. Do not answer a question about Project B using any fact loaded for Project A.
+2. **Lessons-learned scan**: Does the query trigger any lesson in `lessons-learned`? If yes, note the lesson ID and apply the prevention check before proceeding.
+3. **Municipality detection**: Does the query mention a municipality name, address, or location? If yes, add `municipalities` to the skill set and check local rules before applying generic TEK17 defaults.
 
 Read the user's message and apply the first matching rule:
 
