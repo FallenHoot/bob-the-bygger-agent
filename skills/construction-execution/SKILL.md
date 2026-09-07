@@ -1,13 +1,23 @@
 ﻿---
 name: construction-execution
-description: On-site sequencing, demolition, contractor coordination, NS 8405 contract terms, Norwegian material lead times, HMS site safety, and practical problem-solving in the field.
-triggers: [demolition, riving, sequence, rekkefølge, contractor, entreprenør, site, byggeplass, schedule, fremdrift, temporary works, midlertidig, propping, avstiving, asbestos, asbest, NS 8405, contract, kontrakt, lead time, leveringstid, commissioning, igangkjøring, ferdigattest, HMS, safety, sikkerhet, endringsordre, variation, scaffold, stillas, FDV, handover, overtakelse, subcontractor, underentreprenør, rebar, pour, concrete, betong, formwork, forskaling]
+description: Use for construction sequencing, contract departures review, package-based schedules, site progress reporting, FDV handover records, contractor coordination, and temporary-works holds in Norway.
+triggers: [demolition, riving, sequence, rekkefølge, contractor, entreprenør, site, byggeplass, schedule, fremdrift, package-based schedule, site progress reporting, temporary works, midlertidig, propping, avstiving, asbestos, asbest, NS 8405, NS 8415, NS 8407, bustadoppføringslova, håndverkertjenesteloven, contract, kontrakt, contract departures review, departures register, lead time, leveringstid, commissioning, igangkjøring, ferdigattest, HMS, SHA, safety, sikkerhet, endringsordre, variation, scaffold, stillas, FDV, O&M, handover, overtakelse, subcontractor, underentreprenør, rebar, pour, concrete, betong, formwork, forskaling]
 load_with: [building-code-tek17]
 safety_level: high
 license: Proprietary
 ---
 
 # Skill: Construction Execution
+
+## Trust Boundary
+
+**Bob may, on his own analysis:** organize source-linked contract comparisons, proposed sequencing, progress evidence, and FDV records. These are review aids, not legal advice, engineering instructions, site acceptance, or payment certification.
+
+**Bob may flag only as preliminary:** durations, dependencies, cost impacts, and commercial consequences. Missing or conflicting evidence stays explicit; generic examples and prior AI outputs do not establish an accepted baseline or release a hold.
+
+**External authority required:** a responsible structural engineer must verify structural sequences and temporary-works design, with site checks and release by the designated competent person. Qualified hazardous-material specialists must assess suspect materials before disturbance. Use `HAZARDOUS_WASTE_SURVEY_REQUIRED` / `ASBESTOS_SURVEY_REQUIRED` when that assessment establishes a survey need, not as blanket legal findings for every demolition. Verify HMS/SHA duties and competence with current Arbeidstilsynet guidance for the parties and work. Contract interpretation goes to qualified Norwegian legal counsel; contractual decisions belong to the authorized party, and permit/occupancy decisions to the municipality. Bob cannot approve any of these.
+
+---
 
 ## Domain
 On-site construction sequencing, demolition planning, contractor coordination, scope management, Norwegian construction industry practice, trade sequencing, and the practical knowledge of how work actually happens in the field.
@@ -24,10 +34,12 @@ Core principle: **Work from outside to inside, from bottom to top, from structur
 
 ## Standard Construction Sequence — New Residential
 
+Illustrative sequencing only, not an accepted schedule or method statement. Verify package-specific dependencies, design/product requirements and hold releases; the ordering below is not universal.
+
 ### Phase 0 — Pre-Construction
-- [ ] Verify søknad is issued and permit (igangsettingstillatelse) in hand before breaking ground
-- [ ] Establish construction site (byggeplass): hoarding, site hut (brakker), toilet facilities, waste management plan (avfallsplan — required by TEK17/SAK10)
-- [ ] Locate and mark all underground services: water, sewer, electrical, fiber, district heating. Use Geomatikk / VA-kart / Geomap to request service drawings. **Confirm with ground-penetrating radar (GPR) in urban sites before any excavation.**
+- [ ] Verify applicable permit/exemption basis, commencement conditions, and release evidence for the intended work with the responsible applicant/municipality
+- [ ] Establish construction site (byggeplass): hoarding, site facilities, logistics, and waste arrangements. Verify any avfallsplan requirement against the actual scope and current DiBK guidance
+- [ ] Locate and mark underground services using utility records and competent site verification. Agree suitable detection and safe-excavation methods; drawings or GPR alone do not clear excavation
 - [ ] Confirm site survey: property boundaries, existing levels, benchmark
 - [ ] Establish construction logistics: crane position (if applicable), material staging areas, concrete pump access
 
@@ -36,14 +48,14 @@ Core principle: **Work from outside to inside, from bottom to top, from structur
 2. Bulk excavation (sprengning / graving) to formation level
 3. Geotechnical inspection at formation — confirm bearing condition matches assumptions
 4. Drainage installation (drensrør, pukklag)
-5. Blinding layer (45 mm lean concrete or compacted hardcore)
+5. Blinding layer to the verified foundation specification
 6. Radon barrier and capillary break (pukklaget) if required
 7. Foundation formwork (grunnmursforskaling)
 8. Reinforcement installation — inspection by engineer before pour
 9. Concrete pour — foundation walls and slab (betong, pumping in most urban sites)
-10. Concrete curing — minimum 7 days before loading, 28 days for full strength
+10. Concrete curing and strength verification to the project specification, actual conditions, and engineer-defined loading/release criteria; elapsed days alone do not authorize loading
 11. Waterproofing and drainage membrane on foundation exterior
-12. Backfill — compact in 300 mm layers, never backfill against uncured concrete
+12. Backfill and compaction to the verified design/method, only after the structural hold is released
 
 **Critical hold point**: Do not backfill until structural engineer confirms slab and wall strength is adequate to resist lateral backfill pressure.
 
@@ -57,7 +69,7 @@ For timber frame (bindingsverk):
 6. Underroof (undertak) membrane — install as soon as roof structure is complete
 7. Roof covering (taktekking) — tiles, metal sheet, or membrane
 
-**Critical hold point**: All roof structure and waterproofing in place before external insulation and cladding begin. The building must be watertight before interior work starts.
+**Critical hold point**: Verify weather protection and moisture readiness for the affected work package against the project method and product requirements before covering or starting moisture-sensitive work.
 
 ### Phase 3 — Envelope (Klimaskjerm)
 1. Windows and external doors — installed with proper airtight reveals
@@ -67,7 +79,7 @@ For timber frame (bindingsverk):
 5. Airtightness layer on interior side (PE-folie) — install before any internal partitions
 6. Pressure test (tetthetsprøve, blower door test) — done before interior linings go up so repairs are accessible
 
-**Critical hold point**: Blower door test at n50 before interior linings. Fail = find and fix before boarding. The moment boarding goes up, finding air leaks costs 10x more.
+**Critical hold point**: Record the project's airtightness test method, target, inspection stage, result, and responsible release before concealment. Resolve failures and document any required retest; do not invent a universal threshold or release from appearance alone.
 
 ### Phase 4 — Rough Mechanical and Electrical
 Sequence within Phase 4 is critical — some trades must complete before others:
@@ -77,7 +89,7 @@ Sequence within Phase 4 is critical — some trades must complete before others:
 4. Data, fire alarm, and security rough-in
 5. Service cavity installation (if using service cavity for cables + extra insulation)
 
-**Coordination note**: Ventilation ductwork has absolute right-of-way. Everything else routes around it. Mechanical engineer's duct drawings govern. If ducts don't fit, the problem is not the ducts — it is that the ceiling space was undersized in the design.
+**Coordination note**: Coordinate large ducts and other services against the verified multidisciplinary design, structural constraints, access and fire requirements. Resolve clashes with the responsible designers before installation; no trade has automatic right-of-way and a clash alone does not establish its cause.
 
 ### Phase 5 — Interior Linings
 1. Interior airtightness and service cavity boards
@@ -85,7 +97,7 @@ Sequence within Phase 4 is critical — some trades must complete before others:
 3. Gypsum board (gipsplater) — ceilings first, then walls
 4. Taping and jointing (sparkeling) — two coats minimum for painted finish, three for high-sheen
 5. Screed or self-levelling compound on floors (if concrete)
-6. Timber flooring sub-base or moisture barrier (concrete must be dry — RH < 85% before adhesives)
+6. Timber flooring sub-base or moisture barrier: verify substrate moisture using the specified measurement method and exact flooring/adhesive limits before release
 
 ### Phase 6 — Interior Fit-Out
 1. Doors (interior, pre-hung) and door hardware
@@ -105,9 +117,9 @@ Sequence within Phase 4 is critical — some trades must complete before others:
 ### Phase 8 — Completion and Handover
 - [ ] Snag list (mangelsliste) compiled with client
 - [ ] All trade documentation assembled: CE markings, test reports, commissioning reports
-- [ ] FDV documentation (Forvaltning, Drift, og Vedlikehold) — operation and maintenance manual. Required by TEK17.
-- [ ] Ferdigattest application submitted to municipality. Cannot occupy until granted.
-- [ ] Clean site: all temporary works removed, site hoarding down, topsoil reinstated
+- [ ] Assemble source-linked FDV documentation (Forvaltning, Drift, og Vedlikehold) using the register below; verify applicable delivery requirements
+- [ ] Verify the actual municipal occupancy basis and conditions, including ferdigattest or any applicable midlertidig brukstillatelse. An application or assembled FDV package is not permission to occupy
+- [ ] Clean site and reinstate ground. Remove temporary works only under the verified removal sequence and recorded release, not merely because handover is scheduled
 
 ---
 
@@ -115,19 +127,19 @@ Sequence within Phase 4 is critical — some trades must complete before others:
 
 ### Pre-Demolition Requirements
 Before a sledgehammer swings:
-1. **Kartlegging av farlig avfall** (hazardous waste survey): Required by law for all demolition. Must identify:
+1. **Kartlegging av farlig avfall** (hazardous waste assessment): Establish material risks, survey scope, and applicable duties with competent specialists and current guidance before disturbance. Potential hazards include:
    - Asbestos (asbest): common in Norwegian buildings 1940–1985 (insulation, floor tiles, siding, pipe lagging, sealing compounds)
    - Lead paint (blymaling): common pre-1975
    - PCBs: in older sealed glazing units and some electrical equipment
    - Mercury: in older thermostats and fluorescent lights
    - Creosote-treated wood in older structures
-2. **Asbestos analysis**: If the survey identifies possible asbestos-containing materials (ACM), samples must be analysed by an accredited lab before any disturbance. Removal of ACM must be performed by a certified asbestos removal contractor (godkjent asbestsaneringsforetak).
+2. **Asbestos assessment**: Hold disturbance of suspect asbestos-containing materials (ACM). A competent specialist must establish safe sampling/analysis and removal arrangements, verifying contractor authorization and applicable requirements with Arbeidstilsynet.
 3. **Service isolation**: Confirm gas, electricity, water, and sewer are isolated and capped. Get written confirmation from each utility.
 4. **Structural assessment**: Identify all load-bearing elements before beginning selective demolition. Map out the load path and sequence removal to avoid progressive collapse.
 
 ### Selective Demolition (Selektiv Riving) Sequence
-1. Internal fixtures and fittings (non-structural)
-2. Hazardous materials (asbestos, lead paint) — by specialist contractor
+1. Hazardous-material clearance/removal for the affected area by competent specialists before intrusive strip-out
+2. Internal fixtures and fittings (non-structural), within the cleared scope
 3. Mechanical and electrical strip-out
 4. Non-load-bearing internal partitions
 5. Internal linings (boards, tiles, flooring) — to expose structure for inspection
@@ -136,15 +148,10 @@ Before a sledgehammer swings:
 8. Roof covering and secondary structure (if full demolition)
 9. Primary structure — engineer-directed sequence only
 
-**The most common demolition mistake**: Removing a wall assumed to be non-load-bearing without propping the floor above. The floor does not fall immediately — it creeps, it sags, and then, days or weeks later, it fails. Prop first. Confirm after.
+**Demolition hold**: Never remove a wall on an assumed load classification or improvise propping first and verify later. Establish the load path, verified temporary-works design, installation checks, and authorized sequence before disturbing support.
 
 ### Temporary Works (Midlertidig Understøttelse)
-Any structural element that is load-bearing must be temporarily supported before removal of adjacent supporting structure. Standard temporary propping:
-- **Acrow props** (stålstag) at 600–900 mm centres under floors
-- **Needles** through masonry walls to create a load path while a new lintel is installed
-- **Flying shores** for stabilizing free-standing masonry during adjacent demolition
-
-Temporary works design for complex situations must be signed off by a structural engineer.
+Use a verified project-specific temporary-works design from the responsible structural engineer, not generic prop spacing or improvised needles/shores. Record loads, load paths through supporting floors to ground, bearing, bracing, equipment capacity/configuration, installation checks, monitoring, and installation/removal sequence. Hold affected work until the designated competent person records the required checks and release against that design revision. A proposed schedule cannot release supports or authorize loading.
 
 ---
 
@@ -153,35 +160,88 @@ Temporary works design for complex situations must be signed off by a structural
 ### Entrepriseformer (Contract Models)
 | Model | Norwegian Term | Description |
 |---|---|---|
-| General contractor | Totalentreprise | Single contractor responsible for all trades; client has one contract |
-| Design-build | Totalentreprise med prosjektering | GC also responsible for design |
+| General contractor | Generalentreprise | Typically one main construction contract, with design separately arranged; verify the actual allocation |
+| Design-build | Totalentreprise | Typically combines design and construction responsibility; verify scope and exclusions |
 | Trade packages | Delt entreprise | Client holds separate contracts with each trade; more control, more management burden |
 | Construction management | Byggherrens byggeledelse | Owner hires a construction manager (byggeleder) to coordinate separate trade contracts |
 
-For a private client without construction experience: **totalentreprise** provides the clearest accountability. For a client with strong construction management skills: **delt entreprise** typically delivers better value.
+Choose the model against actual design responsibility, interfaces, client capability, and contract terms; labels alone establish neither accountability nor value.
 
-### NS 8405 / NS 8415 — The Governing Contract Standards
-All Norwegian construction contracts should be based on:
-- **NS 8405**: Standard contract for contractor-led work (entreprise)
-- **NS 8415**: Standard subcontract (underentreprise)
-- **NS 8407**: Design-build (totalentreprise)
+### Contract Basis and Applicability
+Determine the parties (including consumer/professional status), work type (such as new dwelling versus work on an existing property), scope, and design responsibility first. Establish whether **bustadoppføringslova** or **håndverkertjenesteloven** applies, and which contract/NS standard, if any, was actually agreed. Do not prescribe NS 8405, NS 8415, or NS 8407 for every Norwegian contract or assume an agreed standard overrides mandatory consumer protections.
 
-Key provisions to understand as a client:
-- **Fristforlengelse** (extension of time): Contractor is entitled to extension if client-caused delays, variation orders, or force majeure events occur. Client must formally reject extension claims within specified deadlines or they are accepted by default.
-- **Endringsordre** (variation order): All changes to scope must be formally issued in writing as an endringsordre. Verbal instructions are not binding. If you tell a contractor to do something different, issue a VO the same day.
-- **Reklamasjonsfrister** (defect notification periods): Client must notify defects in writing within 2 months of discovery. After 5 years from completion, contractor liability for most defects expires (except fraud or gross negligence).
+Verify exact clauses, edition, amendments, document precedence, and applicable law using the supplied executed documents, authorized Standard Norge material, current Lovdata text, relevant official guidance, and qualified Norwegian counsel where interpretation is needed. Record source and verification date. Unavailable clauses or unresolved applicability mean **not assessed**, not a reconstructed rule from memory.
+
+For variations, extensions of time, notices, defects, and liability, verify the specific entitlement, procedure, recipient, timing trigger, and consequence. Do not assert universal two-month/five-year limits, that verbal instructions can never bind, or that silence automatically accepts a claim. Preserve oral-instruction evidence and seek written clarification promptly without deciding its legal effect. Flag potentially time-sensitive issues for immediate competent review rather than inventing a deadline or waiting for the whole review to finish.
+
+## Contract Departures Review
+
+1. Inventory the supplied contract package and revisions, including special conditions, scope, commercial schedules, amendments, and acceptance evidence. Resolve the contract basis above before legal conclusions.
+2. Obtain the **client-accepted comparison baseline**, its revision, and evidence of who accepted it and when. A prior register, article example, tender draft, or AI suggestion is not an accepted baseline. If it or the relevant clause is missing, record **not assessed** and request the evidence.
+3. Compare source wording to that baseline, distinguishing observed differences from proposed commercial/legal consequences. Do not assume the client's preferred position is legally permissible. Record each item:
+
+| Field | Required evidence or state |
+|---|---|
+| Departure ID / topic | Scope and issue, including conflicting or missing documents |
+| Source clause / revision | Document, clause/page, exact relevant wording, edition/revision, amendment and precedence evidence |
+| Client-accepted baseline | Position, source/revision, accepting person/date and acceptance evidence; missing → **not assessed** |
+| Assessment / consequence | Difference and source-supported possible scope, cost, time, or risk effect; uncertainty explicit |
+| Proposed response | Clarification, negotiation wording, or referral; never an issued notice or acceptance |
+| Decision owner / review | Named authorized decision owner, legal/commercial reviewer, review status, decision and evidence/date; unknown owners remain open |
+
+4. Return the departures register with evidence gaps and review actions. Acceptance requires a separate authorized decision; Bob's comparison is **not legal approval**. Do not import the article's illustrative LD cap (including 10%), liability exclusions, warranty terms, or other commercial defaults.
 
 ### Tilsyn (Site Supervision)
-The ansvarlig utførende (responsible contractor) has primary responsibility for quality control. However, the client or client's representative (byggherre / prosjektleder) should conduct regular site visits and document:
+Verify quality-control, inspection, and acceptance responsibilities from the project's role allocation and applicable requirements. Client/representative visits supplement rather than replace required checks. Document:
 - Progress against programme
 - Quality of work at key hold points (foundations, framing, airtightness)
 - Open issues / snagging as work progresses (not all at the end)
 
 ---
 
+## Package-Based Schedule (Optional)
+
+Use when a draft schedule or lookahead is requested. Start from supplied scope/packages, method, milestones, supplier commitments, and the identified accepted schedule revision, if one exists. Do not require a package register where none is needed; map activities to supplied scope instead.
+
+| Record per activity | Required content |
+|---|---|
+| Activity / package / owner | Stable activity ID, package or scope reference, location and responsible trade |
+| Predecessor / logic | Predecessor ID, dependency type and any lag, each with evidence or explicitly proposed assumption |
+| Duration / calendar | Working duration, calendar, availability/productivity or supplier evidence, and unresolved assumptions |
+| Constraints / holds | Access, permits, design readiness, procurement, resources, inspections, moisture/strength requirements; source and release owner/evidence |
+| Proposed vs baseline | Proposed dates separately from accepted baseline dates, revision and acceptance evidence; no accepted baseline → comparison **not assessed** |
+
+Have the planner and affected trades review logic, calendars, durations, and constraints before any baseline decision. Preserve the old baseline and record authorized changes rather than silently replacing it. Report gaps instead of manufacturing a critical path; only label one as calculated with a complete validated dependency/calendar/duration model and traceable calculation. Lead-time ranges below are preliminary context, not supplier commitments. No generic curing time, age, planned date, or reported completion releases a technical hold.
+
+## Site Progress Reporting
+
+Set a reporting cutoff and identify the accepted baseline revision before comparing planned and actual work. If absent, actual observations can still be recorded, but baseline variance is **not assessed**. Keep later updates separate from evidence available at the cutoff.
+
+- **Record per activity/package/location:** planned start/finish and quantity at cutoff with baseline source; actual start/finish or ongoing state with dated measurement, units, method, reporter, and source (site log, photo reference, measurement sheet, inspection record).
+- **Separate evidence states:** observed, contractor-reported, measured, inspected, and accepted are different. Preserve conflicts and unknowns. A photo or reported finish does not prove concealed quality, inspection acceptance, or hold release.
+- **Track blockers and inspections:** constraint/RFI/delivery issue, affected activity, evidence/date, inspection result or pending status, release/acceptance evidence, action owner, and next action. Do not treat an undocumented inspection as passed.
+- **Compare only like-for-like measures:** document the measured quantity and baseline denominator/method for any calculated percentage. Do not infer percentages from photos, narrative, elapsed time, or unsupported claims. Keep claimed progress explicitly attributed and unverified.
+- **Output:** concise actual-versus-planned report, evidence gaps, blockers, and proposed actions. Reported progress is **not accepted work or payment certification** and establishes neither entitlement nor an extension of time.
+
+## FDV Handover Records
+
+Build a draft evidence index for the installed assets, not a generic collection of product brochures. Verify the applicable project/contract delivery requirements separately.
+
+| Record per installed item | Required content |
+|---|---|
+| Item / location / product | Asset ID, actual room/system/location, manufacturer, exact model/variant and serial where applicable, installation evidence and supplier/installer |
+| Manual / warranty | Exact matching manual title/revision/link and supplied warranty document, issuer, terms and start evidence; distinguish warranty from statutory defect rights |
+| Commissioning / as-built | Test/commissioning result, date, responsible party and source; matching as-built drawing revision and unresolved deviations |
+| Maintenance | Source document/page for each task, interval and condition; applicability to installed model/configuration verified |
+| Missing documents / owner | Missing, mismatched, superseded or unverified evidence; named collection/action owner, requested follow-up date and review status |
+
+Do not invent warranty periods, maintenance intervals, commissioning results, or installed-product matches. Keep unknowns explicit and request exact supplier/manufacturer evidence. Issue only a draft index with open-document actions until the designated reviewer verifies scope and delivery. Document completeness is not technical acceptance, contractual handover, a ferdigattest, or permission to occupy.
+
+---
+
 ## Material Lead Times — Norwegian Market Context
 
-Plan procurement carefully. As of 2026, typical lead times:
+Illustrative, unverified planning ranges only. Obtain dated supplier quotations for the exact product, quantity, delivery location and constraints before scheduling a commitment:
 
 | Item | Lead time |
 |---|---|
@@ -194,7 +254,7 @@ Plan procurement carefully. As of 2026, typical lead times:
 | Prefab concrete elements | 6–12 weeks |
 | Electrical switchgear (high-spec) | 8–16 weeks |
 
-**Order windows early.** They are the single most common item that delays the envelope closure and pushes the entire programme.
+**Check window procurement early.** Confirm design readiness and supplier dates; do not infer a critical-path delay or authorize ordering from this table.
 
 ---
 
@@ -220,28 +280,33 @@ Plan procurement carefully. As of 2026, typical lead times:
 - Check in order: (1) flashings at penetrations (pipes, rooflights, dormers), (2) valley gutters, (3) ridge and hip connections, (4) verge edges. The flat middle of a roof almost never leaks — it is always at an edge, penetration, or transition.
 
 ### Problem: The contractor says it will cost more than the VO
-- Get the breakdown in writing before approving. NS 8405 requires the contractor to provide a written quotation for changes. You are not obligated to accept; you can negotiate or require them to proceed under protest (with dispute resolution later) for change work that is minor.
+- Request the scope, price/time breakdown, instruction history, and supporting records. Verify the applicable contract/law, exact variation and notice clauses, and instruction authority through the [Contract Departures Review](#contract-departures-review) before proposing a response. Preserve disputed positions and escalate time-sensitive notices; do not assume a universal NS quotation rule or authority to compel disputed work. Do not issue an instruction, reject a claim, or certify payment on Bob's assessment alone.
 
 ---
 
 ## Site Safety — Norwegian Requirements
 
-- **HMS plan** (Helse, Miljø og Sikkerhet): All construction sites with more than one contractor require a written HMS plan. The client (byggherre) has formal legal responsibility for coordinating HMS when multiple contractors are on site simultaneously.
-- **Sha-koordinator** (Safety coordinator): Required on all projects involving multiple contractors. Often the main contractor's site manager, but must be formally appointed in writing.
-- **Stillasattest** (Scaffolding certificate): Scaffolding erected by a certified scaffolding contractor with a handover declaration before use.
-- **Fall protection**: All work at height > 2.0 m requires fall protection — guardrails, safety nets, or personal fall arrest equipment.
-- **Avfallssortering** (Waste segregation): Norwegian construction waste regulations require source separation. Typically: timber, masonry/concrete, metal, gypsum, hazardous waste, and mixed waste streams. Waste containers must be labelled.
+- **HMS / SHA:** Distinguish contractor HMS systems from project SHA arrangements. Determine applicability, client status (including consumer status), work risks, role duties, coordination and plan requirements through current Arbeidstilsynet guidance and competent safety review. Contractor count alone is not a universal legal test.
+- **Coordinator:** Verify whether appointment is required, who has that duty, competence, authority and conflicts of interest. Do not default to the main contractor's site manager.
+- **Scaffolding:** Require a competent assessment of configuration, assembly, inspection, user instruction and documented release under applicable requirements before use; do not invent a universal contractor certification rule.
+- **Fall protection:** Assess fall risk and suitable preventive measures for the actual work and access. Do not treat a generic height threshold as permission to work unprotected below it.
+- **Waste:** Verify survey, segregation, handling and documentation requirements for the actual work/materials with competent specialists and current official guidance. Record arrangements and unresolved risks rather than declaring all-site compliance.
 
 ---
 
 ## Interaction with Other Skills
-- **TEK17**: Søknad must be filed and permit granted before construction begins. Ferdigattest must be granted before occupation. FDV documentation is a legal requirement.
-- **Structural Engineering**: Structural drawings govern. When the drawing says "prop before removing", it is not optional. Communicate clearly with the structural engineer at key hold points.
-- **SINTEF Byggforsk**: SINTEF details define the correct execution of critical elements — vapour retarder installation, airtightness sealing, foundation drainage. Treat them as craft specifications, not suggestions.
+- **TEK17**: Verify applicable permit/exemption, commencement, FDV and occupancy requirements and actual municipal decisions. A schedule or document checklist does not establish compliance or release.
+- **Structural Engineering**: Use the verified design revision and engineer-defined hold criteria. Obtain temporary-works and removal/loading release evidence; a generic sequence or schedule cannot substitute for engineering verification.
+- **SINTEF Byggforsk**: Verify the applicable detail, edition, and project specification before using it for execution or hold criteria; a generic reference is not project approval.
 - **Historic Preservation**: Heritage site work requires slower pace, documentation before covering, and specialist trades. Build in extra programme and budget contingency.
 - **Classical Architecture**: Good execution serves Venustas. A perfectly proportioned facade ruined by sloppy joint lines and uneven paint is a failure. Craft matters.
 
 ---
 
-*Authority: NS 8405, NS 8415, NS 8407, Arbeidsmiljøloven, SHA-forskriften (FOR 2009-08-03 nr. 1028), TEK17, SAK10*
-*Last reviewed: 2026-07-26*
+## Sources and Limits
+
+- **Workflow inspiration only:** [10 Plug-and-Play Claude Skills for Construction Professionals](https://aiconstructionnews.com/blog/ai-trends/ccc), AI Construction News, May 20, 2026. Public article read; no paid skill files accessed. The workflows above are original instructions, not copied commercial templates or Norwegian legal authority.
+- **Verify for each use:** executed contract and amendments; [Standard Norge](https://standard.no/) authorized standard text; [Lovdata](https://lovdata.no/) current applicable law; [Forbrukerrådet](https://www.forbrukerradet.no/) consumer guidance; [Arbeidstilsynet](https://www.arbeidstilsynet.no/) safety guidance; [DiBK](https://www.dibk.no/) building requirements. Record exact source, edition/date, applicability, and reviewer rather than treating this list as verification.
+- **Review scope:** focused workflow and adjacent claim corrections, not a full engineering or legal audit. Remaining construction examples require project-specific verification before execution; no runtime behavior validation is implied.
+
+*Last reviewed: 2026-09-06 (focused scope above)*

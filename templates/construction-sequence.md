@@ -292,10 +292,10 @@ Final inspections + cleanup (1 week)
 - [ ] Topics: Safety hazards, coordination issues, schedule updates
 
 ### Inspection Approval Process
-Before each phase transition, ensure:
-1. Contractor notifies building inspector (required 48-hour notice)
-2. Inspector performs walk-through
-3. Approval documented (signature on checklist)
+Before each phase transition, verify the inspection/control plan and any permit conditions:
+1. Contractor notifies the designated reviewer using the required or agreed notice period; do not assume a universal 48-hour statutory notice
+2. The responsible reviewer performs the specified inspection; municipal inspection only where required/scheduled
+3. Review outcome and scope documented (record/date on checklist)
 4. Any defects logged; remediation scheduled
 
 ### RFI (Request for Information) Log
@@ -306,7 +306,7 @@ Track all clarifications from plans during construction:
 
 ### Change Order Log
 Any deviations from approved plans:
-| Date | Change | Reason | Cost impact | Approval (owner + PE) |
+| Date | Change | Reason | Cost impact | Approval (owner + responsible designer/authority as applicable) |
 |---|---|---|---|---|
 | | | | | |
 
@@ -366,7 +366,8 @@ Critical inspections:  ↓      ↓      ↓      ↓      ↓       ↓
 ---
 
 **Prepared by:** [Name/role]  
-**Approved by:** [Contractor] [PE/Architect] [Owner]  
+**Review/approval records:** [Contractor] [Responsible designer/architect, scope and date where applicable] [Owner]
+
 **Last updated:** [YYYY-MM-DD]
 
 *This schedule is a living document. Update weekly as work progresses. Share with all trades.*

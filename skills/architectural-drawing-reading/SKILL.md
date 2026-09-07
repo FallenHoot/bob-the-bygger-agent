@@ -1,6 +1,6 @@
 ﻿---
 name: architectural-drawing-reading
-description: Reading Norwegian architectural and structural drawings — plantegninger, snitt, fasader, detaljer, konstruksjonstegninger. Includes symbol libraries, hatching conventions, søknad drawing package completeness, and vision-based analysis protocol. Load whenever a drawing or image is shared.
+description: Reads Norwegian architectural/structural drawings (plantegninger, snitt, fasader, detaljer) — symbol libraries, hatching, søknad completeness. Load whenever a drawing or image is shared.
 triggers: [drawing, tegning, floor plan, plantegning, section, snitt, elevation, fasade, detail, detalj, blueprint, scale, målestokk, title block, tegningshode, hatch, skravur, symbol, IFC, BIM, dimension, mål, beam notation, bjelke notation, reading drawings, tolke tegninger, drawing package, tegningspakke, søknad drawings, situasjonsplan, image uploaded, photo of drawing, scan, PDF drawing]
 load_with: []
 safety_level: low
@@ -20,7 +20,7 @@ Reading, interpreting, and extracting information from Norwegian architectural a
 **Never fabricate. Uncertainty is information.**
 
 When reading a drawing, BTBA distinguishes between three states:
-- ✅ **Confirmed**: Directly readable from the drawing
+- ✅ **Confirmed in drawing**: Directly readable in the identified revision, not independently confirmed on site or as a legal boundary
 - ⚠️ **Inferred**: Reasonable interpretation, stated as such with reasoning
 - ❓ **Unknown**: Cannot be determined from this drawing — flag it and ask
 
@@ -72,6 +72,13 @@ If the title block is missing or illegible, flag this immediately. An undated, u
 - Confirm the stated scale against any dimensioned elements
 - Identify the dimension string conventions: internal vs. external dimensions, wall face vs. wall centre
 - Check for scale bars (målestokklinje) — these survive reproduction better than written scale
+
+**Boundary/setback evidence gate (L005):**
+- Label each distance **DRAWING-DIMENSIONED**, **DRAWING-SCALED/INFERRED**, **CADASTRAL MAP**, **SITE-MEASURED**, or **SURVEY-CONFIRMED**. Record source, date/revision, method/accuracy, boundary segment, and measurement endpoints/datum (wall face, projection, road line, etc.). A site tape measurement or cadastral line of uncertain accuracy does not confirm the legal boundary.
+- For drawing-derived distances use **PRELIMINARY RED FLAGS — requires survey verification**. Even a legible dimension is evidence of drawing content, not a surveyed setback.
+- Reserve **SURVEY-CONFIRMED** for traceable boundary/survey records establishing the relevant segment and feature, reviewed by the competent survey professional/authority as needed. Resolve conflicts and verify the applicable plan/rule, measurement method, and any decision before making a compliance finding; survey alone is not a legal conclusion.
+- Do not call drawing-derived setbacks a confirmed "violation", "illegal", or "non-compliant". Describe an apparent discrepancy or potential breach, with the evidence limit attached.
+- In official correspondence retain: "These distances are preliminary estimates from drawing review, not survey-confirmed boundary distances." Request verification rather than assert a violation; use the [official correspondence gate](../soknad-package/SKILL.md#official-correspondence-gate-l005l006) before release.
 
 ### Step 4: Read the Structural System
 - Identify load-bearing walls (bærevegger): typically shown with heavier lines, different hatching, or explicit notation
@@ -249,7 +256,7 @@ When an image is uploaded, work through this sequence before providing any analy
 
 ## Drawing Package Structure — Norwegian Søknad
 
-A complete building permit application (søknad) in Norway includes the following drawing set. BTBA can identify which drawings are present and which are missing:
+Use the following as a drawing-package checklist, not a universal list of statutory attachments. Verify the measure, application stage, current SAK10 §5-4, and municipal requirements. Distinguish application drawings from technical design records retained in the project; a missing record is a completeness/evidence gap, not proof of illegality.
 
 | Drawing | Norwegian requirement | Governing reference |
 |---|---|---|
@@ -257,7 +264,7 @@ A complete building permit application (søknad) in Norway includes the followin
 | Plan alle etasjer | Required — all floor plans | SAK10 §5-4 |
 | Alle fasader | Required — all four elevations | SAK10 §5-4 |
 | Minst ett snitt | Required — at least one section | SAK10 §5-4 |
-| Konstruksjonstegninger | Required for structural review — signed by prosjekterende | TEK17 §10 |
+| Konstruksjonstegninger | Scope-specific structural design/review records; ansvarlig prosjekterende where applicable, verify submission stage | TEK17 §10 / applicable PBL/SAK10 route |
 | Energiberegning / U-verdi beregning | Required for new construction | TEK17 §14 |
 | Branntegninger | Required for BKL2 and above | TEK17 §11 |
 | VA-tegninger | Required if connecting to public water/sewer | Kommunale krav |
@@ -307,7 +314,7 @@ When reviewing drawings on behalf of a client, BTBA asks:
 - [ ] Is the foundation type shown, and is it appropriate for the noted soil conditions?
 
 **Regulatory**
-- [ ] Does the situasjonsplan show correct setbacks to all boundaries and roads?
+- [ ] Are boundary/road distances labeled by evidence type, endpoints, and uncertainty, with survey verification and the applicable rule checked before a compliance conclusion?
 - [ ] Is the building height within the allowed limit per reguleringsplanen?
 - [ ] Are all required drawings present for the søknad package?
 - [ ] Are wet rooms positioned above each other (minimizes pipe runs and leak exposure)?

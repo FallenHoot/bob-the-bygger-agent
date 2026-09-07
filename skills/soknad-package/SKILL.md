@@ -1,18 +1,42 @@
 ---
 name: soknad-package
-description: SAK10 søknad completeness — exactly which drawings, forms, and documents are required for each project type (tilbygg, fasadeendring, bruksendring, riving, nybygg). Load whenever a user asks what goes in a permit application, how to prepare a søknad, what DiBK requires, or whether their project needs a søknad at all.
+description: SAK10 søknad completeness — exactly which drawings/forms/documents each project type needs. Load for permit-application prep questions.
 license: Proprietary
-metadata:
-  triggers: søknad, byggesøknad, permit, application, what do I need, what documents, drawings required, SAK10, nabovarsel, situasjonsplan, BRA calculation, søknadspliktig, tilbygg, fasadeendring, bruksendring, riving, nybygg, forhåndskonferanse, dispensasjon, igangsettingstillatelse, ferdigattest, eByggesøk, ansvarlig søker, ansvarsrett, tiltakshaver, forhåndskonferanse
-  load_with: building-code-tek17
-  safety_level: high
+triggers: [søknad, byggesøknad, permit, application, what do I need, what documents, drawings required, SAK10, nabovarsel, situasjonsplan, BRA calculation, søknadspliktig, tilbygg, fasadeendring, bruksendring, riving, nybygg, forhåndskonferanse, dispensasjon, igangsettingstillatelse, ferdigattest, eByggesøk, ansvarlig søker, ansvarsrett, tiltakshaver]
+load_with: [building-code-tek17]
+safety_level: high
 ---
 
 # Skill: Søknad Package Completeness (SAK10)
 
+## Trust Boundary
+
+**Bob may, on his own analysis:** walk through the SAK10 completeness checklist for a given measure type and identify which documents are typically required.
+
+**Bob may flag only as preliminary:** BRA/BYA calculations or setback figures based on unverified geometry. Apply the [boundary evidence gate](../architectural-drawing-reading/SKILL.md#step-3-establish-scale-and-dimensions); readable drawings and cadastral lines are not automatically surveyed legal boundaries.
+
+**Submission boundary:** Bob prepares drafts and checks evidence, not grants permission or submits. Verify whether ansvarlig søker/ansvarlige foretak are required or tiltakshaver may apply directly. Obtain the authorized sender's approval and appropriate technical/planning/legal review for consequential unresolved claims; do not impose a universal PE, wet stamp, or lawyer requirement. Missing documents mean unresolved evidence/completeness, not automatically illegal work.
+
+## Official Correspondence Gate (L005/L006)
+
+For letters, emails, objections, and submissions to municipalities, heritage bodies, courts, or other official recipients:
+
+> **DRAFT FOR REVIEW — AI-assisted advisory draft, not submitted or approved. Verify factual and legal claims and obtain the appropriate professional review and sender authorization before sending.**
+
+End each draft with this pre-send checklist; unresolved consequential claims stay on hold or are rewritten as explicit requests for verification:
+- [ ] **Exact supporting documents:** Each claim cites the actual record inspected, title/file, date/revision, section, and scope. Do not infer permit, technical approval, or legal breach from a summary or absent file.
+- [ ] **Attachment manifest:** Exact filenames/titles, revisions/dates, purpose, and draft/reviewed/decision status match the intended attachments; missing or superseded items are flagged.
+- [ ] **Dispatch status:** Draft, approved for issue, sent, and receipt confirmed are separate states. Sent/issued requires dispatch evidence for recipients, date, and exact document set; receipt requires separate evidence. Otherwise state **dispatch unverified**.
+- [ ] **Deadline and currency:** Verify the response/submission deadline and its triggering event against current rules or the actual notice, with absolute date and time/time zone where relevant. Check legal-source effective date and document currency; do not reuse an expired deadline or outdated rule as current.
+- [ ] **Boundary and factual claims:** Retain source/method/accuracy labels. For drawing-derived distances include: "These distances are preliminary estimates from drawing review, not survey-confirmed boundary distances." Request competent survey/authority clarification; do not send a confirmed-violation allegation until the boundary, relevant geometry, and legal basis are verified.
+- [ ] **Scope and money:** State exactly which work/decision is covered and any exclusions. If costs appear, verify monetary currency, estimate/quote date/validity, VAT inclusion/exclusion and rate/basis, and consistent net/gross totals. Mark not applicable if no monetary claim.
+- [ ] **Review and release:** Name the reviewer and scope where professional review is needed; verify legal references and facts, and obtain explicit authorized-sender approval. Completion of this checklist does not itself send anything or establish authority approval.
+
+---
+
 ## Legal Basis
 
-**SAK10** (Byggesaksforskriften — FOR 2010-03-26 nr. 488, amended through 2026) is the procedural regulation under PBL. It defines exactly what must be submitted with a building permit application. Failure to include required documents results in rejection (avvisning) without a substantive review.
+**SAK10** (Byggesaksforskriften — FOR 2010-03-26 nr. 488) is the procedural regulation under PBL. Check its current text, the measure, application stage, and municipal requests to establish required documentation. A missing item may require supplementation; it is not automatically rejection or proof of unlawful work. Distinguish design records retained in the project from attachments required for the application.
 
 **eByggesøk** (DiBK's online søknad portal) automates many of these checks but does not replace knowledge of what is required — the portal will ask you to upload things you haven't prepared.
 
@@ -53,19 +77,21 @@ The following do not require a søknad (as of 2026, including SAK10 amendments e
 
 Covers: tilbygg, påbygg, nybygg, fasadeendring with impact, bruksendring, major renovation.
 
-**Who submits**: Ansvarlig søker (a licensed professional who takes responsibility for the application — typically an architect or builder with godkjenning).
+**Who submits**: Establish the applicable route under PBL §§20-2–20-4. For measures requiring responsible enterprises, ansvarlig søker coordinates the submission; this is not a generic personal licensing requirement.
 
-### §20-4 — Simple Measures Without Neighbors
+### §20-4 — Measures Without Responsible Enterprises
 
-Covers: smaller measures where there is no neighbour impact and no requirements for further documentation. Rare in practice.
+Covers qualifying measures that tiltakshaver may apply for directly. Verify the current categories and conditions; neighbor notification and documentation may still be required.
 
-### §20-3 — Self-Build (Tiltakshaver som ansvarlig søker)
+### §20-3 — Measures Requiring Responsible Enterprises; Selvbygger Route
 
-Private person builds own house. Requires demonstrating sufficient competence. DiBK is tightening these rules — check dibk.no for current eligibility.
+Do not treat §20-3 itself as a self-build exemption. If a personal selvbygger responsibility route is proposed, verify SAK10 §6-8 eligibility, scope, competence, and municipal approval. Neither an exemption nor self-build approval confirms structural or ground safety.
 
 ---
 
 ## Step 3: Required Documents by Project Type
+
+Treat the lists below as prompts to verify against the current rules, measure, application stage, and municipal requests, not a universal attachment or licensing schedule. Identify technical records retained in the project separately from submitted attachments. Assign ansvarlig prosjekterende and review records only under the applicable responsibility route; no generic PE/wet-stamp requirement is implied.
 
 ### 3A — Tilbygg / Påbygg (Addition to Existing Building)
 
@@ -74,7 +100,7 @@ Private person builds own house. Requires demonstrating sufficient competence. D
 - [ ] **Plantegning** — floor plan of the addition at 1:100 or 1:50. Shows room layout, dimensions, door/window positions, existing building interface. Must show *before* and *after* states or clearly mark new work.
 - [ ] **Snitt** (section) — minimum 1 section through the addition showing: floor-to-ceiling heights, floor build-up, foundation depth, roof structure.
 - [ ] **Fasadetegning** (elevation) — all affected facades at 1:100. Must show existing building + addition in same drawing. Mark terrain level (existing and proposed).
-- [ ] **Konstruksjonstegning** (structural drawing) — if the addition is structural (new load path, beam, or foundation). Must be signed by ansvarlig prosjekterende.
+- [ ] **Konstruksjonstegning** (structural drawing) — for new load paths, beams, or foundations, identify the qualified designer's design/review records and applicable responsibility and submission stage.
 
 **Documents required:**
 - [ ] **Søknadsskjema** — standard application form (SAK10 Vedlegg 2 / eByggesøk form)
@@ -142,7 +168,7 @@ Private person builds own house. Requires demonstrating sufficient competence. D
 - [ ] **Snitt** — minimum 2 cross-sections (longitudinal + transverse), showing floor-to-ceiling heights, floor build-up depths, foundation depth, roof structure.
 - [ ] **Fasadetegninger** — all 4 facades (or all visible facades), 1:100. Show terrain line (both existing and finished).
 - [ ] **Fundamentplan / grunnmursplan** — foundation plan showing footing positions, basement walls, drainage.
-- [ ] **Konstruksjonstegninger** — structural drawings for primary load-bearing system (signed by ansvarlig prosjekterende).
+- [ ] **Konstruksjonstegninger** — structural drawings and review records for the primary load-bearing system; identify ansvarlig prosjekterende where applicable and verify which records accompany this submission.
 - [ ] **Bjelkeplan / dekkeplan** — floor structure plans showing joist direction, beam positions.
 
 **Documents required:**
@@ -227,10 +253,10 @@ Demolition of buildings that are søknadspliktig (most permanent buildings > 15 
 1. **Missing or incomplete nabovarsel** — wrong neighbours notified; insufficient waiting period documented
 2. **Situasjonsplan not from matrikkelkart base** — hand-drawn without accurate boundary data
 3. **BYA exceeds allowed %-BYA** — calculation error or missing terrace/parking area
-4. **Missing ansvarlig søker** — tiltakshaver cannot submit without a qualified søker (unless §20-3 applies)
+4. **Applicant/responsibility route unresolved** — establish whether responsible enterprises are required, tiltakshaver may apply under §20-4, or an approved selvbygger route applies
 5. **Ansvarsrett declarations missing** — digital submission in eByggesøk incomplete
 6. **TEK17 compliance not documented** — ceiling height, fire escape, ventilation missing from drawings
-7. **Structural drawings not signed** — unsigned calculations from an unlicensed person
+7. **Structural documentation/review incomplete** — identify the responsible designer and applicable records; no generic PE/wet-stamp requirement or automatic illegality inference
 8. **Hazardous waste survey missing** (for demolition) — automatic rejection
 
 ---
@@ -253,12 +279,12 @@ If the project doesn't comply with the municipal plan (e.g., exceeds %-BYA, wron
 
 | Situation | Flag |
 |---|---|
-| Any søknadspliktig tiltak begun without permit | `SØKNAD_REQUIRED` — stop work immediately; retroactive søknad may be possible but carries penalty risk |
+| Work with unresolved permit status | `PERMIT_STATUS_REVIEW` — verify scope, exemptions, decisions, and conditions with the municipality/applicant; missing records alone do not prove unlawful work |
 | Demolition of any building | `HAZARDOUS_WASTE_SURVEY_REQUIRED` |
 | Project in heritage zone or SEFRAK building | `BYANTIKVAREN_CONSULTATION_REQUIRED` |
 | Basement excavation / unknown soil | `GEOTECHNICAL_REPORT_REQUIRED` |
 | Flood or landslide zone | `NVE_CHECK_REQUIRED` |
-| Structural modification | `WET_STAMP_REQUIRED` |
+| Structural modification | `STRUCTURAL_REVIEW` — scope-specific qualified structural assessment and applicable Norwegian responsibility/documentation route, not a generic wet stamp |
 
 ---
 

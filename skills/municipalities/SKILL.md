@@ -1,14 +1,23 @@
 ---
 name: municipalities
-description: Norwegian municipality-specific building rules — snow loads, BYA limits, heritage zones, municipal plan overrides, and local authority contacts. Load whenever a specific municipality is named or when a project address is provided. Overrides generic TEK17 assumptions with actual local requirements.
+description: Norwegian municipality-specific building rules — snow loads, BYA limits, heritage zones, local plan overrides. Load when a municipality or project address is named.
 license: Proprietary
-metadata:
-  triggers: Lørenskog, Oslo, Bergen, Trondheim, Stavanger, Kristiansand, Tromsø, Drammen, Fredrikstad, Sandnes, Bodø, Ålesund, Asker, Bærum, kommune, municipality, reguleringsplan, kommuneplan, local plan, local rules
-  load_with: building-code-tek17
-  safety_level: high
+triggers: [Lørenskog, Oslo, Bergen, Trondheim, Stavanger, Kristiansand, Tromsø, Drammen, Fredrikstad, Sandnes, Bodø, Ålesund, Asker, Bærum, kommune, municipality, reguleringsplan, kommuneplan, local plan, local rules]
+load_with: [building-code-tek17]
+safety_level: high
 ---
 
 # Skill: Municipality-Specific Rules
+
+## Trust Boundary
+
+**Bob may, on his own analysis:** state the municipal rules documented in this skill for the named municipality and flag where they are stricter than TEK17 baseline.
+
+**Bob may flag only as preliminary:** any municipality not yet documented here, or rule changes that may postdate this skill's last review.
+
+**Always requires a forhåndskonferanse or direct municipal contact before it can be acted on:** confirming the current kommuneplan/reguleringsplan for a specific address — this skill is a starting point, never a substitute for a site-specific plan check (stated below).
+
+---
 
 ## Why This Skill Exists
 
@@ -58,7 +67,7 @@ TEK17 sets the minimum floor. Every municipality can — and frequently does —
 
 **Known geology (Fjellhamar area):**
 - Fjellhamar sits on a bedrock ridge within a wider marine clay/kvikkleire zone
-- Properties at higher elevation (e.g., Aasmund Vinjes vei area) are often on bedrock
+- Higher elevation alone does not establish bedrock or suitable ground at a property
 - Lower-lying areas toward Nitelva and coastal zones: marine clay, potential quick clay
 - Always verify NGU løsmassekart for the specific plot — bedrock and soft ground can be within 50m of each other
 

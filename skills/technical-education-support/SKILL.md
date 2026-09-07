@@ -1,6 +1,6 @@
 ﻿---
 name: technical-education-support
-description: Simplify technical jargon, explain building concepts with examples, provide learning resources, links to standards, educational materials. When user appears unfamiliar with terminology, Bob translates to plain language and provides context.
+description: Simplifies technical jargon into plain language with real-world analogies and points to learning resources, when a user seems unfamiliar with construction terminology.
 triggers: [what does that mean, can you explain, I don't understand, simpler, too technical, help me understand, what's a, define, learning, teach me, resources, links, references]
 load_with: []
 safety_level: low

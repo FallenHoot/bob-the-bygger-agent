@@ -15,6 +15,18 @@ This skill contains information intended to be accurate as of **2026-07-26**. Ho
 
 ---
 
+## Trust Boundary
+
+**Bob may, on his own analysis:** identify which TEK17/PBL/SAK10 paragraph governs a described situation, explain it in plain language, and flag when a project appears non-compliant based on stated facts.
+
+**Bob may flag only as preliminary:** compliance conclusions based on unverified dimensions, boundaries, or existing conditions. For setbacks, use the [boundary evidence gate](../architectural-drawing-reading/SKILL.md#step-3-establish-scale-and-dimensions): distinguish drawing-dimensioned/scaled, cadastral, site-measured, and survey-confirmed evidence. A drawing or tape measurement to an unconfirmed boundary is not survey confirmation. Label drawing-derived concerns **PRELIMINARY RED FLAGS — requires survey verification**; do not assert a violation without reliable boundary evidence and verification of the applicable rule/decision.
+
+**Authority boundary:** Bob drafts, not approves or submits. Verify whether the measure needs ansvarlige foretak, can be handled by tiltakshaver, or needs a municipal decision. Seek qualified technical/planning/legal review for unresolved consequential claims, not a blanket "licensed professional" requirement for every letter. Apply the [official correspondence gate](../soknad-package/SKILL.md#official-correspondence-gate-l005l006) before release.
+
+**Separate evidence, safety, and legal status:** missing documentation means **UNKNOWN / evidence required**, not automatically illegal. Confirm the applicable Norwegian provision, measure, date, exemption conditions, and authority decision before claiming a duty or breach. A permit/responsibility exemption never establishes structural or geotechnical safety; no generic PE credential or wet stamp is universally required by Norwegian law.
+
+---
+
 ## Domain
 Norwegian building regulations — TEK17 (Forskrift om tekniske krav til byggverk), the Plan- og bygningsloven (PBL), søknadsprosess, zoning, fire safety, energy requirements, and accessibility.
 
@@ -141,7 +153,7 @@ TEK17 sets minimum energy requirements for new and significantly renovated build
   - RC1: Low consequence (small outbuildings)
   - RC2: Normal consequence (residential)
   - RC3: High consequence (public buildings, high occupancy)
-- Structural calculations must be documented and signed by ansvarlig prosjekterende
+- Document the structural design basis and verification for the measure. Identify ansvarlig prosjekterende where required by the applicable PBL/SAK10 route, and distinguish project design records from application-stage attachments; do not impose a universal wet-stamp format.
 
 ### §11 — Sikkerhet ved brann (Fire safety)
 **Brannklasse (Risk class):**
@@ -280,10 +292,8 @@ These sections were amended in 2022 to align with Chapter 17's ombruk requiremen
 - Foundation work
 - Structural modifications
 
-### PBL §20-3 — Forenklet søknad (Simplified permit, no neighbors' consent)
-For measures by an ansvarlig søker where:
-- No dispensation from plans is needed
-- Neighbors are not affected
+### PBL §20-3 — Measures Requiring Responsible Enterprises
+Verify which responsible roles and declarations apply to the measure. This is not a general simplified/no-neighbor route; notification, dispensation, and processing-time conditions are separate checks.
 
 ### PBL §20-4 — Søknad uten ansvarsrett (Self-administered permit)
 For simple measures by the property owner themselves, if:
@@ -320,12 +330,12 @@ Municipal processing time for søknad: 3 weeks (forenklet), 12 weeks (full søkn
 | Role | Norwegian Term | Responsibility |
 |---|---|---|
 | Applicant owner | Tiltakshaver | Final legal responsibility |
-| Lead designer | Ansvarlig søker | Coordinates application, signs drawings |
+| Application coordinator | Ansvarlig søker | Coordinates application and responsibility declarations; not automatically the designer |
 | Designer | Ansvarlig prosjekterende | Designs to code, signs calculations |
 | Contractor | Ansvarlig utførende | Builds to drawings and code |
 | Controller | Ansvarlig kontrollerende | Independent review of design/execution |
 
-All roles require formal qualification (sentral godkjenning from DiBK or lokal godkjenning from municipality).
+Verify role-specific competence and ansvarsrett requirements under current PBL/SAK10. Sentral godkjenning is a voluntary scheme, not a universal license required for every role or for the owner. Distinguish measures requiring responsible enterprises, applications handled by tiltakshaver, and municipal approval as selvbygger where applicable.
 
 ---
 
@@ -391,7 +401,7 @@ If the plot is in a mapped kvikkleire area (any NGU sensitivity class), Bob must
 ---
 
 ## Interaction with Other Skills
-- **Structural Engineering**: TEK17 §10 mandates Eurocode compliance. Structural drawings and calculations are required in søknad documentation.
+- **Structural Engineering**: Verify the applicable TEK17 §10 design/documentation route, including Eurocodes with Norwegian National Annexes where used. Determine what is retained as technical documentation versus submitted at the relevant søknad stage.
 - **SINTEF Byggforsk**: Provides execution details (anvisninger) that document how to meet TEK17's energy, moisture, and construction requirements in practice.
 - **Historic Preservation**: Dispensasjon from TEK17 energy requirements is possible for listed/heritage buildings (§14-8). Cultural heritage law overrides where in direct conflict.
 - **Construction Execution**: Søknad must include an igangsettelses- and ferdigattest process. No occupancy before ferdigattest is issued. §9-7 environmental survey required before demolition.

@@ -1,6 +1,6 @@
 ﻿---
 name: electrical-nek400
-description: Norwegian electrical installation standards (NEK 400, IEC 60364), circuit design, grounding, protection, renewable energy integration, EV charging, solar electrical systems, heat pump electrical requirements, inspection protocols.
+description: Norwegian electrical standards (NEK 400, IEC 60364) — circuit design, grounding, protection, EV charging, solar, heat pump electrical requirements, inspection protocols.
 triggers: [NEK 400, electrical, strøm, spenning, krets, circuit, cable, kabel, grounding, jording, RCD, RCCB, overcurrent, overstrøm, fault, feil, EV charging, ladestasjoner, solar, solceller, heat pump, varmepumpe, ventilasjonsanlegg, elektrisk installasjon, inspeksjon, testing, IP rating, feuchtigkeitsmessung, wet room, våtrom, distribution, fordeling, earthing, jordforbindelse, surge protection, overspenningsvern, harmonics, resonance]
 load_with: [building-code-tek17]
 safety_level: critical
@@ -12,6 +12,16 @@ license: Proprietary
 ## ⚠️ DISCLAIMER
 
 This skill is for reference and educational purposes only. **Electrical installation design, inspection, and approval must be performed by a licensed electrician (strømmeister with NEK 400 competence).** Bob cannot replace professional electrical engineering. Errors in electrical work can cause fire, electrocution, or system failure.
+
+---
+
+## Trust Boundary
+
+**Bob may, on his own analysis:** explain NEK 400 requirements, identify what a described installation should include, and flag obviously missing safety features (no RCD, no grounding).
+
+**Bob may flag only as preliminary:** any circuit sizing or load calculation — these are illustrative, not a design.
+
+**Always requires a licensed electrician (strømmeister) before it can be acted on, energized, or signed off:** any actual circuit design, any heat pump/EV charger/solar installation (mandatory by Forskrift om elektriske installasjoner — see Escalation Flags below), and all commissioning/testing.
 
 ---
 

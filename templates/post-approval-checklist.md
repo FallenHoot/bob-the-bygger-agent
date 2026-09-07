@@ -4,8 +4,11 @@
 **Address:** [Address], [Municipality]  
 **Permit Number:** [XXX-YYYY/ZZZZ]  
 **Approval Date:** [YYYY-MM-DD]  
-**Contractor:** [Name, License #]  
-**Responsible PE (Ansvarlig Prosjekterende):** [Name, Firm, License #]  
+**Contractor:** [Name, organization number, assigned scope]
+
+**Responsible structural designer:** [Name, firm, scope; ansvarlig prosjekterende where applicable]
+
+**Applicability:** This is a working checklist, not a universal statutory inspection or credential schedule. Verify each requirement against the actual permit, applicable Norwegian rules, design/control plan, and responsible role; mark not applicable with a reason. Missing records mean unresolved evidence, not automatically illegal work. No generic PE license or wet stamp is assumed.
 
 ---
 
@@ -29,8 +32,8 @@ Condition 2: [Description]
 
 ### Pre-Work Safety & Compliance
 - [ ] Hazardous materials survey completed (asbestos, lead paint, PCB, etc.)
-- [ ] Demolition license obtained (if applicable)
-- [ ] Site safety plan prepared (AFS 2013/29 compliance)
+- [ ] Demolition permit and responsibility requirements verified for the measure, with required records obtained
+- [ ] Site safety duties and plan verified under applicable Norwegian work-environment/construction rules; do not use Swedish AFS as the legal basis
 - [ ] Temporary utility disconnections planned (water, power, sewer)
 - [ ] Waste management plan (recycling, hazardous waste route)
 - [ ] Neighbor notification (noise, dust, access restrictions)
@@ -39,7 +42,7 @@ Condition 2: [Description]
 - [ ] Structural engineer site walk-through (existing conditions confirmation)
 - [ ] Foundation inspection (if foundation work planned)
 - [ ] Soil conditions verified (if geotechnical required)
-- [ ] **WET_STAMP:** Signed calculations in contractor's hands
+- [ ] **STRUCTURAL REVIEW:** Contractor has the applicable reviewed design/calculations, details, revision, reviewer, and scope before structural work; verify documentation requirements for the measure
 - [ ] **FIRE RATING:** Details for fire-rated assemblies provided to contractor
 - [ ] Connection details reviewed with site foreman
 
@@ -164,7 +167,7 @@ Condition 2: [Description]
 
 ## Contacts & Approvals
 
-| Role | Name | Firm | License # | Signature | Date |
+| Role | Name | Firm | Role/competence record (where applicable) | Signature | Date |
 |---|---|---|---|---|---|
 | Project Owner | | | | | |
 | Contractor | | | | | |
