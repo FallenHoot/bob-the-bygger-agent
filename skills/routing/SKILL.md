@@ -1,7 +1,7 @@
 ﻿---
 name: routing
-description: Skill router — reads first on every query to determine which skills to activate. Maps query intent to the minimum necessary skill set. Prevents context bloat from loading all skills when only one is needed.
-triggers: [ALWAYS_LOAD_FIRST]
+description: "Route each task after startup to scoped evidence and relevant skills, including lifecycle updates and overlapping safety domains, without recursive loading."
+triggers: [task classification, changed intent, new attachment, lifecycle update, multi-domain review]
 load_with: []
 safety_level: high
 license: Proprietary
@@ -11,184 +11,125 @@ license: Proprietary
 
 ## Purpose
 
-This skill is loaded first on every query. It classifies the incoming request and selects the minimum set of skills needed to answer it correctly and safely. Only load skills that are directly relevant — context window space is finite and unused skills add noise.
+Apply after [system_prompt.md](../../system_prompt.md) and
+[session-initialization](../session-initialization/SKILL.md). Classify each new
+task or changed intent without rereading unchanged instructions. Keep the
+working set small without omitting safety-relevant domains.
 
-**Language Detection:** Before classification, detect user language (Norwegian or English). Respond in the same language throughout the session unless explicitly asked to switch.
+## Trust Boundary
 
----
+The high rating concerns process integrity. BTBA may classify, prioritize, and
+load sources independently. Skill matches identify possible review needs, not
+legal requirements, approval, or proof that an undocumented action was illegal.
+Use the system prompt's advisory review triggers and source-verification rules,
+including when a legacy domain skill asserts a stronger universal rule.
+Immediate danger receives concise safety escalation before any routing work.
 
-## Language Detection (Run First)
+For a concern outside the system prompt's listed review triggers, state the
+concern, appropriate reviewer, and next evidence in plain language. Do not
+invent an official-looking flag or use an unrelated category to imply authority.
 
-**Detect user's primary language:**
+## Scoped Loading Procedure
 
-| Signal | Language | Example |
-|---|---|---|
-| **Norwegian words present** | Norwegian | "Kan jeg fjerne denne veggen?", "TEK17", "søknad", "varmepumpe" |
-| **English words present** | English | "Can I remove this wall?", "What about the load?" |
-| **Mixed (code-switching)** | Use user's first language OR context (if project address is Norwegian, assume Norwegian) | "Can I do this renovation? Har jeg behov for søknad?" → Respond in Norwegian |
-| **Ambiguous** | Default to Norwegian (Norwegian construction expertise is primary) | Single-word query like "recommendations?" → Respond in Norwegian |
+1. Preserve startup's repository/general/project mode. An explicit project switch
+	updates scope without repeated intake; clarify only ambiguous switches. Match
+	conversational/requested language independently of Norwegian jurisdiction.
+2. Identify the actual task, relevant attachments, and all material hazards or
+	cross-domain dependencies. In repository mode, editing a structural skill does
+	not itself trigger a site assessment or private-project lookup.
+3. Apply **all relevant rows** below, not the first matching row. An image, BIM,
+	aesthetic, or lifecycle task must not suppress structural, ground, electrical,
+	fire, heritage, or other safety concerns present in the request.
+4. Load the minimum useful sections of selected skills and sources. In project
+	mode, consult the index/current summary before following relevant evidence.
+	Stop expanding when evidence is sufficient for the bounded answer. Report gaps.
+5. For broad tasks, sequence small work batches yourself and retain a combined
+	hazard/dependency checklist. There is no hard three-skill cap and no ban on
+	combining design and safety skills. Surface urgent issues without waiting for
+	every batch; do not force the user to restate a multi-domain request.
 
-**Response mode:** Match user's language exactly. If user switches languages mid-conversation, adapt. If user asks "svar på norsk" or "respond in English", honor that request for remainder of session.
+## Task Routes
 
----
+Each skill link is relative to this file. Add other rows only when their scope
+is actually implicated, not merely because a word appears in an address or quote.
 
-## Classification Rules
-
-Read the user's message and apply the first matching rule:
-
-### Rule 0 — Drawing or Image Present
-**Triggers**: Any image attachment, reference to a drawing, "plantegning", "snitt", "fasade", "tegning", "IFC file", "PDF plan"
-**Sub-rule 0a — File provided (PDF, JPEG, PNG, DXF)**: Load `drawing-reader` FIRST to extract structured data from the file, then load `architectural-drawing-reading` to interpret it, then re-classify using Rules 1–9
-**Sub-rule 0b — Image in conversation (no file upload)**: Load `drawing-investigation-protocol` (ask systematic questions) + `architectural-drawing-reading` → re-classify after gathering data
-**Sub-rule 0c — IFC file**: Load `bim-ifc` instead of `drawing-reader`
-**Primary response**: Bob runs the extraction pipeline, produces the structured summary (title block, scale, key dimensions, gaps), then asks targeted follow-up questions for missing data before any structural assessment
-
-### Rule 1 — Structural / Safety Question
-**Triggers**: Removing a wall, sizing a beam, checking a floor, load paths, foundation concerns, structural failure signs, anything where someone could get hurt if the answer is wrong
-
-**Pre-check — Drawing Freeze Gate:**
-If the user has drawings (PDF, JPEG, DXF) that have NOT yet been reviewed, run Rule 0 first. Do not proceed to structural calculations until the drawing package is reviewed and accepted. Exception: if no drawings exist, state this and proceed with qualitative analysis only.
-
-**Load**: If image present: `drawing-investigation-protocol` + `structural-engineering` + `building-code-tek17`. If no image: `structural-engineering` + `building-code-tek17`
-**Add if soil or foundation work involved**: `geotechnical`
-**Protocol**: Lock calculation inputs (span, loads, materials) BEFORE any formula. State confidence level for each input.
-**Safety flag**: HIGH — escalation flags fire first if present (see Escalation Matrix in system_prompt.md)
-
-### Rule 2 — Regulatory / Permit Question
-**Triggers**: Do I need a søknad? Is this legal? What does TEK17 say? Setbacks, heights, use changes, permits, dispensasjon, fire safety, energy requirements
-**Load**: `building-code-tek17`
-**Add if søknad package or document list needed**: `soknad-package`
-**Add if heritage building**: `historic-preservation`
-
-### Rule 2a — Søknad Package / Permit Application Preparation
-**Triggers**: What goes in the søknad? Which drawings do I need? Nabovarsel, ansvarlig søker, forhåndskonferanse, ferdigattest, igangsettingstillatelse, SAK10 document requirements, BRA/BYA calculation for permit
-**Load**: `soknad-package` + `building-code-tek17`
-**Add if drawings are involved**: `architectural-drawing-reading`
-**Primary response**: Walk through the completeness checklist for the specific project type (tilbygg, fasadeendring, nybygg, riving)
-**Template**: Use `templates/pre-application-meeting-notes.md` for forhåndskonferanse preparation
-
-### Rule 2b — Geotechnical / Ground Condition Question
-**Triggers**: Soil, kvikkleire, quick clay, ground investigation, borehole, bearing capacity, settlement, foundation type, radon, slope stability, NGU, NVE flood zone
-**Load**: `geotechnical` + `building-code-tek17`
-**Add if foundation is being designed**: `structural-engineering`
-**Safety flag**: HIGH — quick clay escalation is automatic: `GEOTECHNICAL_REPORT_REQUIRED`
-
-### Rule 3 — Technical Execution Question
-**Triggers**: How do I build this? Vapour barrier placement, insulation specification, moisture concerns, airtightness, drainage, frost protection, wall assembly, roof build-up
-**Load**: `sintef-byggforsk`
-**Add if regulatory check needed**: `building-code-tek17`
-
-### Rule 4 — Heritage / Historic Building Question
-**Triggers**: SEFRAK, old building, pre-1940, preservation, antikvarisk, Byantikvaren, Riksantikvaren, original windows, heritage materials, restoration
-**Load**: `historic-preservation` + `building-code-tek17`
-**Add if structural work on heritage building**: `structural-engineering`
-
-### Rule 5 — Construction Management / Site Question
-**Triggers**: Demolition sequence, contractor coordination, contracts, site safety, lead times, temporary works, asbestos, FDV, ferdigattest, HMS, handover
-**Load**: `construction-execution`
-**Add if regulatory conditions apply**: `building-code-tek17`
-
-### Rule 6 — Design / Appearance Question
-**Triggers**: Does this look right? Window proportions, facade composition, roof pitch, ornament, style, does this fit the neighbourhood, streetscape
-**Load**: `classical-architecture`
-**Add if heritage context**: `historic-preservation`
-
-### Rule 7 — BIM / IFC / Digital Model Question
-**Triggers**: IFC file, BIM model, Revit, ArchiCAD, Bonsai, IfcOpenShell, clash detection, BCF issues, model coordination, buildingSMART IDS, digital permit (eByggesøknad), LOD, model federation, IFC export problems, Statsbygg BIM manual
-**Load**: `bim-ifc` + `architectural-drawing-reading`
-**Add if structural content in model**: `structural-engineering`
-**Add if permit compliance**: `building-code-tek17`
-**Primary response**: Bob identifies IFC entity types present, checks storey hierarchy, flags missing properties, and advises on clash resolution sequence
-
-### Rule 8 — Combined / Complex Query
-**Triggers**: Multiple topics in one question, or any query where Rules 1–7 conflict or overlap
-**Load**: All skills triggered by any individual matching rule, maximum 3 skills simultaneously
-**Note**: If 4+ skills appear necessary, decompose the query into sequential questions
-
-### Rule 9 — Educational / Simplification Request
-**Triggers**: User says "what does that mean?", "explain", "simpler", "I don't understand", "too technical", "can you teach me", "links/resources"
-**Load**: `technical-education-support`
-**Primary response**: Bob translates jargon to plain language, provides real-world analogies, shares learning resources and official links, assesses understanding ("Does that make sense?")
-**Note**: This skill can be loaded ALONGSIDE other skills (e.g., structural-engineering + technical-education-support if user asks "explain that beam calculation in simpler terms")
-
----
-
-## BIM / IFC Routing Note
-- `bim-ifc` always loads `architectural-drawing-reading` — IFC files are read using the same drawing-reading framework
-- IFC validation for permit submission always escalates to a licensed responsible designer (ansvarlig prosjekterende)
-
----
-
-## Template Routing
-
-When producing a formal deliverable, use the matching template from `templates/`:
-
-| Output needed | Template |
+| Intent or evidence | Load and scope |
 |---|---|
-| Site visit or structural assessment memo | `templates/structural-assessment-memo.md` |
-| Heritage / antikvarisk assessment | `templates/heritage-assessment.md` |
-| Construction sequence plan | `templates/construction-sequence.md` |
-| Forhåndskonferanse notes | `templates/pre-application-meeting-notes.md` |
-| Compliance gap analysis | `templates/compliance-gap-analysis.md` |
-| Post-approval / ferdigattest checklist | `templates/post-approval-checklist.md` |
+| Repository instructions, tooling, or skill maintenance | Requested files and relevant authoring conventions; no automatic construction-domain load. |
+| Project index/current summary, document revision, evidence conflict, corrected input, release hold, archive, superseded documents, project folder hygiene | [project-lifecycle](../project-lifecycle/SKILL.md); add technical domains only to resolve technical dependencies. |
+| Drawing-file extraction: PDF, raster, DXF | [drawing-reader](../drawing-reader/SKILL.md); add [architectural-drawing-reading](../architectural-drawing-reading/SKILL.md) for interpretation. Inspect only relevant pages/revisions. |
+| Chat photo, screenshot, unclear drawing evidence | [drawing-investigation-protocol](../drawing-investigation-protocol/SKILL.md); add [architectural-drawing-reading](../architectural-drawing-reading/SKILL.md) for drawings. Ask only material unanswered questions. |
+| Load paths, wall removal, beam/floor capacity, supports, structural distress | [structural-engineering](../structural-engineering/SKILL.md); add regulatory review for actual alterations/compliance and ground review for foundation interactions. |
+| Numerical engineering calculation | Relevant domain skill plus [formulas-reference](../formulas-reference/SKILL.md) as needed; state inputs, evidence status, assumptions, and applicability before results. |
+| TEK17/PBL/SAK10, permits/exemptions, fire/escape, use change, setbacks, regulatory energy limits | [building-code-tek17](../building-code-tek17/SKILL.md); verify applicable sources and scope. |
+| Søknad package, nabovarsel, application drawings, BRA/BYA for permits, completion documentation | [soknad-package](../soknad-package/SKILL.md) plus [building-code-tek17](../building-code-tek17/SKILL.md); preserve draft/submitted/approved distinctions. |
+| Soil, ground investigation, quick clay, excavation, settlement, slope, flood exposure, foundations | [geotechnical](../geotechnical/SKILL.md); add structural review for load transfer and regulatory review for site safety requirements. |
+| Moisture, insulation, airtightness, vapor control, roof/wall assemblies, frost protection | [sintef-byggforsk](../sintef-byggforsk/SKILL.md); add relevant trade, structural, or regulatory scope. |
+| Heritage status/materials, SEFRAK, protection decisions, conservation or restoration | [historic-preservation](../historic-preservation/SKILL.md); add regulatory review for interventions/consents. Age alone does not establish protection. |
+| Sequencing, temporary works, demolition, hazardous materials, site safety, contracts, FDV/handover | [construction-execution](../construction-execution/SKILL.md); include structural/ground/trade safety and regulatory rows where implicated. |
+| Residential tender or contractor pricing request | [residential-tender-writing](../residential-tender-writing/SKILL.md); add lifecycle for conflicting versions or release holds and technical domains for unresolved scope. Drafting is not issuing. |
+| Procurement packages, scope-to-price mapping, contractor bid/no-bid decision | Optional package/bidder modes in [residential-tender-writing](../residential-tender-writing/SKILL.md); distinguish client tender preparation from the contractor's decision. |
+| Estimate audit, missing prices, duplicate scope, quote arithmetic or VAT reconciliation | [Estimate Reconciliation](../general-contractor-review/SKILL.md#estimate-reconciliation); do not run the full drawing-review workflow for a pricing-only question. |
+| Contract departures, commercial reservations or comparison with accepted terms | [Contract Departures Review](../construction-execution/SKILL.md#contract-departures-review); establish actual contract and Norwegian consumer-law applicability, not default foreign commercial positions. |
+| Package-based schedule, site progress report or FDV/O&M completeness | Relevant optional section of [construction-execution](../construction-execution/SKILL.md); separate proposed, reported and accepted states. No mandatory whole-project sequence. |
+| Correspondence register, RFI tracking, unanswered queries or response closure | [Scoped Correspondence and RFI Records](../project-lifecycle/SKILL.md#scoped-correspondence-and-rfi-records); scoped local evidence updates, not automatic monitoring or external sends. |
+| Cross-trade constructability or holistic drawing-package review | [general-contractor-review](../general-contractor-review/SKILL.md), with evidence extraction and affected domains in sequential batches. |
+| Proportions, composition, facade, roof form, architectural style | [classical-architecture](../classical-architecture/SKILL.md); retain heritage, escape/fire, structure, and moisture checks where relevant. |
+| Ventilation, heating, heat pumps, indoor air, mechanical energy systems | [hvac-mechanical](../hvac-mechanical/SKILL.md); add regulatory/fire/electrical checks as relevant. |
+| Circuits, grounding, EV charging, solar electrical systems, electrical safety | [electrical-nek400](../electrical-nek400/SKILL.md); verify applicable rules and qualified-work boundaries. |
+| Water supply, drainage, sanitary installations, leak protection | [plumbing-vs6050](../plumbing-vs6050/SKILL.md); add moisture, ground, or regulatory checks where needed. |
+| Municipality-specific plans, hazards, local practice or conditions | [municipalities](../municipalities/SKILL.md) and relevant national rules; an address alone does not require this load. Local guidance cannot waive national law. |
+| BIM, IFC, Revit/ArchiCAD/Bonsai, IDS, BCF, clash detection, translators, SIMBA, TFM, property mapping | [bim-ifc](../bim-ifc/SKILL.md); pure translator/requirements questions do not require drawing, permit, or infrastructure skills. |
+| IFC4.3 civil/site models: roads, driveways, earthworks, retaining walls, boreholes/strata | [ifc-infrastructure](../ifc-infrastructure/SKILL.md) plus [bim-ifc](../bim-ifc/SKILL.md); add geotechnical/structural skills for engineering interpretation, not schema lookup alone. |
+| Simplification, jargon explanation, learning resources | [technical-education-support](../technical-education-support/SKILL.md) when useful; retain relevant technical and safety limits. |
+| Explicit retrospective or matching known failure mode, such as input drift or drawing-orientation confusion | Relevant section of [lessons-learned](../lessons-learned/SKILL.md) only; no mandatory startup or per-response lesson scan. |
 
-Always offer the template when the user appears to be producing documentation for a project.
+## Evidence and BIM Gates
 
----
+- Before a project-specific calculation, review relevant available drawings and
+  verify the calculation basis. Unresolved safety-critical inputs block a
+  build-ready recommendation, not clearly labeled conceptual guidance. A drawing
+  "freeze" or user-confirmed input is not technical or statutory approval.
+- Process new attachments incrementally; do not restart startup, recatalog all
+  images, or demand unrelated sheets. Preserve extracted facts with their sources.
+- For SIMBA/TFM, establish client, agreement, requirement revision, and delivery
+  purpose from available evidence. These are not universal Norwegian requirements.
+  Trace source-to-IFC mappings against applicable project requirements; a preset
+  or successful validation is not acceptance or professional approval.
+- IFC uses the BIM route, not a mandatory PDF/raster pipeline. Add geometry,
+  structural, or regulatory interpretation only for the actual question. Keep
+  model changes, BCF publication, and other external writes behind authorization.
 
-## Never Load Together (Except on Heritage Projects)
-- `classical-architecture` + `structural-engineering` in the same response (answer the structural question first, offer design review as a follow-up)
-- `sintef-byggforsk` + `classical-architecture` (different layers of the problem)
+## Dependency and Cycle Guard
 
-## Always Load Together
-- `structural-engineering` always loads `building-code-tek17` — structural work without regulatory context is incomplete
-- `historic-preservation` always loads `building-code-tek17` — heritage work always has regulatory implications
-- `geotechnical` always loads `building-code-tek17` — TEK17 §7 governs natural hazard safety requirements
-- `soknad-package` always loads `building-code-tek17` — permits cannot be assessed without the underlying regulation
-- `drawing-reader` always loads `architectural-drawing-reading` — extraction feeds interpretation
-- `bim-ifc` always loads `architectural-drawing-reading` — IFC reading uses the same drawing-reading framework
+The order is system prompt, startup, routing, then selected task skills. Startup
+has a one-way `run_before` link to routing; these orchestration skills have empty
+`load_with` lists. Lifecycle never calls startup again.
 
----
+Treat domain `load_with`, `run_before`, and `auto_load_on` metadata as scoped
+orchestration hints, not commands to recursively read the whole graph. Maintain
+a visited set by canonical skill path for the task; load each skill once and
+reuse it. Ignore self-links and back-edges, and order remaining prerequisites
+before dependents. If a cycle leaves a genuine prerequisite unresolved, report
+it and bound the affected assessment rather than looping or declaring approval.
+Do not let metadata hints override the system prompt's evidence/safety boundaries.
 
-## Quick Classification Table
+## Deliverable Templates
 
-| User says... | Skills to load |
+Read only the template relevant to the requested output. Adapt legacy authority
+or certification wording to the system prompt, and preserve draft/release status.
+
+| Output | Template |
 |---|---|
-| "Can I remove this wall?" | `structural-engineering` + `building-code-tek17` |
-| "Can I remove this wall? Here's a photo" | `drawing-investigation-protocol` + `structural-engineering` + `building-code-tek17` |
-| "Here's my floor-plan.pdf" (file attachment) | `drawing-reader` + `architectural-drawing-reading` → re-classify |
-| "Here's my model.ifc" | `bim-ifc` + `architectural-drawing-reading` |
-| "Do I need a søknad for this?" | `building-code-tek17` |
-| "What documents go in the søknad?" | `soknad-package` + `building-code-tek17` |
-| "I need to prepare my nabovarsel" | `soknad-package` + `building-code-tek17` |
-| "How do I insulate the roof?" | `sintef-byggforsk` |
-| "The building is from 1895..." | `historic-preservation` + `building-code-tek17` |
-| "SEFRAK registered, can we change the windows?" | `historic-preservation` + `building-code-tek17` |
-| "What soil type should I assume for my foundation?" | `geotechnical` + `building-code-tek17` |
-| "Is this site in a kvikkleire zone?" | `geotechnical` + `building-code-tek17` |
-| "How should we sequence the demolition?" | `construction-execution` |
-| "What do you think of these proportions?" | `classical-architecture` |
-| "Is this TEK17 compliant?" | `building-code-tek17` |
-| "Moisture problem in the wall" | `sintef-byggforsk` |
-| "The beam is sagging" | `structural-engineering` + `building-code-tek17` |
-| "How does the contractor get paid?" | `construction-execution` |
-| "Clash detection in my BIM model" | `bim-ifc` + `architectural-drawing-reading` |
-| "What does that mean?" / "Can you explain simpler?" | `technical-education-support` |
-| Multiple topics in one question | All matching skills, max 3 simultaneously |
+| Structural assessment memo | [structural-assessment-memo](../../templates/structural-assessment-memo.md) |
+| Heritage assessment | [heritage-assessment](../../templates/heritage-assessment.md) |
+| Construction sequence | [construction-sequence](../../templates/construction-sequence.md) |
+| Pre-application meeting notes | [pre-application-meeting-notes](../../templates/pre-application-meeting-notes.md) |
+| Compliance gaps | [compliance-gap-analysis](../../templates/compliance-gap-analysis.md) |
+| Completion/conditions checklist | [post-approval-checklist](../../templates/post-approval-checklist.md) |
 
----
+Finish with concise conclusions, supporting evidence, assumptions/limits, and
+next actions. Do not expose private internal deliberation, assert complete hazard
+coverage without a bounded review, or schedule unrequested background audits.
 
-## Escalation Pre-Check
-
-Before loading any skill, check:
-1. Is this a safety-critical structural question? → Flag `ESCALATION_CHECK_REQUIRED`
-2. Is this a heritage building with formal protection (fredet)? → Flag `RIKSANTIKVAREN_CONSENT_REQUIRED`
-3. Is there a known geotechnical risk (quick clay, flood zone)? → Flag `GEOTECHNICAL_REPORT_REQUIRED`
-4. Does the work require a formal wet stamp (signed structural calculations)? → Flag `WET_STAMP_REQUIRED`
-
-See Escalation Matrix in `system_prompt.md` for resolution rules.
-
----
-
-*This skill has no domain knowledge — it is pure routing logic.*
-*Last reviewed: 2026-08-09*
+*Last reviewed: 2026-09-06*

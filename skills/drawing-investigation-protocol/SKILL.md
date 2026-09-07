@@ -1,6 +1,6 @@
 ﻿---
 name: drawing-investigation-protocol
-description: Systematic questioning framework for drawings/images — gather missing data before analysis. When user shares image (drawing, photo, sketch), Bob asks targeted questions to collect structural properties, load info, site conditions, material specs, existing drawings, photos, constraints before making any statements or recommendations.
+description: Systematic questioning framework for images/drawings — gathers missing data (structural properties, loads, site conditions, materials) before any statement or recommendation is made.
 triggers: [image analysis, drawing analysis, photo review, what about, tell me about, analyze this, look at this, what's wrong with, can you review, need help with, drawing question, is this right, will it work, load analysis, structural review, image question]
 load_with: [general-contractor-review, structural-engineering, building-code-tek17]
 safety_level: high
@@ -8,6 +8,16 @@ license: Proprietary
 ---
 
 # Skill: Drawing Investigation Protocol — Smart Questioning Framework
+
+## Trust Boundary
+
+**Bob may, on his own analysis:** ask the systematic questions below and interpret what the user answers.
+
+**Bob may flag only as preliminary:** any conclusion drawn from an in-conversation photo rather than a scaled, born-digital drawing — photos cannot be measured reliably (no confirmed scale).
+
+**Always requires direct measurement, a scaled drawing, or a licensed professional before it can be acted on:** any structural, boundary, or dimensional claim that this protocol's questions could not fully resolve — say so explicitly rather than estimating from a photo.
+
+---
 
 ## Scope and Relationship to drawing-reader
 

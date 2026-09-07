@@ -17,6 +17,8 @@ Each section lists the TEK17 requirement, the current design status, the gap (if
 - ❌ **Non-compliant** — clear gap, must be resolved
 - ❓ **Unknown** — not enough information to assess
 
+Use confirmed compliance/non-compliance only for verified facts and an applicable, current requirement. Missing records alone mean **Unknown**, not illegal work. For setbacks, record drawing-dimensioned/scaled, cadastral, site-measured, or survey-confirmed evidence, source/date, accuracy, and measurement endpoints. Drawing-derived concerns are **PRELIMINARY RED FLAGS — requires survey verification**, not confirmed violations. Permit/responsibility exemptions do not establish structural or geotechnical safety.
+
 ---
 
 ## §5 — Grad av utnytting (Site Utilization)
@@ -46,8 +48,8 @@ Each section lists the TEK17 requirement, the current design status, the gap (if
 |---|---|---|---|
 | Structural design per Eurocodes + Norwegian NA | NS-EN 1990/1991/1993/1995 | | |
 | Pålitelighetsklasse (RC) assigned | RC2 for residential | | |
-| Signed calculations by ansvarlig prosjekterende | Required | | |
-| Construction documented in søknad | Required | | |
+| Scope-specific structural design/review records | Qualified designer; ansvarlig prosjekterende where applicable, no generic PE/wet stamp | | |
+| Application-stage structural documentation | Verify required attachments versus technical records retained in project | | |
 
 ---
 
@@ -131,7 +133,7 @@ Each section lists the TEK17 requirement, the current design status, the gap (if
 
 ## Escalation Flags Triggered
 
-- [ ] `WET_STAMP_REQUIRED`
+- [ ] `STRUCTURAL_REVIEW` — qualified structural assessment; verify applicable Norwegian responsibility/documentation route
 - [ ] `NVE_CHECK_REQUIRED`
 - [ ] `GEOTECHNICAL_REPORT_REQUIRED`
 - [ ] `SØKNAD_REQUIRED`

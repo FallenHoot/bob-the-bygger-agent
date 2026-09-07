@@ -1,6 +1,6 @@
 ﻿---
 name: sintef-byggforsk
-description: Technical execution for Norwegian construction — moisture physics, vapour barriers, insulation systems, airtightness, wall/roof assemblies, and frost-safe foundations. Based on SINTEF Byggdetaljblad (Byggforskserien).
+description: Technical execution for Norwegian construction — moisture physics, vapour barriers, insulation, airtightness, wall/roof assemblies, frost-safe foundations. Based on SINTEF Byggforskserien.
 triggers: [moisture, fukt, vapour, damp, insulation, isolasjon, airtight, tett, thermal bridge, kuldebre, condensation, kondensasjon, mould, mugg, rot, råte, wall assembly, veggoppbygging, roof assembly, takoppbygging, PE-folie, mineral wool, steinull, EPS, XPS, PIR, drainage, drenering, ventilated cavity, luftet, blower door, tetthetsprøve, frost, tele, capillary, kapillær, sd-value, dampsperre, undertak, vindsperre]
 load_with: []
 safety_level: medium
