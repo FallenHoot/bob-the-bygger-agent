@@ -1,13 +1,23 @@
 ﻿---
 name: general-contractor-review
-description: General contractor drawing analysis — load paths, structural support verification, dimensional coordination, trade dependencies, constructability assessment, common modification pitfalls, risk identification, sequencing implications, cost/scope impacts.
-triggers: [drawing analysis, code review, design review, modification feasibility, wall removal, beam addition, opening, aperture, load path, support, post, column, foundation, coordination, constructability, what if, what's wrong, needs improvement, things to consider, trade coordination, sequencing, dependencies, site impact, feasibility assessment]
+description: Review drawings for load paths, trade coordination, constructability and sequencing; reconcile estimates, scope coverage, pricing lines, omissions, overlaps and arithmetic.
+triggers: [drawing analysis, code review, design review, modification feasibility, wall removal, beam addition, opening, aperture, load path, support, post, column, foundation, coordination, constructability, what if, what's wrong, needs improvement, things to consider, trade coordination, sequencing, dependencies, site impact, feasibility assessment, estimate reconciliation, scope coverage, pricing lines, unpriced work, duplicate costs]
 load_with: [structural-engineering, building-code-tek17, architectural-drawing-reading, electrical-nek400, hvac-mechanical, plumbing-vs6050]
 safety_level: critical
 license: Proprietary
 ---
 
 # Skill: General Contractor Review & Drawing Analysis
+
+## Trust Boundary
+
+**Bob may, on his own analysis:** perform the holistic drawing review below — constructability, trade coordination, sequencing, common pitfalls — as an experienced-GC-style read of the drawings; independently recompute supplied estimate arithmetic and identify scope/evidence gaps, without certifying price adequacy.
+
+**Bob may flag only as preliminary:** any cost/scope impact estimate; these are directional, not a quote.
+
+**Professional boundary:** this skill identifies trade conflicts, not engineering approval. Refer technical resolution to the qualified designer/trade responsible for that scope, with Norwegian competence/registration and ansvarsrett requirements checked where applicable. Missing calculations, permits, or reviews are evidence gaps, not proof of illegality. Administrative exemptions and site photographs do not establish structural or ground safety.
+
+---
 
 ## Purpose
 
@@ -32,6 +42,8 @@ This is the **eyes of the experienced GC** looking at drawings and saying: "Here
 2. **Where?** (Which rooms, floors, exterior faces?)
 3. **Why?** (Open plan? Accessibility? Energy upgrade? Functional need?)
 4. **Constraints?** (Budget, timeline, heritage protection, occupied/unoccupied during work?)
+
+For findings reused in contractor correspondence, apply the [Correspondence Claims Gate](../residential-tender-writing/SKILL.md#correspondence-claims-gate): verify exact source documents and attachment manifest, distinguish draft/sent/received with evidence, and confirm current deadlines, scope, currency, and VAT. Drawing-derived setbacks retain the [boundary evidence labels](../architectural-drawing-reading/SKILL.md#step-3-establish-scale-and-dimensions), not confirmed violation language.
 
 **Red flags at this stage:**
 - Scope poorly defined ("make it feel bigger" vs. "remove wall between kitchen-dining")
@@ -207,18 +219,25 @@ Example: **Wall Removal + Beam Addition**
 
 ### Phase 5: Cost & Timeline Impact Assessment (5 minutes)
 
-**Estimate rough order of magnitude:**
+Identify cost and programme consequences of temporary support, utility relocation, foundations, fabrication, finishes, testing and site logistics. Use project-specific sourced quantities, quotations and programme assumptions; generic examples elsewhere in this skill are not evidence for a project budget or duration. Do not add overlapping trade durations as if all work were sequential. With no supplied estimate, return a pricing-information request and scoped risks, not a fabricated budget.
 
-| Aspect | Impact | Consideration |
-|---|---|---|
-| **Temporary support (shoring)** | +1–2 weeks timeline; +5k–15k NOK cost | Depends on complexity; longer for large spans |
-| **Utility relocation** | +1–2 weeks; +10k–30k NOK | Electrical, plumbing, HVAC all need new routing + testing |
-| **Foundation work (if new footings)** | +2–3 weeks (concrete cure time); +20k–50k NOK | Soil conditions matter (excavation cost varies) |
-| **Structural fabrication (beam, posts, connections)** | +2–4 weeks (fab + delivery); +30k–100k NOK | Steel expensive; timber cheaper but may have deflection issues |
-| **Finishes (drywall, painting, flooring)** | +2–3 weeks; +20k–50k NOK | Standard for any interior work |
-| **Testing & commissioning (electrical, HVAC, structural)** | +1 week; +5k–10k NOK | Required by code; often overlooked in timeline |
+### Estimate Reconciliation
 
-**Total rough estimate:** 8–12 weeks; 90k–255k NOK for major modification (wall removal + beam addition + utilities + finishes)
+Use for an actual supplied estimate, quote or bid schedule, independently of the drawing-review phases when only commercial reconciliation is requested. Use the optional [Procurement Package Record](../residential-tender-writing/SKILL.md#optional-procurement-package-record) when helpful; a working package grouping suffices without creating a new file. Load technical disciplines only for implicated questions.
+
+1. **Freeze the evidence basis.** Identify each original estimate/source, date/revision, page/row, currency, VAT treatment, scope/status and validity. Preserve original quantities, rates, amounts, subtotals and reported totals unchanged. Record unavailable sheets, unreadable cells and revision conflicts; do not silently merge unlike revisions or net/gross figures.
+2. **Reconcile coverage.** Build a requirement → package → pricing-line crosswalk using the current evidenced requirements and source revisions. Mark each requirement priced, allowance, excluded/owner-direct, alternative, or missing/unpriced. List unmatched estimate lines and unexplained exclusions. A blank/missing price is **unpriced, not zero**; accept zero only when explicitly evidenced and explain its scope. A partial priced subtotal is not a complete project total. If requirements are missing, report coverage as unknown, not complete.
+3. **Resolve overlaps explicitly.** Check duplicated quantities and scope across packages, owner-direct supply versus trade supply/install, GC versus subcontractor work, and preliminaries (site establishment, supervision, scaffolding, crane, waste, protection and temporary services). Identify the paying/executing owner and included boundaries. Flag suspected overlap pending confirmation; do not delete apparently duplicate lines without evidence.
+4. **Separate choices and allowances.** Identify the selected base, allowance inclusions, and mutually exclusive alternatives. Never add competing systems together. For a replacement option, remove the displaced base scope before adding its replacement; for a genuine incremental option, apply only the documented delta. If selection or pricing basis is unknown, show separate scenarios or an unresolved total, not an assumed selection. Prevent allowances being counted both within lines and again below the subtotal.
+5. **Actually recompute.** For each calculable line, multiply quantity × rate with compatible units and disclosed conversions/rounding; compare against the original reported line amount. Carry explicit lump sums as supplied, marking their internal arithmetic unverifiable. Independently sum line amounts into package subtotals and the selected base subtotal. Retain signs for credits, discounts and other adjustments. State each adjustment's amount or rate, eligible base and application order; independently calculate it rather than copying the reported result.
+6. **Rebuild the total.** Show contingency and VAT separately with sourced rates, explicit eligible bases, inclusions/exclusions and order. Identify whether contingency is already embedded and whether the stated allowance is net or gross; do not assume it is VAT-taxable or untaxed. Recompute net/gross totals only where treatment is established. Unknown quantity/rate, percentage base or tax basis leaves affected results unresolved; do not invent a rate, use a default contingency, or plug a gap to match a target budget.
+7. **Explain every difference.** Return original reported versus independently recomputed amounts and signed variance (recomputed minus reported) for lines, subtotals, adjustments and totals. Show formulas/bases and suspected cause. Keep confirmed arithmetic errors separate from proposed scope/option changes; do not overwrite originals or label a hypothetical corrected scenario an agreed price or approved budget.
+
+**Review output:** source/revision register; coverage crosswalk with unpriced requirements; duplicate/interface and alternative/allowance findings; arithmetic table (`source/line | reported | formula/base | recomputed | variance | uncertainty`); unresolved questions with resolver and pricing impact.
+
+Report three separate conclusions: **scope coverage**, **arithmetic consistency**, and **price adequacy/uncertainty**. Correct arithmetic does not establish complete scope, market reasonableness, affordability, technical adequacy, or a binding price. Price adequacy needs separately sourced, comparable market/quotation evidence, specification, location and date; otherwise mark it unassessed. If an actual client budget is supplied, compare only on a reconciled like-for-like scope/tax basis and disclose unknown exposure; never manufacture a budget.
+
+Route bidder capacity and bid/no-bid questions to [Bidder Review Mode](../residential-tender-writing/SKILL.md#optional-bidder-review-mode), and contractual reservations to [Contract Departures Review](../construction-execution/SKILL.md#contract-departures-review), on demand. Disclosed gaps can support an authorized preliminary pricing request, not permission to order or build. Do not require completed design merely to seek a designer or preliminary prices.
 
 ---
 
@@ -230,7 +249,7 @@ Example: **Wall Removal + Beam Addition**
 
 1. **Is the wall load-bearing?** (Ask: Walls above? Roof load?) → If YES, requires beam
 2. **Beam span required:** Distance the wall spans (measure from bearing points on each end)
-3. **Load magnitude:** Area above the wall × roof snow load (estimated at +5–10 kN/m² in Norway) + dead load of structure
+3. **Load magnitude:** Trace tributary areas and all loads through the affected supports. Use the structural skill's sourced roof assembly takeoff and location/altitude-specific snow basis, not a generic Norwegian roof load. Keep kg/m² versus kN/m² and sloping versus horizontal areas explicit; this review is not a beam adequacy calculation.
 4. **Support locations:** Where will posts/columns sit? On existing footings? New footings required?
 
 **Common pitfalls:**
@@ -338,7 +357,7 @@ Example: **Wall Removal + Beam Addition**
 - [ ] **Constructability assessed?** (Sequencing makes sense, temporary support planned, equipment access confirmed)
 - [ ] **Accessibility & code compliance verified?** (Headroom, daylight, fire egress, universal design)
 - [ ] **Heritage/conservation status confirmed?** (If applicable, Byantikvaren approval documented)
-- [ ] **Budget realistic?** (Includes structural, utilities, testing, contingency ~10–15%)
+- [ ] **Estimate reconciled?** (Requirements covered; unpriced work, overlaps, alternatives and arithmetic checked; contingency basis explicit; price adequacy separately assessed)
 - [ ] **Timeline achievable?** (Major dependencies identified, weather/cure time factored in)
 - [ ] **Site logistics planned?** (Debris removal, temporary power, access routes, safety barriers)
 - [ ] **Commissioning/testing scheduled?** (Structural load test, electrical inspection, HVAC balancing, final inspection)
@@ -370,7 +389,7 @@ Bob can:
 - ✅ Escalate to appropriate licensed professionals
 
 Bob cannot:
-- ❌ Design structural solutions (licensed PE required)
+- ❌ Issue structural designs for construction or certify adequacy (qualified structural designer review and applicable Norwegian responsibility/documentation route required)
 - ❌ Approve architectural drawings (architect + owner sign-off)
 - ❌ Provide binding cost estimates (requires detailed takeoff)
 - ❌ Take responsibility for structural safety (engineer's liability)

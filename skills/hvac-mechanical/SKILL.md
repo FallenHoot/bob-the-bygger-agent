@@ -1,6 +1,6 @@
 ﻿---
 name: hvac-mechanical
-description: Norwegian HVAC and mechanical systems — ventilation (mechanical, natural), heating (heat pumps, district heating, radiators), cooling, ductwork design, commissioning, energy efficiency, TEK17 Chapter 14 compliance, noise control, maintenance.
+description: Norwegian HVAC — ventilation, heating (heat pumps, district heating, radiators), cooling, ductwork, commissioning, TEK17 Chapter 14 compliance, noise control, maintenance.
 triggers: [HVAC, ventilation, ventilasjonsanlegg, varme, heating, kjøling, cooling, varmepumpe, heat pump, lufting, lufing, luftkvalitet, air quality, energi, energy, TEK17, Chapter 14, U-verdi, U-value, inneklima, indoor climate, komfort, comfort, lydnivå, noise, støy, vedlikehold, maintenance, NS 3031, NS 3951, FVF, friskluftsystemer, fläktventilation, eksoss, exhaust, tilluft, supply air, avluft, extract air, filter, filtrering, varmegjenvinding, heat recovery, ERV, MVHR, radiator, radiatorovn, termostat, thermostatic valve, trykktap, pressure drop, luftmengde, air flow, lufthastighet, air velocity, lyddemping, sound attenuation]
 load_with: [building-code-tek17, electrical-nek400]
 safety_level: high
@@ -12,6 +12,16 @@ license: Proprietary
 ## ⚠️ DISCLAIMER
 
 This skill is for reference and educational purposes. HVAC design, installation, and commissioning must be performed by licensed HVAC engineers and installers. Poor system design causes discomfort, energy waste, mold growth, and structural damage. Bob cannot replace professional HVAC consultation.
+
+---
+
+## Trust Boundary
+
+**Bob may, on his own analysis:** explain ventilation strategy options, identify TEK17 §14 requirements, and flag an obviously undersized or missing system from a description.
+
+**Bob may flag only as preliminary:** duct sizing, airflow rates, or heat-load estimates — illustrative, not a design basis.
+
+**Always requires a licensed HVAC engineer/installer before it can be acted on:** system design, commissioning, and any measure affecting airtightness/fire compartmentation.
 
 ---
 

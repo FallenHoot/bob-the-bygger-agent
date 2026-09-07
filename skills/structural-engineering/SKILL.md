@@ -14,6 +14,27 @@ Load path analysis, beam and column sizing, deflection limits, connection design
 
 ---
 
+## Trust Boundary
+
+**Bob may, on his own analysis:**
+- Perform load path reasoning, preliminary member sizing, and deflection checks against locked inputs (see Calculation Input Lock Protocol below)
+- Diagnose distress patterns (cracks, sag, rot, corrosion) from described or photographed evidence and recommend the next investigative step
+- State when a calculation cannot be trusted (unconfirmed profile, unresolved drawing conflict, missing load data) and what would resolve it
+
+**Bob may flag only as preliminary / low-confidence:**
+- Any structural calculation produced before the Drawing Freeze Gate passes (rule-of-thumb sizing only, explicitly labeled LOW confidence)
+- Beam/member identification made from indirect evidence (gypsum thickness, crew size, order timing) rather than direct measurement or documentation — never presented as confirmed (Lesson L003)
+- Hypothetical comparisons with unconfirmed inputs, never an adequacy check of the installed member
+
+**Professional review and status (Lessons L003/L004):**
+- Use `STRUCTURAL_REVIEW` for changed load paths, uncertain supports, structural alterations, or distress. Seek a qualified structural designer's assessment before relying on a solution; identify ansvarlig prosjekterende where the Norwegian responsibility system applies.
+- Without scope-specific verification, report **UNKNOWN: structural adequacy not established**. A positive status must name the reviewed elements, load path, supports, connections, condition, reviewer, and dated/revisioned supporting record. Never give whole-project GREEN from a limited calculation.
+- A permit or responsibility exemption is not technical safety evidence and cannot turn an unknown status GREEN. Keep permission and structural/geotechnical verification separate.
+- Verify applicable PBL/SAK10/TEK17 roles and documentation for the actual measure. A generic PE credential or wet stamp is not a universal Norwegian legal requirement; missing records do not prove illegality or physical failure.
+- Accelerating or urgent distress requires prompt professional assessment; do not wait for paperwork to communicate immediate danger.
+
+---
+
 ## Drawing Freeze Gate ⛔
 
 **This gate must pass before any detailed structural calculation is produced.**
@@ -52,9 +73,9 @@ Do not calculate moments, deflections, or member sizes until ALL of these are co
 | Span         | [X] mm       | [Drawing ref / measurement] | [How confirmed]  | High/Med/Low |
 | Dead load    | [X] kN/m²   | [Material list + EN 1991]  | [Calculated]     | High/Med/Low |
 | Live load    | [X] kN/m²   | [EN 1991-1-1 Table X]      | [Code]           | High |
-| Snow load    | [X] kN/m²   | [TEK17 Table 7.1, zone Z]  | [Code]           | High |
-| Material     | [X]          | [Drawing / PE doc / test]  | [How confirmed]  | High/Med/Low |
-| Section      | [X]          | [Drawing / PE doc / caliper]| [How confirmed] | High/Med/Low |
+| Snow load    | [X] kN/m²   | [NS-EN 1991-1-3 + current Norwegian NA, location/altitude] | [Ground-to-roof derivation] | High/Med/Low |
+| Material     | [X]          | [Traceable design/as-built record / test] | [How confirmed] | High/Med/Low |
+| Section      | [X]          | [As-built record / measured section] | [How confirmed] | High/Med/Low |
 
 All calculations below use these locked values.
 If any input changes, this entire calculation package is VOID.
@@ -67,8 +88,8 @@ If any input changes, this entire calculation package is VOID.
 4. Rerun affected calculations from scratch
 
 **Confidence rules:**
-- Source is a PE drawing or direct measurement → High
-- Source is the drawing under review, confirmed from title block / dimension string → High
+- Traceable professional record or sufficient direct measurement → confidence applies only to the property and scope actually established
+- A readable drawing dimension confirms what that revision depicts, not the installed geometry; record proposed/as-built status and resolve site conflicts
 - Source is user statement, not independently verified → Medium
 - Source is assumed from era/location/practice → Low — must be stated explicitly in every conclusion that uses it
 
@@ -104,10 +125,18 @@ When a wall is removed, a beam must replace the load path. When a floor is added
 |---|---|
 | Timber floor (120mm + flooring) | 1.0–1.5 kN/m² |
 | Concrete slab 150mm | 3.6 kN/m² |
-| Roof (pitched timber + tiles) | 0.8–1.2 kN/m² |
-| Roof (flat, membrane + insulation) | 1.5–2.5 kN/m² |
+| Roof (pitched timber + tiles) | Source-specific assembly takeoff required; no default total |
+| Roof (flat, membrane + insulation) | Source-specific assembly takeoff required; no default total |
 | Brick masonry wall (per m²) | 1.8–4.0 kN/m² |
 | Log wall (laft), ~200mm | 1.0–1.4 kN/m² |
+
+**Roof input guard (L001), including pre-1990 tiled roofs:**
+- Source each component: covering, battens, structure, insulation, ceilings, services, and other permanent loads in scope. Record product/assembly, source and revision, thickness or quantity, area basis, and uncertainty in the locked takeoff. Age or tile type alone does not establish a total.
+- Keep mass per area **kg/m²**, mass density **kg/m³**, unit weight **kN/m³**, and force per area **kN/m²** distinct. Convert sourced area mass using `g_k [kN/m²] = m_A [kg/m²] × 9.80665 / 1000`; reverse with `m_A = g_k × 1000 / 9.80665`. The conversion constant is not a material load value.
+- For a uniform layer, `m_A = density [kg/m³] × thickness [m]`, or `g_k = unit weight [kN/m³] × thickness [m]`. Do not multiply an already area-based product load by thickness or treat tiles as a solid uniform layer without source support.
+- Label sloping-roof versus horizontal projected area for every component. For a uniform pitched plane, a vertical dead load per sloping area becomes `g_horizontal = g_slope / cos(pitch)`; do not reconvert components already expressed per horizontal area. Keep snow separate and avoid double counting.
+- Do not use mixed-unit reference rows, including the ceramic-tile entry in formulas-reference §2.4, until their original source and units are resolved. Do not repair them by guessing a replacement value.
+- Mark missing components unverified, not zero. Obtain the responsible structural designer's verification of the assembly and takeoff before design use.
 
 ### Imposed (Live) Loads — NS-EN 1991-1-1 (Eurocodes)
 | Category | Use | q_k (kN/m²) |
@@ -184,6 +213,8 @@ Common sections: 90×180, 90×225, 90×270, 90×315, 90×360, 140×180, 140×225
 ---
 
 ## Steel Beam Assessment
+
+**Installed section identification gate (L003):** Do not assess installed-beam adequacy until its profile is confirmed by reliable as-built documentation tied to that member or sufficient direct dimensions compared with a verified section table, with engineer inspection where needed. Photographs, nominal size, gypsum comparisons, crew size, order timing, or an order record alone do not confirm the installed section. Identification does not establish grade, condition, restraints, connections, or adequacy. If unresolved, request that evidence; a requested hypothetical comparison must list assumed sections and unresolved inputs, be LOW confidence and not for design/sign-off, and respect the Drawing Freeze Gate.
 
 For residential lintels and replacement beams, HEB/HEA/IPE profiles are common. Quick check for ULS bending:
 
@@ -292,14 +323,14 @@ Treat these as red flags requiring immediate assessment:
 **Response hierarchy for foundation distress:**
 1. Prop any immediately unsafe elements
 2. Install crack monitors; photograph with scale bar and date
-3. Commission geotechnical investigation — `GEOTECHNICAL_REPORT_REQUIRED`
-4. Commission structural assessment — `WET_STAMP_REQUIRED`
+3. Seek geotechnical assessment and an appropriate investigation scope — `GROUND_HAZARD_REVIEW`
+4. Seek a qualified structural designer's assessment — `STRUCTURAL_REVIEW`
 5. Do not dig near foundations without geotechnical guidance (can trigger progressive settlement)
 
 ---
 
 ## Interaction with Other Skills
-- **TEK17**: All structural design must comply with §10 (Konstruksjonssikkerhet). Structural engineering calculations are required in the building permit application (søknad).
+- **TEK17**: Verify the applicable §10 design/documentation basis and PBL/SAK10 responsibility route. Distinguish technical records retained in the project from attachments required at the specific application stage; do not assume all calculations accompany every søknad.
 - **SINTEF Byggforsk**: Execution details for timber connections, moisture protection at foundations, and wood-concrete interfaces.
 - **Historic Preservation**: Structural interventions on SEFRAK-registered buildings require antikvarisk assessment before introducing new loads or removing original structure.
 - **BIM/IFC**: When structural analysis is based on an IFC model, cross-check `IfcWall.LoadBearing`, `IfcBeam`, and `IfcColumn` instances against Pset_WallCommon and Pset_BeamCommon property sets. Missing structural properties in the model are a red flag for incomplete BIM authoring.

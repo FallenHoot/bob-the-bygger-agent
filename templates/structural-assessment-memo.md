@@ -2,7 +2,8 @@
 
 **Project**: [Project name]
 **Property**: [Address, gnr/bnr, municipality]
-**Prepared by**: BTBA / [Engineer of record if applicable]
+**Prepared by**: BTBA (AI advisory draft)
+**Professional reviewer, scope, record/date**: [Not yet reviewed / verified details]
 **Date**: [Date]
 **Reference**: [Drawing number(s) reviewed]
 
@@ -105,7 +106,7 @@ Description of what is proposed and how it addresses the identified structural n
 
 ## 7. Escalation Flags
 
-- [ ] `WET_STAMP_REQUIRED` — This assessment requires signed calculations from ansvarlig prosjekterende before søknad submission and before work commences.
+- [ ] `STRUCTURAL_REVIEW` — Obtain scope-specific review by a qualified structural designer before relying on this proposal. Verify the applicable Norwegian responsibility route, documentation, and submission stage; no universal PE/wet-stamp format is assumed.
 - [ ] `GEOTECHNICAL_REPORT_REQUIRED` — Foundation bearing capacity unconfirmed.
 - [ ] `HAZARDOUS_WASTE_SURVEY_REQUIRED` — If demolition of any element is included.
 
@@ -116,9 +117,9 @@ Description of what is proposed and how it addresses the identified structural n
 | Action | Owner | Deadline |
 |---|---|---|
 | Open floor in two locations to confirm joist size and condition | Contractor | Before detailed design |
-| Structural engineer to sign off calculations | Ansvarlig prosjekterende | Before søknad |
+| Qualified structural designer to verify design and document review | Responsible designer; ansvarlig prosjekterende where applicable | Before design use/construction; verify application-stage requirements |
 | Obtain soil bearing confirmation at post bases | Structural engineer | Before construction |
 
 ---
 
-*This assessment is preliminary guidance based on the information available at the time of preparation. It does not constitute signed structural calculations. All structural work affecting public safety requires formal calculations signed by a qualified ansvarlig prosjekterende under TEK17 §10.*
+*This is an advisory draft, not construction authorization or professional certification. Missing records mean adequacy is unconfirmed, not that work is necessarily illegal or unsafe. Verify the applicable PBL/SAK10/TEK17 responsibilities and documentation for the measure. A permit exemption is not technical safety evidence; any positive status must identify the professional review, its scope, and supporting record.*

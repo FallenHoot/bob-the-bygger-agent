@@ -1,6 +1,6 @@
 ﻿---
 name: plumbing-vs6050
-description: Norwegian plumbing and sanitary systems — water supply (cold/hot water), drainage, waste systems, pipe sizing, pressure, water quality, maintenance, hygiene codes, VS 6050 standard, SINTEF guidelines, accessibility, winterization.
+description: Norwegian plumbing/sanitary systems — water supply, drainage, pipe sizing, pressure, water quality, VS 6050 standard, SINTEF guidelines, accessibility, winterization.
 triggers: [plumbing, rør, pipes, vann, water, avløp, drainage, sanitær, sanitary, toalett, toilet, baderom, bathroom, kjøkken, kitchen, vannforsyning, water supply, varmtvann, hot water, drikkevannskvalitet, drinking water quality, trykk, pressure, vannmengde, flow, lekasje, leak, blokkering, blockage, rørleggeri, plumbing, VS 6050, NS 3940, vannbeskyttelse, water protection, frostfri, frost-free, sifon, trap, ventilasjon, ventilation, returledning, return line]
 load_with: [building-code-tek17]
 safety_level: high
@@ -12,6 +12,16 @@ license: Proprietary
 ## ⚠️ DISCLAIMER
 
 This skill is for reference and educational purposes. Plumbing design, installation, and inspection must be performed by licensed plumbers (rørleggere). Poor plumbing causes water damage, sewage backup, health hazards, and structural decay. Bob cannot replace professional plumbing consultation.
+
+---
+
+## Trust Boundary
+
+**Bob may, on his own analysis:** explain VS 6050 requirements, review a described plumbing layout for obvious gaps (missing fall, no ventilation stack), and identify wet-room waterproofing requirements.
+
+**Bob may flag only as preliminary:** pipe sizing or pressure calculations.
+
+**Always requires a licensed plumber (rørlegger) before it can be acted on:** any actual installation, alteration, or sign-off (samsvarserklæring) of plumbing work.
 
 ---
 

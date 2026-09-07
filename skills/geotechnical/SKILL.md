@@ -1,24 +1,40 @@
 ---
 name: geotechnical
-description: Soil investigation, bearing capacity, settlement analysis, quick clay (kvikkleire) risk, borehole log reading, foundation type selection, and Norwegian geotechnical standards (NS-EN 1997, NGF, NVE). Load whenever the user asks about soil conditions, foundation type, site investigation, quick clay, flood risk mapping, or ground-related building constraints.
+description: Soil investigation, bearing capacity, settlement, quick clay risk, and foundation type selection per Norwegian geotechnical standards. Load for soil, foundation, or ground-condition questions.
 license: Proprietary
-metadata:
-  triggers: soil, grunn, kvikkleire, quick clay, borehole, boring, grunnundersøkelse, CPT, CPTU, SPT, bearing capacity, bæreevne, settlement, setning, foundation, fundament, pile, pæl, ground investigation, geotechnical report, NGU, NVE, landslide, skred, radon, slope stability, skråningsstabilitet, fill, fyllmasse, peat, torv, rock, fjell, soft clay, bløt leire, frost depth, frostdybde, drainage, drenering, excavation, graving
-  load_with: building-code-tek17
-  safety_level: critical
+triggers: [soil, grunn, kvikkleire, quick clay, borehole, boring, grunnundersøkelse, CPT, CPTU, SPT, bearing capacity, bæreevne, settlement, setning, foundation, fundament, pile, pæl, ground investigation, geotechnical report, NGU, NVE, landslide, skred, radon, slope stability, skråningsstabilitet, fill, fyllmasse, peat, torv, rock, fjell, soft clay, bløt leire, frost depth, frostdybde, drainage, drenering, excavation, graving]
+load_with: [building-code-tek17]
+safety_level: critical
 ---
 
 # Skill: Geotechnical Engineering
 
 ## ⚠️ DISCLAIMER
 
-Geotechnical assessment requires site-specific investigation data. Do not design foundations without a professional ground investigation report (grunnundersøkelse). Bob can interpret provided data and identify risk flags — professional geotechnical sign-off is required for any permit-required foundation work.
+Geotechnical design needs adequate site-specific evidence. Bob can interpret evidence and identify risk flags, not authorize foundations or excavation. A qualified geotechnical professional determines whether existing evidence suffices or additional investigation is needed. Verify the applicable Norwegian design, responsibility, and documentation requirements rather than imposing a universal license or report format.
 
-**Automatic escalation trigger:** `GEOTECHNICAL_REPORT_REQUIRED` fires whenever:
-- Plot is in a mapped kvikkleire zone (any NGU sensitivity class)
+**Review trigger:** use `GROUND_HAZARD_REVIEW` whenever:
+- Mapping indicates possible quick clay or an area-stability concern
 - Soil conditions are unknown before any excavation or foundation work
 - Significant fill (fyllmasse) is suspected
 - Settlement-sensitive structures are proposed on soft clay
+
+---
+
+## Trust Boundary
+
+**Bob may, on his own analysis:**
+- Interpret provided ground investigation data (CPT/CPTU/SPT/borehole logs) and identify risk flags
+- Read public map layers (NGU kart, NVE aktsomhetskart) and state what they show for a given plot
+- Explain which foundation types are typically appropriate for a described soil profile, in general terms
+
+**Bob may flag only as preliminary / low-confidence:**
+- Any bearing capacity or settlement estimate made without a site-specific ground investigation report
+- Foundation type suitability when soil data is inferred from nearby boreholes or regional maps rather than the subject plot
+
+**Seek qualified geotechnical review before relying on:** foundation design or bearing values, excavation near foundations/slopes/waterways, quick-clay screening, or settlement-sensitive work on soft clay/fill. Identify the responsible designer and the investigation/review scope appropriate to the measure and hazard. This is a safety-review gate, not a claim that every such case has the same statutory investigation program.
+
+**Ground evidence gate (L004):** Label evidence as owner-reported, photograph/visible outcrop, map screening, site investigation, or professional assessment, with location, date, coverage, and limitations. A bedrock photograph establishes at most a visible surface observation, not rock continuity beneath all supports, rock quality, bearing capacity, settlement performance, or local/area slope stability. Map absence of a hazard is not site clearance either. Keep **UNKNOWN: ground safety not established** until scope-specific professional evidence resolves it. A permit/responsibility exemption cannot establish technical safety or turn this status GREEN. Missing documentation alone is not proof of illegality or unsafe ground.
 
 ---
 
@@ -51,7 +67,7 @@ Geotechnical assessment requires site-specific investigation data. Do not design
 ### Soil Types in Norway — Common Conditions
 | Type (Norwegian) | Type (English) | Typical Location | Key Properties |
 |---|---|---|---|
-| **Fjell** | Bedrock (granite/gneiss/schist) | Everywhere at depth; outcropping in west | Excellent bearing; no settlement |
+| **Fjell** | Bedrock (granite/gneiss/schist) | Outcrops or at variable depth | Bearing/deformation depend on continuity, weathering, fractures, support geometry, and slope stability; visible rock is not clearance |
 | **Morene** | Till / glacial moraine | Most of the country | Dense, mixed; generally good bearing |
 | **Sand/grus** | Sand/gravel | River valleys, coastal | Good bearing; drains well; frost-susceptible |
 | **Silt** | Silt | River deltas, coastal flats | Moderate bearing; compressible; frost-susceptible |
@@ -177,21 +193,17 @@ Quick clay is Norway's most dangerous geotechnical hazard. It is a legacy of pos
 | High | St 50–200 | su,r 0.15–0.5 kPa | High |
 | **Extra high (quick clay)** | St > 200 | su,r < 0.15 kPa | **Critical** |
 
-**Check the NGU kvikkleirekart at [geo.ngu.no](https://geo.ngu.no)** — downloadable as WMS/WFS. Any NGU sensitivity class on or adjacent to a plot triggers `GEOTECHNICAL_REPORT_REQUIRED`.
+**Check relevant NVE hazard and NGU ground-condition layers**, with dataset date and limitations. Mapped potential on or near a plot triggers `GROUND_HAZARD_REVIEW`, not a confirmed site diagnosis; absence from a mapped zone does not rule out quick clay.
 
-### Quick Clay — TEK17 Requirements
-Per TEK17 §7-3 and NVE Veileder 7/2014:
-- **Stability analysis** required for any new building in a mapped quick clay zone
-- **Safety factor** for slope stability: F ≥ 1.4 (ordinary) / 1.2 (temporary works)
-- **Investigation scope**: CPTU (piezocone) testing minimum; fall cone tests on samples; oedometer tests for consolidation; laboratory remoulded strength
-- **Design**: Avoid excavations that remove toe support; pre-load or surcharge may be required; pile foundations through unstable layer to bedrock may be necessary
+### Quick Clay — Applicable Assessment
+Verify current TEK17 §7-3 and NVE guidance for the measure, terrain, and local/area hazard. The geotechnical professional determines screening steps, investigation, stability analysis, safety criteria, and independent review where applicable. Do not treat a fixed safety factor, CPTU minimum, or piles to rock as universally sufficient. Piles do not by themselves resolve area instability.
 
 ### Quick Clay Response Protocol
 When quick clay is mapped on or near a plot:
-1. **Flag immediately**: `GEOTECHNICAL_REPORT_REQUIRED` + `NVE_CHECK_REQUIRED`
-2. **Tell the user**: "This plot is in a quick clay zone. No foundation design can proceed without a professional geotechnical investigation. The investigation must include CPTU testing and stability analysis per NVE Veileder 7/2014."
-3. **Municipality notification**: Large excavations in quick clay zones require pre-notification to the municipality and NVE regardless of søknad status.
-4. **Do not estimate**: Never provide a bearing capacity estimate for quick clay sites from in-context knowledge. Site-specific CPTU data and professional assessment are mandatory.
+1. **Flag immediately**: `GROUND_HAZARD_REVIEW`.
+2. **Tell the user**: "Mapping indicates a potential quick-clay/area-stability concern. It does not confirm conditions at every support. Obtain qualified geotechnical assessment before relying on a foundation or excavation proposal."
+3. **Authority route**: Verify any municipal/NVE notification or permit obligations for the specific work; do not assert universal pre-notification regardless of scope.
+4. **Do not estimate**: Do not assign bearing capacity for a potentially quick-clay site from generic tables. Ask the geotechnical professional to establish the necessary evidence and design basis.
 
 ---
 
@@ -237,7 +249,7 @@ Step 1: What is the depth to bedrock or competent bearing layer?
   > 4 m in soft soil → Piles or ground improvement
 
 Step 2: Is there quick clay or very soft clay?
-  YES → Piles to bedrock (always); or engineered ground improvement
+  YES → Geotechnical assessment of local/area stability and foundation options; no automatic piles-to-rock clearance
   NO → Continue to Step 3
 
 Step 3: Is there frost-susceptible soil (silt, fine sand, silty clay)?
