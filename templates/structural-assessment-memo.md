@@ -1,125 +1,69 @@
 # Structural Assessment Memo
 
-**Project**: [Project name]
-**Property**: [Address, gnr/bnr, municipality]
-**Prepared by**: BTBA (AI advisory draft)
-**Professional reviewer, scope, record/date**: [Not yet reviewed / verified details]
-**Date**: [Date]
-**Reference**: [Drawing number(s) reviewed]
+*Prepared by BTBA, AI advisory draft, not professional certification.*
 
----
+**Project / scope**: [Selected project and affected elements]
 
-## 1. Scope of Assessment
+**Date / revision / purpose**: [Options, design review or clarification]
 
-Brief description of what was assessed and why:
+**Status**: Draft — not issued for construction
 
-> [e.g., "Assessment of existing timber floor structure at first-floor level to determine capacity for proposed open-plan reconfiguration, including removal of internal partition wall on grid axis B between axes 2 and 4."]
+**Sources inspected**: [File/page/view/date/revision and coverage]
 
----
+**Professional review**: [Named reviewer, scope and actual record, or not reviewed]
 
-## 2. Existing Structure
+## Existing and Proposed Conditions
 
-| Element | Description | Condition |
-|---|---|---|
-| Foundation | | |
-| Ground floor | | |
-| Wall structure (ground floor) | | |
-| Floor structure (first floor) | | |
-| Roof structure | | |
-| Material condition (visual inspection) | | |
+| Element / ID | Existing evidence and uncertainty | Proposed change | Source / revision | Verification needed |
+|---|---|---|---|---|
+| [ID] | [Observed, reported or unknown; concealed conditions explicit] | [Proposal] | [Record] | [Next evidence] |
 
-Known deficiencies or unknowns:
-- [ ] Foundation type not confirmed — assumed strip concrete, requires opening
-- [ ] Timber species not identified — conservative C16 assumed
-- [ ] [Add others]
+Do not assign timber grade, steel profile, foundation type or support conditions
+from age, appearance or a generic conservative label. Missing documentation is an
+evidence gap, not proof of illegality or safety.
 
----
+## Calculation Basis
 
-## 3. Loads
-
-### Dead Loads (Egenlast)
-
-| Element | Value (kN/m²) | Source |
-|---|---|---|
-| Floor structure (existing) | | Assumed / Measured |
-| Floor covering | | |
-| Ceiling below | | |
-| **Total dead load** | | |
-
-### Imposed Load (Nyttelast)
-
-| Use | Category | q_k (kN/m²) |
-|---|---|---|
-| Residential floor | A | 2.0 |
-| [Other if applicable] | | |
-
-### Load Combination (ULS)
-
-`Ed = 1.35 × Gk + 1.5 × Qk`
-
----
-
-## 4. Assessment
-
-### Element: [Name, e.g., "First floor joist, span B/2–B/4"]
-
-| Parameter | Value | Limit | Status |
+| Input | Value / units | Source / revision / evidence status | Assumptions and scope |
 |---|---|---|---|
-| Span | m | — | — |
-| Section | mm × mm | — | — |
-| Spacing | mm c/c | — | — |
-| Applied moment (MEd) | kNm | — | — |
-| Moment resistance (MRd) | kNm | ≥ MEd | PASS / FAIL |
-| Deflection (wfin) | mm | L/250 = mm | PASS / FAIL |
+| Geometry / span / support conditions | [Unknown until established] | [Record] | [Installed versus proposed] |
+| Materials / axis / stiffness / section | [Record] | [Record] | [No automatic grade or material preset] |
+| Permanent loads | [Component takeoff; units and area basis] | [Record] | [Self-weight and omitted components] |
+| Variable / snow / wind / other loads | [Actual applicable source and arrangement] | [Record] | [No nationality-based default] |
+| Load combination | [Expression and factor sources] | [Standard/NA edition and scope] | [SLS/ULS and response component] |
+| Acceptance criterion | [Limit and source, or unverified] | [Record] | [Not a generic L/ratio] |
 
-**Governing standard**: NS-EN 1995-1-1 + Norwegian NA, TEK17 §10
+Trace the load path through connections, supports and foundations. Input agreement
+is not verification. The local beam tool only supports its documented one-span
+elastic cases; it does not supply strength, stability, fire or foundation design.
 
-### Element: [Name, e.g., "Load-bearing wall B, ground floor"]
+## Results and Limits
 
-| Parameter | Value | Limit | Status |
-|---|---|---|---|
-| Load from above | kN/m | — | — |
-| Wall height | m | — | — |
-| Section | | — | — |
-| Axial resistance | kN/m | ≥ applied | PASS / FAIL |
+| Element / check | Formula/tool and input revision | Result / units | Applicable criterion | Comparison and unassessed scope |
+|---|---|---|---|---|
+| [ID / check] | [Reproducible basis] | [Derived result] | [Sourced or unknown] | [No blanket adequacy status] |
 
----
+## Proposed Alternatives
 
-## 5. Proposed Works
+[Describe conceptual alternatives and interfaces without prescribing unverified
+member sizes, connections, props, excavation or load testing. Identify the
+appropriate designer/trade and evidence needed before consequential use.]
 
-Description of what is proposed and how it addresses the identified structural need:
+## Review Triggers and Holds
 
-> [e.g., "Remove partition wall on axis B between axes 2–4. Install GL30 90×315 glulam beam on new timber posts (2× 90×195 C24) bearing on doubled joist at each end. New posts to bear on existing foundation sill plate — verify bearing capacity at foundation level."]
+| Hold | Affected element / issue | Evidence needed | Appropriate reviewer | Status / closure evidence |
+|---|---|---|---|---|
+| [ID] | [Structural, ground, hazardous-material or trade concern] | [Specific record] | [Unassigned if unknown] | [Open] |
 
----
+Use the system prompt's STRUCTURAL_REVIEW, GROUND_HAZARD_REVIEW and other applicable
+review triggers, not invented universal report or wet-stamp rules. Suspected
+hazardous material requires competent assessment before disturbance.
 
-## 6. Uncertainty Declaration
+## Revision and Next Actions
 
-| Item | Status |
-|---|---|
-| **Assumptions** | [List: timber grade assumed C24; foundation bearing capacity not confirmed; no rotten sections observed but not opened] |
-| **Sensitivity** | [Which assumption most affects the answer: foundation bearing capacity is the critical unknown] |
-| **Confidence** | Medium — desktop assessment based on visual inspection and as-built drawings |
-| **What would change this** | Opening floor to inspect joists; exposing foundation to confirm type |
+[Old/new input, affected calculations/details/quantities, status pending revalidation,
+unchanged scope and next evidence. Preserve original calculations and issue records.]
 
----
-
-## 7. Escalation Flags
-
-- [ ] `STRUCTURAL_REVIEW` — Obtain scope-specific review by a qualified structural designer before relying on this proposal. Verify the applicable Norwegian responsibility route, documentation, and submission stage; no universal PE/wet-stamp format is assumed.
-- [ ] `GEOTECHNICAL_REPORT_REQUIRED` — Foundation bearing capacity unconfirmed.
-- [ ] `HAZARDOUS_WASTE_SURVEY_REQUIRED` — If demolition of any element is included.
-
----
-
-## 8. Recommended Next Steps
-
-| Action | Owner | Deadline |
-|---|---|---|
-| Open floor in two locations to confirm joist size and condition | Contractor | Before detailed design |
-| Qualified structural designer to verify design and document review | Responsible designer; ansvarlig prosjekterende where applicable | Before design use/construction; verify application-stage requirements |
-| Obtain soil bearing confirmation at post bases | Structural engineer | Before construction |
-
----
-
-*This is an advisory draft, not construction authorization or professional certification. Missing records mean adequacy is unconfirmed, not that work is necessarily illegal or unsafe. Verify the applicable PBL/SAK10/TEK17 responsibilities and documentation for the measure. A permit exemption is not technical safety evidence; any positive status must identify the professional review, its scope, and supporting record.*
+An AI calculation, template or review request is not permission to build. Actual
+professional review, authorized issue and applicable municipal decisions must be
+recorded separately for the exact scope/revision.

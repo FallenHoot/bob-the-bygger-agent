@@ -1,0 +1,40 @@
+name: Repository validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements-dev.txt
+            skills/structural-engineering/scripts/requirements.txt
+      - name: Install test dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Check dependency compatibility
+        run: python -m pip check
+      - name: Skill structure (warnings remain visible)
+        run: python skills/validate_skills.py
+      - name: Offline synthetic and numerical tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+      - name: Repository-only source contracts
+        shell: pwsh
+        run: ./tests/Test-AgentContracts.ps1
+      - name: Whitespace
+        run: git diff --check

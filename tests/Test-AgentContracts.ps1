@@ -58,6 +58,12 @@ function Read-Repo {
     return Read-Source (Join-Path $RepositoryRoot $RelativePath)
 }
 
+function Get-SimbaRouteRow {
+    param([string] $Text)
+    # $ anchors before LF, not before CRLF; permit a CR without capturing it.
+    return [regex]::Match($Text, '(?m)^(?<row>\|[^\r\n]*SIMBA[^\r\n]*)\r?$').Groups['row'].Value
+}
+
 function Remove-FencedCode {
     param([string] $Text)
     # CommonMark-style backtick/tilde fences, including quoted fences and
@@ -256,10 +262,28 @@ Invoke-Check 'Agent: real entry point and ordered source references' {
 }
 
 $sourceFiles = @(
+    'README.md', 'CONTRIBUTING.md', '.github/prompts/btba.prompt.md',
+    'docs/readme-audit-2026-09-11.md', 'docs/construction-plans-roadmap.md',
+    'docs/reliability-implementation-2026-09-11.md', 'docs/development.md',
+    'docs/reliability-hardening-2026-09-11.md',
+    'docs/evaluations/README.md', 'examples/detail-package/README.md',
+    'skills/building-code-tek17/SKILL.md', 'skills/building-code-tek17/references/verified-requirements.md',
+    'skills/sintef-byggforsk/SKILL.md', 'skills/electrical-nek400/SKILL.md',
+    'skills/drawing-reader/references/leveled-reading-model.md',
+    'skills/drawing-reader/references/extraction-pipelines.md',
+    'templates/structural-assessment-memo.md', 'templates/compliance-gap-analysis.md',
+    'templates/construction-sequence.md', 'templates/heritage-assessment.md',
+    'templates/post-approval-checklist.md', 'templates/pre-application-meeting-notes.md',
+    'mcp/tools/norwegian-building-data.md',
+    'templates/construction-detail-package.md',
     'system_prompt.md', '.instructions.md', 'skills/session-initialization/SKILL.md',
     'skills/routing/SKILL.md', 'skills/project-lifecycle/SKILL.md',
     'skills/lessons-learned/SKILL.md', 'skills/formulas-reference/SKILL.md',
     'skills/structural-engineering/SKILL.md', 'skills/bim-ifc/SKILL.md',
+    'skills/structural-engineering/references/beam-calculator.md',
+    'skills/structural-engineering/references/local-beam-calculator.md',
+    'skills/structural-engineering/references/norwegian-design-basis.md',
+    'mcp/tools/structural-analysis.md',
     'skills/construction-execution/SKILL.md', 'skills/residential-tender-writing/SKILL.md',
     'skills/general-contractor-review/SKILL.md', 'skills/drawing-reader/SKILL.md'
 )
@@ -267,6 +291,149 @@ foreach ($relative in $sourceFiles) {
     Invoke-Check "Source links: $relative" {
         Assert-LocalLinks (Join-Path $RepositoryRoot $relative) (Read-Repo $relative)
     }
+}
+
+Invoke-Check 'README: inventory, guidance versus implementation and unfinished tools' {
+    $text = Read-Repo 'README.md'
+    $skillCount = @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'skills') -Directory |
+        Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md') -PathType Leaf }).Count
+    Assert-Patterns $text @(
+        "$skillCount modular skills", 'not a standalone CAD application',
+        'Guidance.*means an agent procedure, not a tested software integration',
+        'Server not implemented', 'No default well size|No universal window-well size',
+        'not an implemented automatic construction-plan generator',
+        'Git-ignored.*not distributed with a normal clone',
+        'Numerical tests are not professional design certification',
+        'no external connector is claimed tested or connected'
+    )
+    Assert-True ($text -notmatch 'WET_STAMP_REQUIRED|professional-grade|all 2026 amendments|All 6 output templates complete|agentskills\.io compliant') 'Outdated blanket readiness/authority claim returned'
+    Assert-Patterns (Read-Repo 'docs/construction-plans-roadmap.md') @(
+        'Source-linked detail register first', 'CAD/BIM detail output.*Not implemented',
+        'expected and actual results separately', 'not a claim that an agent has passed',
+        'No external code was installed', 'No individual dataset.*was evaluated'
+    )
+}
+
+Invoke-Check 'Quick Ask: ordered loading and no hardcoded private fallback' {
+    $text = Read-Repo '.github/prompts/btba.prompt.md'
+    Assert-Patterns $text @(
+        'system_prompt\.md.*session-initialization.*once.*routing',
+        'explicitly selected project scope', 'No hardcoded project fallback',
+        'no private-project lookup for repository maintenance',
+        'Concise evidence summary', 'no private internal deliberation'
+    )
+    Assert-True ($text -notmatch 'projects/|skills/routing\.md|use ReAct sections') 'Legacy Quick Ask scope/path/instruction returned'
+}
+
+Invoke-Check 'Reliability: source corrections and no default construction release' {
+    Assert-Patterns (Read-Repo 'skills/building-code-tek17/references/verified-requirements.md') @(
+        'no fixed minimum room area', 'minimum levels.*complete applicable pathway',
+        'preaccepted guidance', 'does not supply a universal lysgrav', 'not.*full.*review'
+    )
+    Assert-Patterns (Read-Repo 'skills/sintef-byggforsk/SKILL.md') @(
+        'earlier contradictory cold/warm resistance ratio', 'withdrawn', 'No guessed replacement rule'
+    )
+    Assert-Patterns (Read-Repo 'skills/electrical-nek400/SKILL.md') @(
+        'insurance-voiding claims.*withdrawn', 'specific FEL/FEK/NEK provisions.*not independently validated'
+    )
+    $fm = Get-Frontmatter (Read-Repo 'skills/building-code-tek17/SKILL.md')
+    Assert-True ((Get-Field $fm 'load_with') -eq '[]') 'Structural/regulatory companion cycle returned'
+    foreach ($template in @(Get-ChildItem -LiteralPath (Join-Path $RepositoryRoot 'templates') -Filter '*.md' -File)) {
+        Assert-Patterns (Read-Source $template.FullName) @('Prepared by BTBA, AI advisory draft, not professional certification')
+    }
+}
+
+Invoke-Check 'Reliability: local tools, evaluation distinction and fresh-clone paths' {
+    Assert-Patterns (Read-Repo 'docs/development.md') @(
+        'No private project or MCP configuration is needed', 'not a general sandbox',
+        'transitive dependencies are not a complete lockfile', 'live-host runs|cases still to run'
+    )
+    Assert-Patterns (Read-Repo 'docs/evaluations/README.md') @(
+        'live-host runs not performed', 'observed pass / observed failure / not run',
+        'not a universal guarantee'
+    )
+    foreach ($path in @('system_prompt.md', 'skills/drawing-reader/SKILL.md')) {
+        Assert-True ((Read-Repo $path) -notmatch '\]\([^)]*mcp-config\.json\)') 'Ignored config link is a clone prerequisite'
+    }
+    foreach ($path in @('skills/drawing-reader/references/extraction-pipelines.md', 'skills/drawing-reader/references/norwegian-extraction-prompt.txt')) {
+        $text = Read-Repo $path
+        Assert-True ($text -notmatch 'Confirmed scale from title block|mm assumed for Norway|YOUR_API_KEY') 'Unsafe legacy extraction prompt returned'
+        Assert-Patterns $text @('untrusted', 'scope', 'calibration')
+    }
+    Assert-Patterns (Read-Repo 'mcp/tools/norwegian-building-data.md') @(
+        'not implemented or connected', 'No features in query.*not.*no hazard',
+        'failed request is not an empty result', 'No source text can execute commands'
+    )
+}
+
+Invoke-Check 'Hardening: evidence and candidate identity remain scoped' {
+    Assert-Patterns (Read-Repo 'docs/reliability-hardening-2026-09-11.md') @(
+        'Removed holds', 'requiring review, not a closed issue',
+        'not an independently verified document hash',
+        'not persistent BIM wall IDs across revisions',
+        'not an installation tolerance',
+        'host benchmark itself remains not run'
+    )
+    Assert-Patterns (Read-Repo 'docs/evaluations/README.md') @(
+        'validator_fixture cannot count as host passes',
+        'every case/attempt', 'observed_failure, not blocked',
+        'not independent correctness or certification'
+    )
+    Assert-Patterns (Read-Repo 'skills/drawing-reader/references/leveled-reading-model.md') @(
+        'unrotated crop-relative', 'rotation and cropbox metadata',
+        'sample_truncated', 'not persistent wall identities'
+    )
+}
+
+Invoke-Check 'Construction details: scoped evidence, dimensions, holds and revision invalidation' {
+    $section = Get-Section (Read-Repo 'skills/construction-execution/SKILL.md') '^Construction Detail Packages$'
+    Assert-Patterns $section @(
+        'Draft instruction workflow, not an automated CAD/BIM generator',
+        'no property is selected.*do not retrieve another project',
+        'Missing safety-critical inputs permit a bounded inventory/options draft',
+        'Do not promote legacy generic assemblies',
+        'reuse existing project IDs/registers',
+        'a type schedule alone does not account for every wall',
+        'structural opening, frame outer size, glazing area.*actual unobstructed clear opening',
+        'clear internal width parallel to facade.*finished facade plane.*bottom/rim/terrain levels',
+        'sash travel, steps/ladder, cover/grating',
+        'no default compliant window-well size',
+        'Do not assume infiltration or an existing drain connection is feasible',
+        'missing quantities stay unknown, not zero',
+        'technical review, authorized issue.*authority approval',
+        'affected results not valid for reuse pending revalidation',
+        'expected results, not observed behavioral test runs',
+        'Forbidden: invent a compliant well size or release excavation'
+    )
+}
+
+Invoke-Check 'Detail template: element coverage, well geometry, source and release fields' {
+    $text = Read-Repo 'templates/construction-detail-package.md'
+    Assert-Patterns $text @(
+        'Prepared by BTBA, AI advisory draft, not professional certification',
+        'Draft.*not issued for construction', 'Blank fields are unknown, not zero',
+        'Source Manifest and Design Basis', 'Wall Register.*One Row per Instance',
+        'Wall Type Detail', 'Junction and Detail Register', 'Window and Door Schedule',
+        'Actual unobstructed clear opening', 'Window-Well Schedule.*Lysgraver',
+        'External footprint and excavation are separate sizes',
+        'Unknown outlet remains an open hold',
+        'Quantities, Sequence and Inspection Holds',
+        'Open Decisions and Revision Impacts',
+        'not valid for reuse pending revalidation',
+        'not an issued design, professional approval, permit or authorization to order/build'
+    )
+}
+
+Invoke-Check 'Detail routing: companion domains and actual template destination' {
+    $text = Read-Repo 'skills/routing/SKILL.md'
+    $rows = [regex]::Matches($text, '(?m)^\| Construction detail packages[^\r\n]*')
+    Assert-True ($rows.Count -eq 1) 'Expected one construction-detail route'
+    Assert-Patterns $rows[0].Value @(
+        'construction-execution/SKILL\.md#construction-detail-packages',
+        'building physics', 'structural/ground', 'regulatory/trade',
+        'No default well size or automatic CAD generation'
+    )
+    Assert-True ('../../templates/construction-detail-package.md' -in @(Get-LinkTargets $text)) 'Missing detail-package template link'
 }
 
 Invoke-Check 'Startup: repository/general/project routes and scoped intake' {
@@ -323,9 +490,16 @@ Invoke-Check 'Lifecycle: dependency invalidation and safe archival' {
     Assert-Patterns (Get-Section $text '^Safe Archiving') @('in-place status', 'replacement.*content and scope', 'Preserve unique', 'inbound and outbound links', 'obtain authorization', 'Do not overwrite', 'verify they resolve', 'leave the source in place')
 }
 
+Invoke-Check 'SIMBA route matcher: identical LF and CRLF behavior' {
+    $row = '| BIM, SIMBA | [bim-ifc](../bim-ifc/SKILL.md) |'
+    Assert-True ((Get-SimbaRouteRow "intro`n$row`nnext") -ceq $row) 'LF row lookup failed'
+    Assert-True ((Get-SimbaRouteRow "intro`r`n$row`r`nnext") -ceq $row) 'CRLF row lookup failed'
+    Assert-True ((Get-SimbaRouteRow 'No matching row') -eq '') 'Absent row must not match'
+}
+
 Invoke-Check 'SIMBA: scoped routing and preset is not acceptance' {
     $route = Read-Repo 'skills/routing/SKILL.md'
-    $row = [regex]::Match($route, '(?m)^\|[^\r\n]*SIMBA[^\r\n]*$').Value
+    $row = Get-SimbaRouteRow $route
     Assert-Patterns $row @('bim-ifc/SKILL\.md', 'do not require drawing, permit, or infrastructure')
     Assert-Patterns (Get-Section $route '^Evidence and BIM Gates') @('client.*agreement.*revision.*purpose', 'not universal', 'preset.*not acceptance or professional approval')
     Assert-Patterns (Read-Repo 'system_prompt.md') @('SIMBA.*project/client requirements.*not universal', 'preset.*not professional approval')
@@ -351,10 +525,72 @@ Invoke-Check 'Formulas: fabricated snow table and malformed tile row absent' {
     Assert-Patterns $dead @('manufacturer mass per tile', 'installed coverage', 'source/revision', 'area.*sloping roof or horizontal', 'missing components.*unverified, not zero')
 }
 
+Invoke-Check 'Beam reference: optional cross-check, units, Norway applicability and evidence scope' {
+    $reference = Read-Repo 'skills/structural-engineering/references/beam-calculator.md'
+    $links = @(Get-LinkTargets (Get-Section $reference '^Resource Map$'))
+    $paths = @('documentation', 'calculator/beam-deflection',
+        'calculator/beam-deflection-formulas-shown', 'calculator/beam-deflection-unit-converter',
+        'calculator/beam-deflection-limit-l-360', 'calculator/material-reference',
+        'calculator/section-properties')
+    foreach ($path in $paths) {
+        $prefix = "https://beam-calculator.github.io/en/$path/"
+        Assert-True (@($links | Where-Object { $_.StartsWith($prefix) }).Count -eq 1) "Missing or duplicate beam resource: $path"
+    }
+    Assert-Patterns (Get-Section $reference '^Evidence and Review Scope$') @(
+        'browser UI was not run', 'no whole-site solver audit', 'not evidence about any property'
+    )
+    Assert-Patterns (Get-Section $reference '^Use Procedure$') @(
+        'support conditions', 'self-weight', '1 cm⁴ = 10,000 mm⁴', '1 kN/m = 1 N/mm',
+        'SLS combination', 'Norwegian National Annexes', 'criterion unverified',
+        'lateral-torsional buckling', 'creep', 'not structural approval',
+        'private project inputs.*without explicit authorization'
+    )
+    Assert-Patterns (Get-Section $reference '^Observed Cautions$') @(
+        'substitution is not a unit-complete calculation', 'C16/C24 timber',
+        'plastic section modulus', 'clamps.*positive minima'
+    )
+    Assert-Patterns (Get-Section $reference '^Supplied Link Interpretation$') @(
+        'st=c.*Cantilever', 'lt=p.*Point load', 'w=12.*not 12 kN/m',
+        'derived values, not observed browser outputs', 'Forbidden inference'
+    )
+    Assert-Patterns (Get-Section (Read-Repo 'skills/structural-engineering/SKILL.md') '^Optional Beam Calculator Reference$') @(
+        'references/beam-calculator.md.*on demand', 'not a universal Norwegian limit'
+    )
+    Assert-Patterns (Read-Repo 'skills/formulas-reference/SKILL.md') @(
+        'structural-engineering/references/beam-calculator.md', 'No calculator integration is installed'
+    )
+}
+
 Invoke-Check 'Structural source: input/span invalidation outside examples' {
     $text = Read-Repo 'skills/structural-engineering/SKILL.md'
     Assert-Patterns (Get-Section $text '^Calculation Input Lock Protocol') @('before the first formula', 'locked input changes', 'old value.*VOID', 'new locked input table', 'prior calculations.*SUPERSEDED', 'Rerun affected calculations', 'drawing dimension.*not the installed geometry')
     Assert-Patterns (Get-Section (Read-Repo 'skills/lessons-learned/SKILL.md') '^Lesson L002') @('span', 'corrected', 'structural-engineering', 'not an automated consistency check')
+}
+
+Invoke-Check 'Local beam workflow: no automatic Norwegian design defaults or approval' {
+    $skill = Read-Repo 'skills/structural-engineering/SKILL.md'
+    Assert-Patterns (Get-Section $skill '^Local Tested Beam Analysis$') @(
+        'Pint units', 'local JSON report', 'not an MCP server', 'numerical.*unverified',
+        'No automatic load factors or deflection limits', 'not revalidated'
+    )
+    Assert-Patterns (Get-Section $skill '^Deflection Criteria') @(
+        'withdrawn as design defaults', 'unavailable criterion stays unverified',
+        'do not report pass/fail', 'norwegian-design-basis.md'
+    )
+    Assert-Patterns (Get-Section $skill '^Drawing Freeze Gate') @(
+        'not a ban on conceptual arithmetic', 'not structural verification',
+        'Bounded numerical comparisons.*allowed'
+    )
+    $register = Read-Repo 'skills/structural-engineering/references/norwegian-design-basis.md'
+    Assert-Patterns $register @(
+        'dibk.no/regelverk/byggteknisk-forskrift-tek17/10/10-2',
+        'regulation.*guidance', 'No numerical NA rule pack is implemented',
+        'not.*revalidated', 'exact standard/NA edition'
+    )
+    $guide = Read-Repo 'mcp/tools/structural-analysis.md'
+    Assert-Patterns $guide @('Unverified Availability', 'configuration entry does not establish availability',
+        'stated section and supplied inertia.*not a verified matched pair')
+    Assert-True ($guide -notmatch 'WET_STAMP_REQUIRED|666450000') 'Obsolete MCP sizing/stamp defaults returned'
 }
 
 Invoke-Check 'Structural source: installed profile needs traceable evidence, not visual inference' {

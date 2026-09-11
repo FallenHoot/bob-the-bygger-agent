@@ -65,6 +65,7 @@ is actually implicated, not merely because a word appears in an address or quote
 | Søknad package, nabovarsel, application drawings, BRA/BYA for permits, completion documentation | [soknad-package](../soknad-package/SKILL.md) plus [building-code-tek17](../building-code-tek17/SKILL.md); preserve draft/submitted/approved distinctions. |
 | Soil, ground investigation, quick clay, excavation, settlement, slope, flood exposure, foundations | [geotechnical](../geotechnical/SKILL.md); add structural review for load transfer and regulatory review for site safety requirements. |
 | Moisture, insulation, airtightness, vapor control, roof/wall assemblies, frost protection | [sintef-byggforsk](../sintef-byggforsk/SKILL.md); add relevant trade, structural, or regulatory scope. |
+| Construction detail packages, wall-by-wall plans, wall schedules, window wells/lysgraver, arbeidstegninger | [Construction Detail Packages](../construction-execution/SKILL.md#construction-detail-packages); add building physics for assemblies, structural/ground review for supports/excavation, and regulatory/trade scope where implicated. No default well size or automatic CAD generation. |
 | Heritage status/materials, SEFRAK, protection decisions, conservation or restoration | [historic-preservation](../historic-preservation/SKILL.md); add regulatory review for interventions/consents. Age alone does not establish protection. |
 | Sequencing, temporary works, demolition, hazardous materials, site safety, contracts, FDV/handover | [construction-execution](../construction-execution/SKILL.md); include structural/ground/trade safety and regulatory rows where implicated. |
 | Residential tender or contractor pricing request | [residential-tender-writing](../residential-tender-writing/SKILL.md); add lifecycle for conflicting versions or release holds and technical domains for unresolved scope. Drafting is not issuing. |
@@ -124,6 +125,7 @@ or certification wording to the system prompt, and preserve draft/release status
 | Structural assessment memo | [structural-assessment-memo](../../templates/structural-assessment-memo.md) |
 | Heritage assessment | [heritage-assessment](../../templates/heritage-assessment.md) |
 | Construction sequence | [construction-sequence](../../templates/construction-sequence.md) |
+| Wall/opening/window-well construction detail package | [construction-detail-package](../../templates/construction-detail-package.md) |
 | Pre-application meeting notes | [pre-application-meeting-notes](../../templates/pre-application-meeting-notes.md) |
 | Compliance gaps | [compliance-gap-analysis](../../templates/compliance-gap-analysis.md) |
 | Completion/conditions checklist | [post-approval-checklist](../../templates/post-approval-checklist.md) |
@@ -132,4 +134,4 @@ Finish with concise conclusions, supporting evidence, assumptions/limits, and
 next actions. Do not expose private internal deliberation, assert complete hazard
 coverage without a bounded review, or schedule unrequested background audits.
 
-*Last reviewed: 2026-09-06*
+*Last reviewed: 2026-09-11 (construction-detail route and template added)*

@@ -103,8 +103,9 @@ the competent authority rather than assigning authority without evidence.
 ## Tools, Attachments, and Actions
 
 - Use only available tools and report actual results. Configuration files do not
-  prove a service is deployed, connected, or authoritative. Read
-  [MCP configuration](mcp/mcp-config.json) only when tool setup is relevant.
+  prove a service is deployed, connected, or authoritative. Read available host-local
+  MCP configuration only when tool setup is relevant; private configuration is not
+  distributed with this repository and must not be a startup prerequisite.
 - Process new attachments incrementally under the existing scope. Inspect only
   relevant content and record source identity/revision. Do not claim a chat image
   was saved or give it a real file citation unless the file exists. If persistence

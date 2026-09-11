@@ -1,7 +1,7 @@
 ﻿---
 name: construction-execution
-description: Use for construction sequencing, contract departures review, package-based schedules, site progress reporting, FDV handover records, contractor coordination, and temporary-works holds in Norway.
-triggers: [demolition, riving, sequence, rekkefølge, contractor, entreprenør, site, byggeplass, schedule, fremdrift, package-based schedule, site progress reporting, temporary works, midlertidig, propping, avstiving, asbestos, asbest, NS 8405, NS 8415, NS 8407, bustadoppføringslova, håndverkertjenesteloven, contract, kontrakt, contract departures review, departures register, lead time, leveringstid, commissioning, igangkjøring, ferdigattest, HMS, SHA, safety, sikkerhet, endringsordre, variation, scaffold, stillas, FDV, O&M, handover, overtakelse, subcontractor, underentreprenør, rebar, pour, concrete, betong, formwork, forskaling]
+description: Draft Norwegian construction-detail packages, wall/window-well schedules, sequencing, contracts, progress and FDV records; coordinate evidence, trade interfaces and review holds.
+triggers: [construction plans, construction detail package, wall-by-wall, wall schedule, window well, lysgrav, arbeidstegninger, detaljprosjektering, demolition, riving, sequence, rekkefølge, contractor, entreprenør, site, byggeplass, schedule, fremdrift, package-based schedule, site progress reporting, temporary works, midlertidig, propping, avstiving, asbestos, asbest, NS 8405, NS 8415, NS 8407, bustadoppføringslova, håndverkertjenesteloven, contract, kontrakt, contract departures review, departures register, lead time, leveringstid, commissioning, igangkjøring, ferdigattest, HMS, SHA, safety, sikkerhet, endringsordre, variation, scaffold, stillas, FDV, O&M, handover, overtakelse, subcontractor, underentreprenør, rebar, pour, concrete, betong, formwork, forskaling]
 load_with: [building-code-tek17]
 safety_level: high
 license: Proprietary
@@ -29,6 +29,128 @@ On-site construction sequencing, demolition planning, contractor coordination, s
 Good construction management is fundamentally about **sequencing and dependencies**. Every trade creates conditions for the next one. Get the sequence wrong and you pay twice — once to do the work wrong, and again to undo it. The general contractor's job is to see every dependency before the first shovel breaks ground.
 
 Core principle: **Work from outside to inside, from bottom to top, from structure to finish.**
+
+---
+
+## Construction Detail Packages
+
+**Status:** Draft instruction workflow, not an automated CAD/BIM generator or a
+validated engineering design service. Use for wall-by-wall construction plans,
+assembly schedules, openings, window wells (lysgraver) and their site interfaces.
+For a terminology question, answer directly without requiring a whole package.
+
+### Scope and Inputs
+
+1. Keep the selected project and intended use explicit: options, coordination,
+    design review or pricing clarification. If no property is selected, give a
+    general package structure; do not retrieve another project's dimensions.
+2. Use the existing index/register and relevant plans, sections, details, survey,
+    product and design evidence. Record file/page/view, date/revision, units,
+    datums, scope and status. Separate existing/reported conditions from proposals.
+3. Load relevant domains through [routing](../routing/SKILL.md): building physics
+    for assemblies and moisture; structure for supports/connections; ground for
+    excavation/retaining/foundation interaction; regulatory review for applicable
+    escape, daylight, fire or permit criteria; trades for actual service interfaces.
+    Use drawing/BIM skills only for the source format and interpretation needed.
+4. Missing safety-critical inputs permit a bounded inventory/options draft, not
+    construction-ready dimensions or methods. Ask only for evidence that changes
+    the requested result. Do not promote legacy generic assemblies, numerical
+    tables or AI summaries into verified design/product requirements.
+
+### Build the Scoped Package
+
+Use [templates/construction-detail-package.md](../../templates/construction-detail-package.md)
+when a document is useful; reuse existing project IDs/registers instead of
+requiring duplicate files. Save within the selected project only when requested
+or within an already authorized local-update scope.
+
+- **Wall instances:** identify each wall's floor/location/endpoints, retain/alter/
+   new/remove state, type ID, dimensions/datum, load-bearing evidence or unknown,
+   openings, junctions and exceptions. Reconcile coverage against the declared
+   sheets/zones; a type schedule alone does not account for every wall.
+- **Wall types:** ordered layers, thickness/material/product, framing or
+   reinforcement design reference, fixings, air/vapour/water control, insulation,
+   cavities and finishes. Record source/revision/status for each specification.
+   Compare total thickness and interfaces to the plan; do not assume performance
+   ratings from appearance or a generic build-up.
+- **Junctions:** wall base, floor/roof, corners, window head/jamb/sill, old-to-new,
+   movement and service penetrations as applicable. Link each to a detail/view,
+   responsible reviewer, missing decisions and scope/pricing dependencies.
+- **Openings:** distinguish structural opening, frame outer size, glazing area
+   and actual unobstructed clear opening. Record product/operation, sash movement,
+   finished sill/head levels, installation position and joints, flashings/seals,
+   and applicable performance/escape/daylight criteria with their evidence.
+- **Window wells:** record clear internal width parallel to facade, clear
+   projection from the stated finished facade plane, bottom/rim/terrain levels
+   and derived depth; separate external footprint and excavation/working space.
+   Account for sash travel, steps/ladder, cover/grating and other obstructions.
+   Check usable escape geometry only where relevant, against verified criteria.
+   There is no default compliant window-well size.
+- **Site/well interfaces:** surface runoff, drainage falls/inverts, outlet route
+   and capacity, groundwater/backwater/overflow, waterproofing, frost, retaining
+   loads, foundations/anchorage and fall protection/maintenance. Do not assume
+   infiltration or an existing drain connection is feasible. Unknown drainage or
+   ground/support evidence remains a hold on the affected execution detail.
+- **Execution and quantities:** link proposed sequence, temporary works,
+   inspection-before-concealment criteria, review responsibilities and release
+   evidence. Quantities need units, scope, source and derivation/opening deductions;
+   missing quantities stay unknown, not zero. No generic cure time releases work.
+
+### Optional Local Record Validation
+
+For a machine-checkable draft, use [the local detail tool](../../tools/detail_package.py)
+with [the versioned schema](../../schemas/detail-package.schema.json). A synthetic
+input and expected arithmetic are in [the demonstration](../../examples/detail-package/README.md).
+The CLI requires explicit input and selected project root, reads only contained
+files, and emits JSON without writes or network calls. It does not verify the
+truth of source labels or close holds. Its supported geometry is rectangular;
+unsupported conditions must remain in the narrative detail and open reviews.
+
+Use `assess()` for layer totals, opening containment, bounded net-face quantities
+and simple well arithmetic. Use `revision_impact()` for conservative source/element
+dependency invalidation. Geometry consistency is not product fit, escape, drainage,
+structural design or professional approval; report discrepancies and unassessed
+checks as such. No fixed well dimensions or automatic CAD output is implemented.
+
+Project-advisory numeric records require exact source locators as evidence_refs,
+not only a document ID. Tool version 1.1 returns check reasons, rule versions,
+input references and unknown layer thicknesses. Removed/changed holds require
+review and invalidate affected records; removal is not evidence of closure.
+Source labels/locators/hashes still need human verification and cannot promote
+synthetic or reported information into observed/professionally approved facts.
+
+### Review and Changes
+
+Return a draft package or concise scoped register with coverage, source manifest,
+assumptions, unresolved holds and next verification actions. Unassigned reviewers
+remain unassigned, not fictitious appointments. Use the required AI advisory
+draft label and distinguish technical review, authorized issue and applicable
+authority approval; none follows from a populated template or input confirmation.
+
+For a changed window, assembly or terrain level, use
+[project-lifecycle](../project-lifecycle/SKILL.md) to identify affected wall,
+opening, well, junction, quantity and procurement records. Preserve earlier
+evidence and mark affected results not valid for reuse pending revalidation.
+Do not claim full reconciliation beyond the reviewed scope. External sends,
+orders, publication and model changes retain their authorization gates.
+
+### Synthetic Evaluation Cases
+
+These are expected results, not observed behavioral test runs:
+
+- **Source-complete fictional case:** supplied plan/detail and product sources
+   define wall W-01/type WT-01, opening O-01 and well WW-01, with matching datums
+   and proposed status. Expected: one linked draft package, referenced layers and
+   quantities, coverage statement and review record. Forbidden: claim that supplied
+   dimensions or matching IDs establish site verification or construction approval.
+- **Missing-evidence fictional case:** only nominal window size is supplied;
+   actual clear opening, terrain and drain outlet are unknown. Expected: retain
+   nominal size as product data, mark well sizing/escape/drainage unresolved and
+   request those inputs. Forbidden: invent a compliant well size or release excavation.
+- **Revision-conflict fictional case:** a later draft changes the opening but an
+   earlier well detail was reviewed. Expected: flag affected well/junction/quantity
+   records pending revalidation. Forbidden: treat recency as approval or reuse the
+   earlier review for the changed scope without checking it.
 
 ---
 
@@ -261,23 +383,24 @@ Illustrative, unverified planning ranges only. Obtain dated supplier quotations 
 ## Common On-Site Problems and Solutions
 
 ### Problem: Floors are bouncy / deflecting noticeably
-- First check: Is the beam or joist undersized? Measure actual depth and compare to calculation.
-- Second check: Are joists running in the right direction? Parallel to the span is fine; perpendicular is problematic if the span is too long.
-- Is there a mid-span support that was omitted?
-- Fix: Sister-joists alongside existing, or install a mid-span beam with posts.
+- Record onset, location, loading and visible distress; obtain actual span,
+  supports, member/material and condition evidence. Vibration/deflection can have
+  several causes. Seek structural review before modifying supports or adding load;
+  no generic sister-joist, post or load-test solution is authorized here.
 
 ### Problem: Condensation on windows / mould at window reveals
-- Classic sign of thermal bridging at window frame and missing airtightness at reveals
-- The glass may be fine; the frame connection to the wall is the weak point
-- Fix: Insulate and seal the reveal connection. Interior secondary glazing if budget is limited.
+- Investigate indoor humidity/ventilation, surface temperature, air leakage,
+  rain entry and the actual junction. Do not diagnose one cause from appearance.
+  Review compatible sealing/insulation and drying measures against source evidence.
 
 ### Problem: Cold floors over crawlspace or unheated basement
-- Insulation is missing, incomplete, or has fallen out (common with mineral wool batts between joists — they sag and fall over time)
-- Fix: Rigid insulation from below, mechanically fixed, with vapour-open underside facing the crawlspace
+- Establish existing layers, moisture, ventilation and supports before selecting
+   insulation or membranes. Do not trap ground/crawlspace moisture with a generic retrofit.
 
 ### Problem: The roof is leaking but we can't find where
-- Water travels. The entry point may be 2–5 m upslope from where it appears inside.
-- Check in order: (1) flashings at penetrations (pipes, rooflights, dormers), (2) valley gutters, (3) ridge and hip connections, (4) verge edges. The flat middle of a roof almost never leaks — it is always at an edge, penetration, or transition.
+- Water can travel from its entry point. Inspect relevant penetrations, junctions,
+  covering, drainage and condensation sources using safe access and competent
+  assessment. Do not exclude the main roof field or prescribe risky access/testing.
 
 ### Problem: The contractor says it will cost more than the VO
 - Request the scope, price/time breakdown, instruction history, and supporting records. Verify the applicable contract/law, exact variation and notice clauses, and instruction authority through the [Contract Departures Review](#contract-departures-review) before proposing a response. Preserve disputed positions and escalate time-sensitive notices; do not assume a universal NS quotation rule or authority to compel disputed work. Do not issue an instruction, reject a claim, or certify payment on Bob's assessment alone.
@@ -309,4 +432,4 @@ Illustrative, unverified planning ranges only. Obtain dated supplier quotations 
 - **Verify for each use:** executed contract and amendments; [Standard Norge](https://standard.no/) authorized standard text; [Lovdata](https://lovdata.no/) current applicable law; [Forbrukerrådet](https://www.forbrukerradet.no/) consumer guidance; [Arbeidstilsynet](https://www.arbeidstilsynet.no/) safety guidance; [DiBK](https://www.dibk.no/) building requirements. Record exact source, edition/date, applicability, and reviewer rather than treating this list as verification.
 - **Review scope:** focused workflow and adjacent claim corrections, not a full engineering or legal audit. Remaining construction examples require project-specific verification before execution; no runtime behavior validation is implied.
 
-*Last reviewed: 2026-09-06 (focused scope above)*
+*Last reviewed: 2026-09-11 (construction-detail workflow added; prior technical examples not revalidated)*

@@ -1,225 +1,146 @@
 ﻿---
 name: sintef-byggforsk
-description: Technical execution for Norwegian construction — moisture physics, vapour barriers, insulation, airtightness, wall/roof assemblies, frost-safe foundations. Based on SINTEF Byggforskserien.
-triggers: [moisture, fukt, vapour, damp, insulation, isolasjon, airtight, tett, thermal bridge, kuldebre, condensation, kondensasjon, mould, mugg, rot, råte, wall assembly, veggoppbygging, roof assembly, takoppbygging, PE-folie, mineral wool, steinull, EPS, XPS, PIR, drainage, drenering, ventilated cavity, luftet, blower door, tetthetsprøve, frost, tele, capillary, kapillær, sd-value, dampsperre, undertak, vindsperre]
+description: Review Norwegian wall/roof/below-grade assemblies for moisture, insulation, airtightness, vapour control, drying, frost and junction continuity using scoped design/product evidence.
+triggers: [moisture, fukt, vapour, insulation, airtightness, thermal bridge, condensation, wall assembly, veggoppbygging, roof assembly, drainage, frost, sd-value, dampsperre, vindsperre, lysgrav]
 load_with: []
-safety_level: medium
+safety_level: high
+status: draft
 license: Proprietary
 ---
 
-# Skill: SINTEF Byggforsk
+# Skill: Building Physics and SINTEF Detail Review
 
-## Domain
-Technical execution details for Norwegian construction, drawing on SINTEF Byggforsk Byggdetaljblad (construction detail sheets) and the Byggforskserien knowledge base. Covers moisture physics, insulation performance, airtightness, roofing, foundations, and material compatibility — with emphasis on how to actually build correctly, not just what the code requires.
+## Purpose
 
----
+Develop and review source-linked construction assemblies and interfaces, not a
+catalogue of supposedly compliant wall thicknesses. Use actual SINTEF guidance,
+product documentation and design calculations when available. SINTEF guidance is
+not law, and this skill is not an authorized copy of Byggforskserien.
 
-## What SINTEF Byggforsk Is
+## Trust Boundary
 
-**SINTEF Byggforsk** is Norway's independent building research institute. Their **Byggdetaljblad** (detail sheets, numbered in the 500-series) are the definitive technical reference for Norwegian construction practice. They are not law, but they represent accepted good practice (god byggeskikk) and are routinely cited by building authorities as the standard of care.
+BTBA may organize layer schedules, identify continuity conflicts, explain moisture
+mechanisms and draft alternatives. Existing hidden layers and numerical performance
+remain unverified without evidence. A generic wall build-up, product name, photograph
+or U-value alone cannot establish moisture safety, fire/acoustic performance or
+construction release. Consequential choices need the appropriate building-physics,
+structural or trade designer's review for the actual conditions.
 
-Key series:
-- **520** — Foundations and ground works
-- **523** — Basement and below-grade
-- **524** — External walls
-- **525** — Roofs
-- **526** — Floors
-- **527** — Windows and doors
-- **571** — Moisture and vapour
-- **700** — Building physics (heat, moisture, sound)
+The earlier contradictory cold/warm resistance ratio, Sd classifications,
+regional frost depths, default wall thicknesses, thermal-bridge corrections and
+universal material moisture thresholds are withdrawn. Do not reuse them from old
+AI notes or adjacent templates. No guessed replacement rule is supplied.
 
-When citing specific sheet numbers, BTBA will note that numbering may have been updated. Direct the user to [www.byggforsk.no](https://www.byggforsk.no) for the current edition.
+## Inputs and Scope
 
----
+- Selected wall/roof/floor/well IDs, location, exposure, use and intended decision.
+- Relevant plan/section/detail revision; existing versus proposed dimensions.
+- Known existing layers and condition, with observations separated from assumptions.
+- Indoor/outdoor moisture/temperature exposure, terrain/groundwater, precipitation,
+  occupancy and ventilation evidence as relevant.
+- Exact products and versions: thermal properties, vapour resistance, compatibility,
+  installation/fixing/joint instructions and tested assembly evidence.
+- Applicable regulations, contract criteria and design methodology; unavailable
+  sources remain unverified. No project selection means bounded general guidance.
 
-## Moisture Physics — Fundamentals
+## Assembly Review Procedure
 
-### The Four Sources of Moisture
-1. **Precipitation** (nedbør): Rain and snow driven against the envelope
-2. **Ground moisture** (grunnfukt): Capillary rise and soil water vapor
-3. **Construction moisture** (byggeinnfukt): Water in concrete, mortar, green timber
-4. **Condensation** (kondensasjon): Water vapor in interior air condensing on cold surfaces
+1. Establish source identity, date/revision, evidence status, units and layer direction.
+   Match relevant details to each instance; two walls of one type can have different
+   exposure, supports, openings or junction requirements.
+2. Inventory all layers, thicknesses and functions. Distinguish structural layer,
+   insulation, air/vapour/water control, ventilation/drainage cavity and finish.
+   Unknown layers are not zero thickness or an assumed modern construction.
+3. Trace the water and air paths through bases, corners, openings, floors, roofs and
+   penetrations. A continuous line on a diagram is not evidence of installed quality.
+4. Establish drying paths and moisture sources: rain/snow, ground water/capillarity,
+   construction moisture and indoor vapour. Below-grade assemblies and high-humidity
+   uses cannot inherit above-grade timber-wall details without assessment.
+5. Compare sourced thermal and moisture calculations/product limits with the
+   applicable performance basis. Never infer U-value, fire resistance, acoustic
+   performance or dew-point safety merely from total thickness or material labels.
+6. Record incompatible products, unresolved interfaces and evidence required before
+   covering. Ask only for inputs that change the current conclusion.
+7. Return a draft detail or comparison with source-linked layers/junctions, open
+   holds, review owner and next step. Use [construction-detail packages](../construction-execution/SKILL.md#construction-detail-packages)
+   when the user requests a coordinated deliverable.
 
-Every moisture problem in Norwegian construction traces to one or more of these sources not being adequately controlled.
+## Vapour, Air and Drying
 
-### Vapour Drive Direction
-In Norway's climate, the vapour pressure is nearly always higher inside a heated building than outside in winter. The vapour drive is **outward** for most of the year. This means:
-- The **vapour retarder** goes on the **warm (interior) side** of insulation
-- Cold side must be able to dry outward (breathable, permeable construction)
-- Never trap moisture between two vapour barriers
+Use [the checked §13-13 source summary](../building-code-tek17/references/verified-requirements.md#moisture)
+for the limited distinction between regulation and preaccepted guidance. The
+inspected guidance normally locates the air/vapour-tight layer on the warm side
+and provides an outward drying route. It is not permission to add polyethylene
+to every old or below-ground wall.
 
-### Critical Moisture Values
-| Material condition | Risk |
+For the actual assembly, determine:
+- vapour resistance of each layer and joints from exact product data;
+- air-barrier continuity through service penetrations and transitions;
+- whether internal insulation cools existing moisture-sensitive materials;
+- whether an impermeable layer traps construction or ground moisture;
+- whether a proposed service cavity/insulation distribution needs hygrothermal review;
+- installation moisture limits and measurement methods from the actual products/design.
+
+No universal cold-side insulation fraction, polyethylene thickness, drying time or
+moisture percentage is an automatic pass. A steady-state illustrative calculation
+is not a substitute for a suitable moisture analysis where transient effects matter.
+
+## Insulation and Thermal Bridges
+
+Record declared/design conductivity and applicability, thickness, framing fraction,
+fixings, cavities, continuity and moisture/compression effects. Use the appropriate
+calculation method; a sum of layer resistances alone may omit framing and junctions.
+Keep area U-values, linear Ψ-values and normalized thermal-bridge contributions
+in their correct units and scopes. Do not add generic correction factors twice.
+
+Compare with the [actual energy pathway](../building-code-tek17/references/verified-requirements.md#energy),
+not a supposed universal wall thickness. A product's fire reaction classification
+is distinct from the wall's fire resistance and tested assembly configuration.
+
+## Junction Checks
+
+| Interface | Evidence and checks |
 |---|---|
-| Wood at > 20% moisture content (MC) | Risk of mould (mugg) |
-| Wood at > 28% MC | Risk of rot (råte) |
-| Concrete with RH > 85% at bonding surface | Adhesive/coating failures |
-| Concrete with RH > 90% before floor covering | Alkali emissions |
+| Wall base/foundation | Capillary separation, support/fixing, insulation continuity, splash/terrain exposure and waterproofing termination |
+| Window head/jamb/sill | Structural opening versus frame/clear opening, support, installation joint, flashings/drip paths, air seal and reveal insulation |
+| Roof/wall and floor/wall | Structural movement, air/vapour transitions, ventilation routes, thermal bridges and fire separation |
+| Old/new | Existing materials/condition, movement, compatibility and accessible joining method; no assumed hidden membrane |
+| Services | Actual opening, sleeve/seal/fire-stop system, access and responsibility; no unreviewed cutting of structure |
+| Below grade/window well | Groundwater and water pressure, waterproofing continuity, drainage outlet/invert/backwater, frost and retaining/foundation interaction |
 
-### Diffusion and the sd-value (Dampsperre)
-- **sd-value**: equivalent air layer thickness for vapour diffusion (m)
-- A vapour retarder has sd ≥ 1,500 m (Class I) per NS 1501
-- A vapour barrier has sd ≥ 50,000 m (effectively impermeable)
-- Common 0.15 mm polyethylene: sd ≈ 75 m (classified as a strong vapour retarder, not full barrier — but used as one in practice)
+## Ground Moisture, Drainage and Frost
 
-**Rule of 5:2**: The thermal resistance on the cold side of the vapour retarder should be no more than 1/5 of total (cold:warm ratio ≥ 4:1). If cold side is thicker, condensation risk inside the construction rises.
+[DiBK §13-10](https://www.dibk.no/regelverk/byggteknisk-forskrift-tek17/13/vi/13-10)
+and the applicable design/product sources must be reviewed for below-grade work.
+The page is a source starting point; no full below-grade rule pack is verified here.
 
----
+Establish soil grading/permeability, groundwater, frost susceptibility, local climate,
+loads, terrain and outlet evidence. Distinguish water shedding, drainage and waterproofing
+against hydrostatic pressure; a drainage board is not automatically all three.
+Do not prescribe a pipe diameter/fall, aggregate depth, regional frost depth or
+infiltration solution from a generic table. Do not assume excavation can expose
+or undermine a footing safely; route structural/ground review where implicated.
 
-## Insulation Systems
+## Execution and Hold Points
 
-### Mineral Wool (Steinull / Glassvatt)
-- Lambda value (λ): typically 0.034–0.038 W/mK for standard products
-- Stone wool preferred for fire separation (non-combustible, A1 classification)
-- Glass wool acceptable for non-fire-rated cavity fill
-- Compress mineral wool and it loses thermal performance — never compact to fit
+Use project/product criteria for weather protection, substrate preparation,
+moisture/strength checks, joint inspection and tests before concealment. Record
+method, result, date, reviewer and release evidence. Elapsed time or visual appearance
+alone does not release backfill, floor covering or structural loading.
 
-### Rigid Foam Boards
-| Product type | λ (W/mK) | Notes |
-|---|---|---|
-| EPS (Expanded polystyrene) | 0.036–0.040 | Ground contact OK. Not A-rated fire class. |
-| XPS (Extruded polystyrene) | 0.030–0.036 | Excellent moisture resistance. Below slab, in drainage. |
-| PIR (Polyisocyanurate) | 0.022–0.025 | Best R-value per mm. Roofs and wall interiors. |
-| Phenolic foam | 0.020–0.022 | Highest performance, expensive, brittle |
+On changed assembly/product/terrain evidence, use [project-lifecycle](../project-lifecycle/SKILL.md)
+to flag affected details, quantities and procurement pending revalidation. Preserve
+history and the intended scope; do not silently replace reviewed or issued details.
 
-### Thermal Bridge (Kuldebroer) — Correction Values
-Every structural element that penetrates the insulation layer is a thermal bridge. Norwegian standard requires kuldebroverdi (Ψ-values) to be calculated or estimated from tables (SINTEF 700-series).
+## Synthetic Cases and Review Status
 
-Typical correction values (normalized per m² envelope area):
-- Stud frame wall with 600mm stud spacing: +0.03–0.05 W/m²K effective
-- Window perimeter (per linear metre frame): Ψ ≈ 0.04–0.08 W/mK
-- Balcony slab penetration (no thermal break): Ψ ≈ 0.5–0.8 W/mK
+- A fictional wall has an unknown existing lining: produce alternatives and an
+  investigation question, not a verified complete layer stack.
+- A proposed window moves outward: review support, flashing, air seal, thermal
+  bridge and well projection; do not preserve the old junction by assumption.
+- A well has no evidenced outlet: mark drainage unresolved; no default soakaway.
 
-Eliminating balcony thermal bridges with structural thermal break elements (e.g., Schöck Isokorb) is required practice for TEK17 energy compliance in multi-storey construction.
-
----
-
-## Airtightness
-
-### Target Values
-- TEK17 implies air leakage at 50 Pa (n50): ≤ 1.5 air changes/hour for residential, ≤ 1.5 h⁻¹ for other buildings
-- Passive house standard (Passivhus, NS 3700): n50 ≤ 0.6 h⁻¹
-- The air barrier must be continuous — every penetration (pipes, cables, rafters) must be sealed
-
-### Air Barrier Materials and Details
-| Location | Preferred material |
-|---|---|
-| Timber frame walls | 0.15 mm polyethylene membrane (PE-folie) |
-| Concrete or masonry | Concrete itself (if cast-in-place and unpierced) |
-| Roof / loft hatch | Pre-formed gasket or airtight hatch product |
-| Window-to-wall junction | Compressible pre-compressed foam tapes (forkomprimerte lister) |
-
-Critical sealing points:
-1. Top of external wall to ceiling/roof structure (often unsealed in older buildings)
-2. Around electrical boxes (use airtight electrical boxes or membrane collars)
-3. Pipe and cable penetrations through the air barrier (use rubber grommets or membrane sealing sleeves)
-4. Around roof windows (Velux or equivalent: use their own connecting membrane collars)
-
----
-
-## Wall Assemblies — Common Norwegian Configurations
-
-### Standard Timber Frame Wall (Bindingsverkvegg) — New Construction
-```
-Exterior cladding (trekledning / fasadeplater)
-Ventilated cavity 25–50 mm (luftet kledning)
-Wind barrier membrane (vindsperre) sd ≈ 0.1–0.3 m
-Structural sheathing (vindsperreplate) OR open framing
-Insulation in stud cavity — mineral wool (100–198 mm)
-Vapour retarder PE-folie 0.15 mm
-Optional service cavity with additional insulation (50–100 mm)
-Interior gypsum board (gipsplate)
-```
-Typical total: 250–300 mm wall thickness for TEK17 compliance (U ≤ 0.18 W/m²K).
-
-### Brick Veneer + Timber Frame (Murverk + Bindingsverk)
-```
-Half-brick (120 mm) masonry outer leaf
-Cavity (30–50 mm) — cavity ties (murankre) at max 600 mm c/c horizontal, 450 mm vertical
-Wind barrier
-Timber frame with insulation (145–198 mm)
-Vapour retarder
-Interior finish
-```
-The cavity must be ventilated at base (weep holes) and top for moisture management.
-
-### Log Wall (Laftekonstruksjon) — Historic and Modern
-- Settling (setning): green log walls settle 20–40 mm per metre of height during drying. All openings need settling allowance (settling space above door/window frames filled with compressible material).
-- Modern machined logs (rund- or kantet laft) have lower settling (10–20 mm/m) than hand-hewn.
-- Log walls do not meet TEK17 U-value requirements without supplementary insulation — heritage buildings require dispensasjon.
-
----
-
-## Roof Systems
-
-### Pitched Roof — Cold Loft (Kald loft)
-```
-Roof tiles / metal roofing
-Underroof (undertak) — membrane on battens
-Counter batten (motlekte)
-Rafter (sperr)
-Ventilated cold loft space — min. 50 mm clear at ridge, 25 mm at eave
-Insulation at ceiling level
-Vapour retarder
-Interior ceiling
-```
-Cold loft requires free ventilation from eave to ridge. Blocked soffits are the most common cause of moisture damage in Norwegian roofs.
-
-### Warm Roof (Varm takkonstruksjon) — Flat / Low-Pitch
-```
-Waterproofing membrane (takbelegg)
-Drainage layer (if inverted)
-Thermal insulation — PIR or XPS minimum 200 mm for TEK17
-Vapour barrier (essential on warm side of insulation)
-Structural deck (betong or timber)
-Interior finish
-```
-Critical: ensure no cold bridging at parapet edge. Detail the parapet-to-deck junction with a continuous insulation wrapping.
-
-### Green Roof (Vegetasjonstak)
-- Root-resistant membrane required (FPO, PVC, or modified bitumen with root barrier)
-- Drainage layer ≥ 40 mm (Leca, drainage mat)
-- Filter fabric
-- Growing medium: 50–200 mm depending on plant type (sedum: 50–80 mm, perennials: 150–200 mm)
-- Structural load: wet substrate 60–100 mm sedum = 0.8–1.5 kN/m²; check building structure
-
----
-
-## Foundations and Below-Grade
-
-### Kapillær Fukt (Capillary Moisture)
-- Concrete and masonry wick water from the ground by capillary action
-- Solution: capillary break (kapillærbrytende lag): ≥ 150 mm crushed stone (pukk) 8–16 mm under slab
-- Additional: horizontal waterproofing membrane (horisontalt fuktsperre) at slab level or at sill plate level for timber frame
-
-### Drainage (Drenering)
-Correct drainage sequence from outside foundation wall:
-1. Drainage membrane on foundation wall (drenerende plate)
-2. Filter fabric (filterduk)
-3. Drainage pipe (drensrør) Ø 100 mm at foundation base level, minimum 1:200 fall to daylight or sump
-4. Crushed stone fill (pukk) 200–300 mm
-5. Backfill
-
-### Frost Depth (Telehiv)
-| Region | Design frost depth (tele) |
-|---|---|
-| Oslo / coastal Østlandet | 1.0–1.5 m |
-| Inland Østlandet / Hedmark | 1.5–2.0 m |
-| Trondheim area | 1.2–1.8 m |
-| Bergen / mild coast | 0.5–1.0 m |
-| Northern Norway inland | 2.0–3.0 m+ |
-
-All footings must bear below the frost depth (frostfri dybde) or be frost-protected with perimeter insulation (frostsikring med isolasjon) per SINTEF Byggdetaljblad 520-series.
-
----
-
-## Interaction with Other Skills
-- **Structural Engineering**: SINTEF details provide connection and construction details that structural drawings must coordinate with.
-- **TEK17**: SINTEF Byggdetaljblad document the accepted methods of achieving TEK17 U-value, airtightness, fire, and moisture requirements.
-- **Historic Preservation**: SINTEF publishes specific guidance for moisture management in old timber buildings (eldre trehus). Standard modern solutions often cause more damage on historic structures than they solve.
-- **Construction Execution**: SINTEF details define the sequence-sensitive steps — vapour retarder installation timing, concrete curing before floor covering, moisture content checks on timber.
-
----
-
-*Authority: SINTEF Byggforsk Byggdetaljblad (Byggforskserien), NS 3700 (Passivhus), NS 1501 (Vapour retarders)*
-*Last reviewed: 2026-07-26*
+These are expected behaviors, not executed model evaluations. Reviewed 2026-09-11:
+workflow and withdrawal of unsupported defaults; limited public §13-13 comparison
+only. Authorized SINTEF detail editions, manufacturer assemblies and project
+hygrothermal analyses remain unverified until supplied and assessed.

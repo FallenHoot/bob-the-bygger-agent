@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "package_id": "SYNTHETIC-DETAIL",
+  "revision": "A",
+  "basis": "synthetic",
+  "status": "draft_not_for_construction",
+  "scope": "Fictional rectangular wall, opening and well; record/geometry tests only, not a buildable assembly. Levels share a fictional zero datum.",
+  "sources": [
+    {"id": "SYN-PLAN", "location": "Original synthetic test plan, wall elevation; no property", "revision": "A", "evidence_status": "synthetic"},
+    {"id": "SYN-WINDOW", "location": "Invented test window dimensions; not a manufacturer product", "revision": "A", "evidence_status": "synthetic"}
+  ],
+  "elements": [
+    {
+      "id": "W-01", "kind": "wall", "location": "Fictional wall elevation, left origin", "depends_on": [],
+      "fields": {
+        "length": {"value": 4, "unit": "m", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Rectangular face length"},
+        "height": {"value": 2.6, "unit": "m", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Rectangular face height"},
+        "thickness": {"value": 325, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Arithmetic layer total only"}
+      },
+      "layers": [
+        {"material": "Fictional outer finish, no product selected", "thickness": {"value": 20, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Outside-to-inside illustrative order"}},
+        {"material": "Fictional cavity", "thickness": {"value": 30, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Not a verified ventilation detail"}},
+        {"material": "Fictional sheathing", "thickness": {"value": 10, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "No structural or moisture rating"}},
+        {"material": "Fictional core", "thickness": {"value": 200, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Structure/material and insulation design unresolved"}},
+        {"material": "Fictional service zone", "thickness": {"value": 50, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "No membrane position or insulation rule implied"}},
+        {"material": "Fictional inner finish", "thickness": {"value": 15, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "No fire/acoustic classification"}}
+      ]
+    },
+    {
+      "id": "O-01", "kind": "opening", "location": "W-01, fictional offset from left and sill above zero", "depends_on": ["W-01"], "layers": [],
+      "fields": {
+        "width": {"value": 1200, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Structural opening"},
+        "height": {"value": 1200, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Structural opening"},
+        "offset": {"value": 1400, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "From fictional left origin"},
+        "sill": {"value": 900, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Above fictional floor datum"},
+        "frame_width": {"value": 1150, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-WINDOW"], "note": "Invented outer frame; no installation tolerance approval"},
+        "frame_height": {"value": 1150, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-WINDOW"], "note": "Invented outer frame"},
+        "clear_width": {"value": 1000, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-WINDOW"], "note": "Invented opening; no escape verification"},
+        "clear_height": {"value": 1000, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-WINDOW"], "note": "Invented opening"},
+        "sash_projection": {"value": 550, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-WINDOW"], "note": "Simplified plan-envelope test only"}
+      }
+    },
+    {
+      "id": "WW-01", "kind": "well", "location": "Outside O-01, projection from fictional finished facade plane", "depends_on": ["O-01"], "layers": [],
+      "fields": {
+        "width": {"value": 1600, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Clear internal width parallel to facade"},
+        "projection": {"value": 1000, "unit": "mm", "status": "synthetic", "source_ids": ["SYN-PLAN"], "note": "Clear internal projection; no ladder/cover modeled"},
+        "bottom_level": {"value": 0.5, "unit": "m", "status": "synthetic", "datum": "SYNTHETIC-FFL-ZERO", "source_ids": ["SYN-PLAN"], "note": "Fictional common floor benchmark"},
+        "rim_level": {"value": 1.5, "unit": "m", "status": "synthetic", "datum": "SYNTHETIC-FFL-ZERO", "source_ids": ["SYN-PLAN"], "note": "Fictional common floor benchmark; terrain design absent"},
+        "drain_invert": {"value": null, "unit": "mm", "status": "unknown", "datum": "SYNTHETIC-FFL-ZERO", "source_ids": [], "note": "Outlet, invert, capacity and backwater evidence not supplied"}
+      }
+    }
+  ],
+  "holds": [
+    {"id": "H-DESIGN", "elements": ["W-01", "O-01", "WW-01"], "reason": "Fictional geometry is not a structural, fire, moisture or buildable product design", "reviewer": "Appropriate designers/trades not appointed in this synthetic example", "status": "open"},
+    {"id": "H-DRAIN", "elements": ["WW-01"], "reason": "Drainage, terrain, ground/foundation, waterproofing and escape access unresolved", "reviewer": "Ground/drainage/building designers as applicable; unassigned", "status": "open"}
+  ]
+}

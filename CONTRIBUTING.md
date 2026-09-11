@@ -74,17 +74,27 @@ chore: bump version to 1.4
 ## Code Quality Guidelines
 
 ### Skills
-- **YAML frontmatter required** — Every skill must have `name`, `description`, `triggers`, `load_with`, `safety_level`
+- **Local authoring contract** — Follow [skills/README.md](skills/README.md) for
+   required fields, flat frontmatter, workflow structure and validation limits.
 - **Clear structure** — Purpose, content sections, examples, links
-- **Norwegian-first expertise** — Standards (TEK17, NEK 400, VS 6050) are authoritative
+- **Norway-first evidence** — Distinguish law, standards/NA editions, contractual
+   requirements and guidance. Verify applicability and sources; do not treat a
+   skill table, product preset or prior AI output as design approval.
 - **Bilingual support** — Include English equivalents, resource links in both languages
-- **Safety disclaimers** — If skill touches regulatory or structural topics, include disclaimer note
+- **Trust boundaries** — Follow [system_prompt.md](system_prompt.md); high/critical
+   skills need a Trust Boundary section. Use synthetic examples, not private data.
 
 ### System Prompt & Routing
-- **ReAct protocol** — Explicit reasoning before conclusions
-- **Escalation checks** — Flag high-risk decisions (WET_STAMP_REQUIRED, etc.)
-- **Language detection** — Route to correct language response
-- **Safety gates** — Data-first for structural; education-first for technical
+- **Loading order** — System prompt, shared constraints, startup once, then scoped
+   routing. Extend existing skills where practical; avoid duplicate orchestration.
+- **Checkable answers** — Concise conclusions, evidence, assumptions, formulas
+   when useful and next actions; do not demand private internal deliberation.
+- **Review triggers** — Use task-specific evidence and appropriate Norwegian
+   reviewers, not generic foreign licensing or mandatory-stamp thresholds.
+- **Scope and language** — Match the user language and selected mode/project.
+- **Privacy and actions** — Preserve unrelated local edits. Never stage ignored
+   project data. External writes, moves and destructive actions require explicit
+   authorization; commits and publication are separate from drafting changes.
 
 ### Documentation
 - **README.md** — Updated with new features
@@ -94,13 +104,23 @@ chore: bump version to 1.4
 
 ## Testing / Validation
 
+Use [docs/development.md](docs/development.md) for the shared environment and
+commands, and [docs/evaluations/README.md](docs/evaluations/README.md) for live-host
+evaluation cases. Local test success is not a remotely executed CI result.
+
 Before submitting PR:
 
-1. **Routing logic** — Test that your skill is correctly triggered by keywords
-2. **Language detection** — Verify both Norwegian and English queries route correctly
-3. **Links** — All resource links are active and point to intended content
-4. **Disclaimers** — High-risk topics (structural, regulatory) include appropriate warnings
-5. **Examples** — Provide realistic scenario examples in the skill
+1. **Static contracts** — Run [tests/Test-AgentContracts.ps1](tests/Test-AgentContracts.ps1)
+   without a project argument for repository-only checks.
+2. **Skill lint** — Run [skills/validate_skills.py](skills/validate_skills.py) after
+   skill edits; report warnings as review needs rather than suppressing them.
+3. **Changed code** — Run relevant tests, including the local beam suite when
+   changing that calculator. Record the actual command/result and test scope.
+4. **Behavior** — Exercise applicable synthetic success, missing-evidence,
+   revision-conflict and language cases. Record expected and observed results
+   separately; unrun examples and source assertions are not behavioral tests.
+5. **Sources and links** — Verify changed references and technical applicability.
+   Clean static checks do not establish engineering/legal accuracy or approval.
 
 ## Reporting Issues
 

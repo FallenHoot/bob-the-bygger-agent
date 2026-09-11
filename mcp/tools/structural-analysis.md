@@ -1,143 +1,69 @@
-# MCP Tool: structural-analysis-mcp
+# Structural Calculation Tools — Local Engine and Optional MCP
 
-**Source**: [github.com/Elandu/structural-analysis-mcp](https://github.com/Elandu/structural-analysis-mcp)
-**Status**: Available (MVP, June 2026) — no Eurocode compliance checks yet
-**Language**: Python
-**Protocol**: MCP over stdio
+*Prepared by BTBA, AI advisory draft, not professional certification.*
 
----
+## Implemented Local Calculator
 
-## What It Does
+The [local Python engine](../../skills/structural-engineering/scripts/beam_calculator.py)
+provides explicit-unit, deterministic elastic beam response without an MCP
+connection. See [setup, JSON inputs, supported cases and tests](../../skills/structural-engineering/references/local-beam-calculator.md).
+It supports simply supported/cantilever beams with one point load or full-span
+UDL. Pint converts allowed units; invalid inputs are rejected, not clamped.
+No third-party calculator code is embedded.
 
-Exposes deterministic structural engineering calculations to AI agents via MCP tool calls. Uses established open-source Python engineering libraries:
-- `sectionproperties` — geometric section properties
-- `concreteproperties` — concrete section analysis
-- `PyniteFEA` — finite element analysis
+Inputs and reports stay local. The CLI reads a specified JSON file and prints
+the report; it does not upload inputs, change project files or submit a design.
+The [public benchmark input](../../skills/structural-engineering/assets/beam-example.json)
+is illustrative, not a project default. No graphical UI or MCP endpoint is
+installed by this implementation.
 
-This fills BTBA's biggest gap: **real numbers instead of in-context estimates**.
+## Norwegian Design Checks Remain Separate
 
----
+Read the [Norwegian design-basis register](../../skills/structural-engineering/references/norwegian-design-basis.md):
+the DiBK structural requirements and Eurocode/NA route were checked against
+public official sources; numerical standard/NA factors are not implemented or
+verified merely by that check. Tool arithmetic and legal/design applicability
+are different layers.
 
-## Available Tools
+Before relying on a result:
+1. Record source/revision and evidence status for span, supports, stiffness,
+   section axis, load path, load magnitude and self-weight inclusion.
+2. Select and verify the applicable action arrangements and ULS/SLS combinations.
+   The engine evaluates only the supplied load; it adds no factors or snow loads.
+3. Independently check the matching model, coherent units, equilibrium and
+   response. Distinguish moment/shear signs from magnitude summaries.
+4. For deflection, establish a sourced response definition, reference span,
+   combination and limit. No universal L/250 or L/360 requirement is assumed.
+   Missing/unverified criteria remain not assessed, not pass/fail.
+5. Retain stability, strength, creep/cracking, vibration, connections, bearing,
+   fire, foundations and temporary-works checks where relevant. Obtain qualified
+   structural review before project reliance. A tool pass is not approval or
+   a generic Norwegian wet-stamp requirement.
 
-### `calculate_rectangle_section_properties`
-Gross geometric properties for a solid rectangular section.
+The older glulam example is withdrawn: its stated section and supplied inertia
+were not a verified matched pair. Do not reuse it as a sizing/design benchmark.
+Earlier project results have not been recalculated or revalidated by this edit.
 
-```json
-{
-  "name": "calculate_rectangle_section_properties",
-  "arguments": {
-    "width_mm": 90,
-    "depth_mm": 315
-  }
-}
-```
+## Optional External MCP — Unverified Availability
 
-Returns: `area_mm2`, `centroid_x_mm`, `centroid_y_mm`, `ixx_mm4`, `iyy_mm4`, `j_mm4`
+**External reference:** [Elandu/structural-analysis-mcp](https://github.com/Elandu/structural-analysis-mcp).
+Prior repository notes described a Python stdio server using `sectionproperties`,
+`concreteproperties` and `PyniteFEA`, with tools named
+`calculate_rectangle_section_properties`, `analyse_simple_beam_udl` and
+`calculate_rectangular_concrete_section_summary`. These are historical
+descriptions, not tool calls verified in this session.
 
-**Halvard use case**: Before sizing a glulam beam, confirm Ixx for the proposed section before calculating deflection.
+**Current installation, schemas, runtime connectivity and upstream capabilities
+are unverified.** A configuration entry does not establish availability. Before
+installing or invoking an external implementation, inspect its current release,
+dependencies, tool schema/units and limitations, and run independent benchmarks.
+Use only actually exposed tools; do not claim Eurocode/NA checking from the name
+or an older README. Any transmission of private project data needs explicit
+authorization for that destination.
 
----
+For optional website cross-checks, use the
+[Beam Calculator resource review](../../skills/structural-engineering/references/beam-calculator.md).
+The website, local script and possible MCP server are separate tools with
+separate validation and availability claims.
 
-### `analyse_simple_beam_udl`
-Simply supported beam under full-span UDL — reactions, max shear, max moment, max deflection.
-
-```json
-{
-  "name": "analyse_simple_beam_udl",
-  "arguments": {
-    "span_m": 5.4,
-    "udl_kn_per_m": 12.0,
-    "elastic_modulus_mpa": 13600,
-    "ixx_mm4": 666450000
-  }
-}
-```
-
-Returns: `reaction_left_kn`, `reaction_right_kn`, `max_shear_kn`, `max_moment_knm`, `max_deflection_mm`
-
-**Halvard use case**: Verify deflection of a GL30h 90×315 glulam over 5.4m span against L/250 limit.
-
----
-
-### `calculate_rectangular_concrete_section_summary`
-Gross rectangular concrete section summary (no reinforcement, no cracking, no capacity check).
-
-```json
-{
-  "name": "calculate_rectangular_concrete_section_summary",
-  "arguments": {
-    "width_mm": 300,
-    "depth_mm": 500,
-    "concrete_strength_mpa": 35
-  }
-}
-```
-
-**Halvard use case**: Foundation beam section properties for preliminary design.
-
----
-
-## What It Does NOT Do (Yet)
-
-- No Eurocode (NS-EN 1995, NS-EN 1993, NS-EN 1992) code checks
-- No load combinations (1.35G + 1.5Q)
-- No lateral-torsional buckling
-- No reinforcement design
-- No steel section database
-- No unit conversion (inputs must match field names exactly)
-- No interaction with Norwegian National Annexes
-
-**BTBA workflow with this limitation**: Use the tool for deterministic statics, then apply Eurocode checks manually from `skills/structural-engineering/SKILL.md`. The tool gives numbers; Bob applies the code.
-
----
-
-## Halvard Integration Protocol
-
-When invoking this tool:
-
-1. **State what you're calculating** before the tool call: *"Checking deflection of the proposed GL30h 90×315 beam at 5.4m span under design UDL of 12.0 kN/m."*
-2. **Show the inputs** you're passing and why
-3. **Interpret the output** against the TEK17/Eurocode limits: deflection limit = L/250 = 21.6 mm for this span
-4. **State the result clearly**: pass or fail, with margin
-5. **Flag** `WET_STAMP_REQUIRED` if the result is load-bearing and permit-relevant
-
----
-
-## Installation
-
-```bash
-git clone https://github.com/Elandu/structural-analysis-mcp.git
-cd structural-analysis-mcp
-python -m venv .venv
-.venv\Scripts\activate  # Windows
-pip install -e ".[dev]"
-```
-
-Add to MCP client config (see `mcp/mcp-config.json`):
-```json
-{
-  "mcpServers": {
-    "structural-analysis": {
-      "command": "python",
-      "args": ["-m", "structural_analysis_mcp"]
-    }
-  }
-}
-```
-
----
-
-## Roadmap (from Elandu)
-- Steel section database
-- Reinforced concrete interaction diagrams
-- 2D frame analysis
-- Load combinations
-- Unit conversion
-- Optional Australian Standards examples (Eurocode would require separate contribution)
-
-*Note: Eurocode Norwegian national annex support would require a contribution to the Elandu project or a fork. This is the most valuable contribution Halvard's development could make to the open-source ecosystem.*
-
----
-
-*Last reviewed: 2026-07-26*
+*Last reviewed: 2026-09-10 — scoped documentation correction and local-tool addition.*

@@ -42,6 +42,26 @@ STATUS_VALUES = ("unreviewed", "draft", "production")
 TRUST_BOUNDARY_HEADING = re.compile(r"^##\s+Trust Boundary\s*$", re.MULTILINE)
 
 
+class UniqueKeyLoader(yaml.SafeLoader):
+    """Reject ambiguous configuration instead of silently keeping the last key."""
+
+
+def unique_mapping(loader, node, deep=False):
+    loader.flatten_mapping(node)
+    mapping = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        if not isinstance(key, str):
+            raise yaml.constructor.ConstructorError(None, None, "Field names must be strings", key_node.start_mark)
+        if key in mapping:
+            raise yaml.constructor.ConstructorError(None, None, f"Duplicate field: {key}", key_node.start_mark)
+        mapping[key] = loader.construct_object(value_node, deep=deep)
+    return mapping
+
+
+UniqueKeyLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, unique_mapping)
+
+
 def load_frontmatter(text: str):
     lines = text.splitlines()
     if not lines or lines[0].rstrip() != "---":
@@ -50,7 +70,7 @@ def load_frontmatter(text: str):
     if closing is None:
         return None, "Could not find closing '---' for frontmatter"
     try:
-        fm = yaml.safe_load("\n".join(lines[1:closing]))
+        fm = yaml.load("\n".join(lines[1:closing]), Loader=UniqueKeyLoader)
     except (yaml.YAMLError, ValueError, OverflowError, RecursionError) as e:
         return None, f"Invalid YAML frontmatter: {e}"
     if not isinstance(fm, dict):
@@ -147,8 +167,8 @@ def validate_skill(skill_dir: Path) -> list:
         issues.append((
             "warn",
             "safety_level is high/critical but SKILL.md has no '## Trust Boundary' section — "
-            "state explicitly what Bob may determine alone vs. what always requires a licensed "
-            "professional, surveyor, or authority sign-off (see skills/README.md)",
+            "state what is preliminary and what needs a task-appropriate Norwegian "
+            "designer, trade, surveyor or authority review (see skills/README.md)",
         ))
 
     scripts_dir = skill_dir / "scripts"

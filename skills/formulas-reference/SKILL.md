@@ -40,6 +40,21 @@ with section modulus in mm³ require moment in N·mm. These are idealized
 linear-elastic beam models; verify supports, loading, stiffness assumptions,
 and whether shear deformation or other effects need separate treatment.
 
+**Optional web cross-check:** when using Beam Calculator, consult the
+[resource review and unit cautions](../structural-engineering/references/beam-calculator.md).
+The formula display omits conversion factors in its numeric substitutions;
+rebuild them in coherent units. Its L/360 helper is not a Norwegian code limit,
+and its indicative timber Fy/Fu labels are not verified design properties.
+Use an independent calculation, not two pages sharing the same solver, as
+the arithmetic cross-check. No calculator integration is installed by this link.
+
+**Local numerical implementation:** use the
+[tested beam calculator procedure](../structural-engineering/references/local-beam-calculator.md)
+for the supported simple-span/cantilever point-load and UDL cases. It performs
+unit conversion and returns response, not Norwegian design compliance. Read the
+[Norwegian design-basis register](../structural-engineering/references/norwegian-design-basis.md)
+for source-checked public requirements and numerical provisions still unverified.
+
 ---
 
 > For historical materials (1920s-1960s concrete, steel, timber grades and load standards), see [references/historical-materials.md](references/historical-materials.md)

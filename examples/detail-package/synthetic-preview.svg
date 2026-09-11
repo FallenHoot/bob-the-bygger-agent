@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" role="img">
+  <title>BTBA advisory geometry preview — not for construction</title>
+  <rect width="1000" height="800" fill="#f8fafc" />
+  <text x="30" y="35" font-family="sans-serif" font-size="21" fill="#172554">BTBA | DRAFT GEOMETRY PREVIEW — NOT FOR CONSTRUCTION</text>
+  <text x="30" y="62" font-family="sans-serif" font-size="15" fill="#172554">SYNTHETIC-DETAIL / A / synthetic</text>
+  <text x="30" y="87" font-family="sans-serif" font-size="15" fill="#172554">Schematic layout; use stated mm dimensions. No engineering, escape or drainage approval.</text>
+  <text x="30" y="125" font-family="sans-serif" font-size="18" fill="#172554">Wall elevation W-01 — opening O-01</text>
+  <rect x="40" y="155" width="353.84615384615387" height="230.0" fill="#cbd5e1" stroke="#334155" stroke-width="2" />
+  <rect x="163.84615384615387" y="199.23076923076923" width="106.15384615384616" height="106.15384615384616" fill="#dbeafe" stroke="#334155" stroke-width="2" />
+  <text x="40" y="410" font-family="sans-serif" font-size="15" fill="#172554">Wall 4000 × 2600 mm; opening 1200 × 1200 mm</text>
+  <text x="40" y="435" font-family="sans-serif" font-size="15" fill="#172554">Offset 1400 mm; sill 900 mm above declared wall origin</text>
+  <text x="620" y="125" font-family="sans-serif" font-size="18" fill="#172554">Well plan WW-01</text>
+  <rect x="620" y="155" width="310.0" height="193.75" fill="#e0f2fe" stroke="#334155" stroke-width="2" />
+  <rect x="620" y="155" width="310.0" height="106.5625" fill="#fed7aa" stroke="#334155" stroke-width="2" />
+  <text x="620" y="410" font-family="sans-serif" font-size="15" fill="#172554">Clear 1600 × 1000 mm</text>
+  <text x="620" y="435" font-family="sans-serif" font-size="15" fill="#172554">Sash envelope 550 mm</text>
+  <text x="30" y="485" font-family="sans-serif" font-size="18" fill="#172554">Well level section — declared common datum</text>
+  <rect x="40" y="510" width="160.0" height="160.0" fill="#e0f2fe" stroke="#334155" stroke-width="2" />
+  <text x="420" y="535" font-family="sans-serif" font-size="15" fill="#172554">Rim 1500 mm; bottom 500 mm</text>
+  <text x="420" y="562" font-family="sans-serif" font-size="15" fill="#172554">Depth 1000 mm; datum: SYNTHETIC-FFL-ZERO</text>
+  <text x="420" y="589" font-family="sans-serif" font-size="15" fill="#172554">Drain outlet/invert, retaining, waterp… [full record in JSON]<title>Drain outlet/invert, retaining, waterproofing and access: review required</title></text>
+  <text x="30" y="715" font-family="sans-serif" font-size="15" fill="#172554">Open holds: 2; source labels not independently verified</text>
+  <text x="30" y="741" font-family="sans-serif" font-size="12" fill="#172554">Input SHA-256: d62928a3e8e764bf50a8836524c6cfb2944ef3e1da99859813db1b87779f2de6</text>
+  <text x="30" y="770" font-family="sans-serif" font-size="13" fill="#172554">Prepared by BTBA, AI advisory draft, not professional certification.</text>
+</svg>

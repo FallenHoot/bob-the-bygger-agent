@@ -145,7 +145,7 @@ Treat the lists below as prompts to verify against the current rules, measure, a
 
 **Drawings required:**
 - [ ] **Plantegning** — before and after floor plans of the converted space. Show all new partitions, windows, escape routes.
-- [ ] **Snitt** — show ceiling height (minimum 2.20 m for habitable rooms per TEK17 §12-7) in the converted space.
+- [ ] **Snitt** — show actual room height and measurement convention; verify the applicable [§12-7 room/use-change route](../building-code-tek17/references/verified-requirements.md#rooms), not a universal 2.20 m rule.
 - [ ] **Fasadetegning** — if new windows or escape windows are added.
 - [ ] **Ventilasjon** — schematic showing how the new space is ventilated (fresh air supply, extract).
 

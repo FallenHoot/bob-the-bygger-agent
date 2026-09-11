@@ -1,144 +1,66 @@
-# TEK17 Compliance Gap Analysis
+# Norwegian Requirements Gap Analysis
 
-**Project**: [Project name]
-**Property**: [Address]
-**Date**: [Date]
-**Prepared by**: BTBA
-**Drawing set reviewed**: [Drawing numbers / revision]
-**Scope**: [New construction / Major renovation / Loft conversion / Extension]
+*Prepared by BTBA, AI advisory draft, not professional certification.*
 
----
+**Project / measure / scope:** [Record]
 
-## How to Use This Document
+**Date / revision / intended use:** [Record]
 
-Each section lists the TEK17 requirement, the current design status, the gap (if any), and the required action. Status codes:
-- ✅ **Compliant** — design meets the requirement
-- ⚠️ **Partial** — partially addressed, action needed
-- ❌ **Non-compliant** — clear gap, must be resolved
-- ❓ **Unknown** — not enough information to assess
+**Status:** Draft — not a permit, professional approval or construction release
 
-Use confirmed compliance/non-compliance only for verified facts and an applicable, current requirement. Missing records alone mean **Unknown**, not illegal work. For setbacks, record drawing-dimensioned/scaled, cadastral, site-measured, or survey-confirmed evidence, source/date, accuracy, and measurement endpoints. Drawing-derived concerns are **PRELIMINARY RED FLAGS — requires survey verification**, not confirmed violations. Permit/responsibility exemptions do not establish structural or geotechnical safety.
+**Sources and coverage:** [Exact files/pages/revisions inspected; omitted scope]
 
----
+## Evidence and Applicability
 
-## §5 — Grad av utnytting (Site Utilization)
+Identify the actual building/room use, new or existing-building route, application
+dates, applicable local plan/permit conditions and responsible roles. Distinguish
+regulation, preaccepted guidance, standards/NA and project preferences. Missing
+records mean **Unknown**, not illegal work or a passing check.
 
-| Check | Requirement | Current design | Status | Action |
+For boundaries record drawing-dimensioned/scaled, cadastral, site-measured or
+survey-confirmed evidence, source/date, accuracy and measurement endpoints.
+Drawing-derived concerns are **PRELIMINARY RED FLAGS — requires survey verification**,
+not confirmed violations. Permit exemptions do not establish structural/ground safety.
+
+## Requirement Register
+
+| ID / topic | Applicable criterion / exact source / edition | Scope and applicability evidence | Actual/proposed value and source | Comparison | Next action / reviewer |
+|---|---|---|---|---|---|
+| [ID] | [No default threshold] | [Established or unverified] | [Units, datum, page/revision] | [Met for stated scope / discrepancy / unassessed] | [Specific missing evidence] |
+
+Use relevant rows only:
+- Utilization/BRA/BYA, heights, boundaries, roads and local plans.
+- Natural hazards and actual flood/landslide safety class; maps are not site clearance.
+- Structure, supports, load paths and applicable design/control documentation.
+- Fire strategy, risk/fire classes, escape and rescue access.
+- Rooms, functional space, height, stairs and accessibility.
+- Daylight, ventilation, radon, sound and moisture.
+- Energy: chosen §14-2 pathway separately from §14-3 minimum levels.
+- Groundwater, stormwater, drainage outlet, backwater and overflow.
+- Heritage protection basis, waste/climate obligations and permit conditions.
+
+Use [the checked requirement register](../skills/building-code-tek17/references/verified-requirements.md)
+for limited source comparisons. There is no universal 7 m² room minimum, every-bedroom
+escape-window rule or fixed compliant window-well size in this template. Do not
+copy superseded regulatory tables from earlier versions.
+
+## Scope-Specific Summary
+
+| Scope | Assessed criteria | Discrepancies | Unassessed / missing evidence | Review or decision required |
 |---|---|---|---|---|
-| %-BYA within allowed | Per reguleringsplan | % | | |
-| Building height within limit | Per reguleringsplan | m | | |
-| Setback from property line | ≥ 4.0 m (default) | m | | |
+| [Scope] | [IDs] | [IDs] | [IDs] | [Record] |
 
----
+A count of met criteria is not an overall compliance score. Review requests,
+professional assessments, client acceptance and municipal decisions are different
+states. Record exact reviewer/authority, scope/revision, conditions and decision
+source rather than promoting a checklist to approval.
 
-## §7 — Sikkerhet mot naturpåkjenninger (Natural Hazards)
+## Holds and Next Actions
 
-| Check | Requirement | Status | Action |
-|---|---|---|---|
-| Habitable space above 200-year flood level | Yes | | |
-| Landslide / avalanche risk assessed | 1-in-1000 limit | | |
-| Quick clay investigation (if in risk area) | Geotechnical report | | |
-| Radon barrier installed | Required in high-risk zones | | |
-
----
-
-## §10 — Konstruksjonssikkerhet (Structural Safety)
-
-| Check | Requirement | Status | Action |
-|---|---|---|---|
-| Structural design per Eurocodes + Norwegian NA | NS-EN 1990/1991/1993/1995 | | |
-| Pålitelighetsklasse (RC) assigned | RC2 for residential | | |
-| Scope-specific structural design/review records | Qualified designer; ansvarlig prosjekterende where applicable, no generic PE/wet stamp | | |
-| Application-stage structural documentation | Verify required attachments versus technical records retained in project | | |
-
----
-
-## §11 — Sikkerhet ved brann (Fire Safety)
-
-| Check | Requirement | Current design | Status | Action |
+| Hold / issue | Affected scope | Evidence required | Proposed resolver | Status / closure evidence |
 |---|---|---|---|---|
-| Brannklasse (BKL) assigned | | | | |
-| Risikoklasse (RKL) assigned | | | | |
-| Smoke alarms on every floor, interconnected | TEK17 §11-12 | | | |
-| Escape route from every sleeping room | TEK17 §11-13 | | | |
-| Fire separation between units | EI60 min | | | |
-| Distance to neighbouring building | ≥ 8 m or fire-rated wall | m | | |
-| Sprinkler required? | BKL2+ | | | |
+| [ID] | [Record] | [Record] | [Unassigned if unknown] | [Open] |
 
----
-
-## §12 — Planløsning og bygningsdeler (Layout)
-
-| Check | Requirement | Current design | Status | Action |
-|---|---|---|---|---|
-| Ceiling height, habitable rooms | ≥ 2.20 m | m | | |
-| Ceiling height, stairwell | ≥ 2.10 m | m | | |
-| Room area, habitable rooms | ≥ 7.0 m² | m² | | |
-| Stair rise | ≤ 200 mm | mm | | |
-| Stair going | ≥ 200 mm | mm | | |
-| Stair clear width | ≥ 900 mm | mm | | |
-| Handrail on stair | Required ≥ 3 risers | | | |
-
----
-
-## §13 — Miljø (Environment)
-
-| Check | Requirement | Current design | Status | Action |
-|---|---|---|---|---|
-| Indoor radon | ≤ 200 Bq/m³ | | | |
-| Radon barrier installed | Required in risk zones | | | |
-| Airborne sound between units | Rw ≥ 55 dB | | | |
-| Impact sound between units | Ln,w ≤ 53 dB | | | |
-
----
-
-## §14 — Energi (Energy)
-
-| Check | Requirement | Current value | Status | Action |
-|---|---|---|---|---|
-| U-value, exterior wall | ≤ 0.18 W/m²K | W/m²K | | |
-| U-value, roof | ≤ 0.13 W/m²K | W/m²K | | |
-| U-value, floor to ground | ≤ 0.10 W/m²K | W/m²K | | |
-| U-value, windows + doors | ≤ 0.80 W/m²K | W/m²K | | |
-| Thermal bridges (normalized) | ≤ 0.03 W/m²K | W/m²K | | |
-| Air leakage at 50 Pa | ≤ 1.5 h⁻¹ | h⁻¹ (if tested) | | |
-| Ventilation: heat recovery | ≥ 80% | % | | |
-| Ventilation: minimum airflow | 26 m³/h per person | | | |
-| Heating system allows heat pump / fjernvarme | Required | | | |
-
-**Heritage dispensasjon applicable?** Yes / No — if yes, note TEK17 §14-8 exemption basis:
-> [e.g., "Building is fredet under Kulturminneloven. Full U-value compliance would require removal of original cladding and window frames. Dispensasjon from §14-3 values sought."]
-
----
-
-## Summary
-
-| Chapter | Compliant | Partial | Non-compliant | Unknown |
-|---|---|---|---|---|
-| §5 Utilization | | | | |
-| §7 Natural hazards | | | | |
-| §10 Structural | | | | |
-| §11 Fire | | | | |
-| §12 Layout | | | | |
-| §13 Environment | | | | |
-| §14 Energy | | | | |
-
-**Critical gaps requiring resolution before søknad submission:**
-
-1. [Gap 1]
-2. [Gap 2]
-3. [Gap 3]
-
----
-
-## Escalation Flags Triggered
-
-- [ ] `STRUCTURAL_REVIEW` — qualified structural assessment; verify applicable Norwegian responsibility/documentation route
-- [ ] `NVE_CHECK_REQUIRED`
-- [ ] `GEOTECHNICAL_REPORT_REQUIRED`
-- [ ] `SØKNAD_REQUIRED`
-- [ ] `BYANTIKVAREN_CONSULTATION_REQUIRED`
-
----
-
-*This gap analysis is a working tool for project management. It does not substitute for the formal søknad documentation or the municipality's compliance assessment.*
+Use task-appropriate review triggers from the system prompt. An explicitly authorized
+preliminary enquiry may disclose unresolved issues; it does not release ordering,
+fixed-price scope or construction. External sends need separate authorization.
