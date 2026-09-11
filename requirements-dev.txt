@@ -1,0 +1,8 @@
+# Reproducible local/CI test environment (Python 3.12).
+# Optional OCR and BIM engines are intentionally not installed by this file.
+-r skills/structural-engineering/scripts/requirements.txt
+Pint==0.25.3
+PyYAML==6.0.3
+PyMuPDF==1.26.4
+ezdxf==1.4.2
+jsonschema==4.25.1

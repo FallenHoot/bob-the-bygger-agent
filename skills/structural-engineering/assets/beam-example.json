@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "support": "simply_supported",
+  "span": {"value": 6, "unit": "m"},
+  "elastic_modulus": {"value": 210, "unit": "GPa"},
+  "second_moment": {"value": 8500, "unit": "cm^4"},
+  "load": {
+    "kind": "udl",
+    "magnitude": {"value": 5, "unit": "kN/m"}
+  },
+  "basis": {
+    "source": "Public Beam Calculator benchmark, reviewed 2026-09-10; illustrative, not a project",
+    "geometry_and_supports": "Assumed ideal 6 m simply supported single span",
+    "material_and_axis": "Assumed constant elastic E and second moment about the bending axis; no grade or profile identification",
+    "load_basis": "illustrative",
+    "combination": "Only the stated 5 kN/m UDL; no automatic factors",
+    "self_weight": "excluded"
+  }
+}

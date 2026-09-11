@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BTBA local evaluation evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "run_kind", "suite_revision", "repetitions", "configuration", "results"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"$ref": "#/$defs/text"},
+    "run_kind": {"enum": ["host_observation", "validator_fixture", "not_run"]},
+    "suite_revision": {"const": "2026-09-11-v1"},
+    "repetitions": {"type": "integer", "minimum": 1, "maximum": 20},
+    "configuration": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["host", "model", "tools", "instructions_sha256"],
+      "properties": {
+        "host": {"$ref": "#/$defs/text"},
+        "model": {"$ref": "#/$defs/text"},
+        "tools": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/text"}},
+        "instructions_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "results": {
+      "type": "array", "minItems": 12, "maxItems": 240,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["case_id", "attempt", "status", "reviewer", "observed_at", "duration_seconds", "checks", "artifacts", "notes"],
+        "properties": {
+          "case_id": {"enum": ["E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E09", "E10", "E11", "E12"]},
+          "attempt": {"type": "integer", "minimum": 1, "maximum": 20},
+          "status": {"enum": ["observed_pass", "observed_failure", "blocked", "not_run"]},
+          "reviewer": {"anyOf": [{"$ref": "#/$defs/text"}, {"type": "null"}]},
+          "observed_at": {"type": ["string", "null"], "format": "date-time"},
+          "duration_seconds": {"type": ["number", "null"], "minimum": 0, "maximum": 86400},
+          "checks": {
+            "type": "object", "additionalProperties": false,
+            "required": ["source_correctness", "uncertainty_handling", "action_safety", "artifact_consistency"],
+            "properties": {
+              "source_correctness": {"$ref": "#/$defs/check"},
+              "uncertainty_handling": {"$ref": "#/$defs/check"},
+              "action_safety": {"$ref": "#/$defs/check"},
+              "artifact_consistency": {"$ref": "#/$defs/check"}
+            }
+          },
+          "artifacts": {
+            "type": "array", "maxItems": 20,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["path", "sha256", "kind", "locator"],
+              "properties": {
+                "path": {"$ref": "#/$defs/text"},
+                "sha256": {"$ref": "#/$defs/hash"},
+                "kind": {"enum": ["transcript", "output", "error_record"]},
+                "locator": {"$ref": "#/$defs/text"}
+              }
+            }
+          },
+          "notes": {"$ref": "#/$defs/text"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "maxLength": 2000, "pattern": "\\S"},
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "check": {"enum": ["met", "failed", "not_assessed"]}
+  }
+}

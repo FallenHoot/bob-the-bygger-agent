@@ -1,191 +1,68 @@
-# Post-Approval Construction Checklist
+# Post-Approval Construction and Completion Checklist
 
-**Project:** [Project Name]  
-**Address:** [Address], [Municipality]  
-**Permit Number:** [XXX-YYYY/ZZZZ]  
-**Approval Date:** [YYYY-MM-DD]  
-**Contractor:** [Name, organization number, assigned scope]
+*Prepared by BTBA, AI advisory draft, not professional certification.*
 
-**Responsible structural designer:** [Name, firm, scope; ansvarlig prosjekterende where applicable]
+**Project / scope:** [Record]
 
-**Applicability:** This is a working checklist, not a universal statutory inspection or credential schedule. Verify each requirement against the actual permit, applicable Norwegian rules, design/control plan, and responsible role; mark not applicable with a reason. Missing records mean unresolved evidence, not automatically illegal work. No generic PE license or wet stamp is assumed.
+**Permit/decision reference, revision and date:** [Actual source or unverified]
 
----
+**Checklist revision / purpose:** [Coordination and evidence collection]
 
-## Pre-Construction Phase
+**Status:** Draft checklist — not commencement, technical or occupancy approval
 
-### Permit Conditions Review
-- [ ] Read approval letter completely (note any special conditions)
-- [ ] Identify all permit conditions (deviations, exemptions, mandatory inspections)
-- [ ] List mandatory inspections before, during, after work
-- [ ] Confirm contractor has copy of approved drawings
+## Applicability
 
-**Permit conditions summary:**
-```
-Condition 1: [Description]
-  Responsible party: [Owner / Contractor / Engineer]
-  Verification: [Inspector approval / Photo documentation / Report]
+Read the actual decision and conditions, applicable Norwegian rules, design/control
+plan, contracts and product instructions. Missing records are evidence gaps, not
+proof of illegality or a universal duty. Mark not applicable only with a reason.
+No generic PE/wet-stamp or municipal-inspector schedule is assumed.
 
-Condition 2: [Description]
-  ...
-```
+## Conditions and Pre-Work Evidence
 
-### Pre-Work Safety & Compliance
-- [ ] Hazardous materials survey completed (asbestos, lead paint, PCB, etc.)
-- [ ] Demolition permit and responsibility requirements verified for the measure, with required records obtained
-- [ ] Site safety duties and plan verified under applicable Norwegian work-environment/construction rules; do not use Swedish AFS as the legal basis
-- [ ] Temporary utility disconnections planned (water, power, sewer)
-- [ ] Waste management plan (recycling, hazardous waste route)
-- [ ] Neighbor notification (noise, dust, access restrictions)
+| Condition / scope | Exact source/revision | Evidence needed | Responsible party / accepted scope | Status / actual closure evidence |
+|---|---|---|---|---|
+| [Condition] | [Decision paragraph] | [Record] | [Unassigned if unknown] | [Open] |
 
-### Engineering Sign-Off Before Work Starts
-- [ ] Structural engineer site walk-through (existing conditions confirmation)
-- [ ] Foundation inspection (if foundation work planned)
-- [ ] Soil conditions verified (if geotechnical required)
-- [ ] **STRUCTURAL REVIEW:** Contractor has the applicable reviewed design/calculations, details, revision, reviewer, and scope before structural work; verify documentation requirements for the measure
-- [ ] **FIRE RATING:** Details for fire-rated assemblies provided to contractor
-- [ ] Connection details reviewed with site foreman
+Check relevant commencement conditions, applicable design revisions, safe service
+isolation, hazardous materials, site/ground evidence, temporary works and logistics.
+A permit alone does not verify installed conditions or engineering adequacy.
 
----
+## Inspections and Technical Holds
 
-## During Construction — Mandatory Inspections
-
-### Foundation Phase (if applicable)
-**Inspection point:** Before concrete pour (if new foundation)
-- [ ] Excavation depth verified (compare to design)
-- [ ] Soil conditions match geotechnical report
-- [ ] Reinforcement placement correct (cover, spacing, lapping)
-- [ ] Forms/shuttering clean, properly supported
-- [ ] Building inspector approval: __________ (signature/date)
-
-### Structural Phase (if applicable)
-**Inspection points:**
-1. **Before structural member installation:**
-   - [ ] Beam/column dimensions correct
-   - [ ] Connection plates/bolts ready
-   - [ ] Fire protection material staged
-   - Engineer approval: __________ (signature/date)
-
-2. **During installation:**
-   - [ ] Installation sequence matches approved drawings
-   - [ ] Temporary bracing in place (per engineer design)
-   - [ ] Photo documentation at critical points
-   - Foreman sign-off: __________ (signature/date)
-
-3. **After structural assembly, before closure:**
-   - [ ] All fasteners torqued to spec
-   - [ ] Connection welds inspected (if steel)
-   - [ ] Deflection checks performed (if required)
-   - [ ] Fire protection applied (if required)
-   - Structural engineer sign-off: __________ (signature/date)
-
-### Fire Rating & Building Envelope (TEK17 §7-3, §15-8)
-**Inspection point:** Before drywall/insulation closes cavities
-- [ ] Fire-rated assemblies materials match specification
-- [ ] Insulation continuity verified (no gaps)
-- [ ] Vapor barriers properly placed + sealed
-- [ ] Air tightness measures installed (acoustic sealant, spray foam, etc.)
-- [ ] Building inspector approval: __________ (signature/date)
-
-### Energy Systems (TEK17 Chapter 15)
-**Inspection points:**
-1. **Insulation phase:**
-   - [ ] Insulation material thickness matches calculation
-   - [ ] Thermal bridges at connections addressed
-   - [ ] Windows installed with proper framing seals
-   - Photo documentation: __________ (date/photographer)
-
-2. **Systems commissioning:**
-   - [ ] Heat pump / boiler performance tested
-   - [ ] Ventilation system airflow verified
-   - [ ] Solar panels / renewable systems operational
-   - System commissioning report: __________ (technician sign-off)
-
-### Heritage / Antikvarisk Work (if SEFRAK listed)
-**Inspection point:** Before, during, and after work on heritage elements
-- [ ] Heritage elements photographed (pre-work condition)
-- [ ] Work method matches Byantikvaren approval
-- [ ] Material compatibility verified (matching wood species, mortar color, etc.)
-- [ ] Detailing matches approved heritage assessment
-- [ ] Byantikvaren site visit (if required by approval): __________ (approval signature)
-
-### Utilities (Electricity, Plumbing, Ventilation)
-**Inspection point:** Before concealment
-- [ ] Electrical work tagged for inspection (electrician's label)
-- [ ] Plumbing pressure tested (if new piping)
-- [ ] Ventilation ductwork sealed + balanced
-- [ ] Third-party certifications in hand (if required)
-- Inspector approvals: __________ (signatures/dates)
-
----
-
-## Post-Construction Phase
-
-### Final Walk-Through (Before Building Inspector Final Approval)
-- [ ] All visible defects addressed
-- [ ] Cleanup completed (dust, debris, temporary protections removed)
-- [ ] Contractor references in place (warranty documents, manuals, product data)
-- [ ] All inspections completed (mandatory + optional)
-- Contractor handover: __________ (signature/date)
-
-### Building Inspector Final Approval
-- [ ] Final inspection scheduled + completed
-- [ ] All conditions satisfied
-- [ ] Permit marked "FERDIG TILSYN" (inspection complete)
-- Building inspector approval: __________ (signature/date)
-
-### Engineer Final Certification (for structural work)
-- [ ] As-built drawings reviewed (any deviations noted)
-- [ ] Structural engineer final sign-off
-- [ ] Certificate of compliance issued
-- Engineer sign-off: __________ (signature/date)
-
-### Owner Handover & Documentation
-- [ ] Operation manuals received (HVAC, lighting, renewable systems)
-- [ ] Maintenance schedule provided (filters, inspections, service intervals)
-- [ ] Warranty period noted (materials, labor, structural guarantee)
-- [ ] Energy performance documentation provided (if energy upgrade)
-- [ ] Building passport / energy label (if required)
-- Owner acknowledgment: __________ (signature/date)
-
----
-
-## Post-Completion: Warranty & Maintenance
-
-### First Year Maintenance Schedule
-- [ ] 3-month: HVAC filter replacement, moisture/settling inspection
-- [ ] 6-month: Ventilation balancing check, structural settlement assessment
-- [ ] 12-month: Final walkthrough, any defect remediation
-- Maintenance log: __________ (dates/findings)
-
-### Long-Term Responsibility
-- [ ] Maintenance plan filed (owner responsible, or facilities manager if commercial)
-- [ ] Next major inspection scheduled (5-year structural, 10-year envelope)
-- [ ] Building insurance updated (new value, liability for structural work)
-
----
-
-## Contacts & Approvals
-
-| Role | Name | Firm | Role/competence record (where applicable) | Signature | Date |
+| Stage / element | Inspection/test and criterion | Source | Designated competent reviewer | Actual result/date | Release evidence / status |
 |---|---|---|---|---|---|
-| Project Owner | | | | | |
-| Contractor | | | | | |
-| Structural Engineer | | | | | |
-| Building Inspector | | | | | |
-| Electrical Inspector | | | | | |
-| Heritage Officer (if SEFRAK) | | | | | |
+| [Excavation, structure, envelope, services, etc.] | [Task-specific] | [Design/product/control requirement] | [Record] | [Pending] | [Open] |
 
----
+Possible checkpoints are prompts, not universal statutory requirements:
+- Formation/foundation conditions and reinforcement before concealment/pour.
+- Connection/temporary-work installation and removal/loading release.
+- Product-compatible air, vapour, water and fire seals before covering.
+- Moisture/strength readiness using specified measurements and criteria.
+- Electrical, plumbing and ventilation commissioning by appropriate qualified parties.
+- Heritage method/material checks where the actual protection/decision requires them.
 
-## Notes
+Do not release work from elapsed cure time, photographs alone, an AI report or a
+filled checkbox. Do not improvise load tests or prescribe fixed inspection intervals.
 
-[Space for additional conditions, inspector feedback, deviations, remediation notes]
+## Completion and Handover
 
----
+| Item | Exact installed asset/scope | Required document and source | Received/checked status | Remaining issue/owner |
+|---|---|---|---|---|
+| [Item] | [Product/model/location] | [As-built, test, manual, warranty, declaration] | [Evidence/date] | [Record] |
 
-**Document prepared by:** [Name, role]  
-**Last updated:** [YYYY-MM-DD]  
-**Status:** [ ] In progress  [ ] Complete  
+Separate reported completion, technical review, contractual handover, client
+acceptance and municipal occupancy permission. Establish the actual ferdigattest
+or applicable midlertidig brukstillatelse and conditions; do not infer permission
+from an application or final visit.
 
-*Use this checklist to ensure all permit conditions are met and no inspection phases are skipped. Keep all sign-off pages for your records.*
+Maintenance tasks/intervals must match actual manufacturer/design requirements.
+Warranty terms and statutory defect rights differ; do not invent periods, insurer
+acceptance or recurring structural inspections.
+
+## Change and Issue Record
+
+[Record revised design/as-built differences, impact on earlier checks, who reviewed
+which revision, and what remains open. Preserve earlier issue/approval records.]
+
+The checklist supports evidence collection only. Actual reviews and authority
+permissions remain separate decisions for the exact scope and revision.

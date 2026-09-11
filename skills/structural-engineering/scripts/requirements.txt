@@ -1,0 +1,2 @@
+# Unit parsing and dimensional conversion; tests use Python's unittest.
+Pint>=0.24,<0.26

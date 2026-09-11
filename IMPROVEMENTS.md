@@ -6,6 +6,167 @@ remain reported history, not independently verified project evidence.
 
 ---
 
+## 2026-09-11 — Evidence and Evaluation Hardening
+
+Continued the reliability work with reproduced failure cases, not additional
+readiness claims. See [docs/reliability-hardening-2026-09-11.md](docs/reliability-hardening-2026-09-11.md).
+
+- Detail reports no longer alias their input; layer unknowns are explicit.
+  Project numeric values require source-matched evidence locators, and synthetic
+  sources/quantities cannot become project evidence by relabeling the package.
+  Numeric range and fixed arithmetic tolerance checks prevent floating-point
+  collapse or scale-dependent comparisons from looking consistent.
+- Revision reports include field-level before/after differences, absent-versus-null
+  distinction, metadata changes and changed/removed holds. Hold removal triggers
+  review/revalidation, not closure. No-change and deep reverse-order dependency
+  regressions protect complete traversal. Well/opening alignment is explicitly
+  unassessed because its geometry is not modeled.
+- PDF extraction now includes rectangle edges, unrotated crop-relative coordinates,
+  rotation/crop metadata, source-byte hashes and source-scoped candidate IDs.
+  Hidden crop content, unsupported paths and truncated candidate samples are
+  reported as omissions rather than implied complete wall geometry.
+- Added a strict evaluation-run schema and local record checker. Pending templates
+  remain not_run; complete case/attempt coverage, reviewer/configuration/timing,
+  scoped artifact paths and hashes are checked. Fixtures never count as host
+  performance. Timestamp validation is explicit rather than dependent on optional
+  JSON Schema date-time packages. No model or transcript content is executed.
+- SVG labels are bounded and invalid control text rejected; the saved synthetic
+  preview matches the renderer. Updated and long-label renders were inspected.
+
+**Observed validation:** 97 automated tests and 81 static checks passed; skill
+lint found 0 errors and 19 existing review-status warnings. Dependency compatibility,
+whitespace and relevant editor diagnostics passed. Tests initially reproduced the
+old defects; an intermediate traversal return-placement defect and missing optional
+date-time validation were fixed with dedicated regressions.
+
+**Limits:** Live-host evaluations remain not run. Source locators/hashes do not
+establish truthful provenance or professional approval. The tools do not establish
+site conditions, full wall/room topology, native CAD/BIM authoring, general sandboxing
+or licensing resolution. No private project was opened, no packages were added in
+this batch, and no staging, commits, sends or publication were performed.
+
+---
+
+## 2026-09-11 — Reliability Repairs and Tested Detail Records
+
+Implemented a bounded reliability upgrade after the audit. See
+[docs/reliability-implementation-2026-09-11.md](docs/reliability-implementation-2026-09-11.md)
+for the per-finding status and remaining work. No claim that the entire agent is
+professionally verified or that every audit item is closed.
+
+- Source-checked room, energy, escape, moisture and stormwater distinctions against
+  current public DiBK pages; replaced broad regulatory, building-physics and
+  electrical defaults with scoped evidence workflows. Removed relevant downstream
+  room/height, curing, heritage, pricing and symptom-to-repair shortcuts.
+- Reworked six shared templates to remove preset grades/loads/limits, invented
+  inspection/approval schedules, generic costs and maintenance intervals. Preserved
+  their purposes using source/applicability, review and release fields.
+- Drawing schema v2 adds explicit page/view selection, retained sparse text,
+  caller-supplied calibration rather than confirmed scale text, supported linear
+  DXF unit conversion, angular separation, native DWG rejection, no implicit OCR
+  and output overwrite protection. Optional external OCR still needs separate
+  availability, privacy and backend-scope verification.
+- Added strict detail records, root-scoped local reads, units/datums/source/dependency
+  validation, rectangular quantities and conservative revision invalidation. The
+  local tool cannot close holds or authorize construction. A synthetic wall/window/
+  well fixture produces a dimension-labeled SVG schematic; the saved preview is
+  checked against the renderer and was rendered for visual inspection.
+- Added duplicate-YAML-key rejection, shared Python 3.12 test dependencies,
+  Windows/Ubuntu CI definition and twelve live-host evaluation cases. CI is defined
+  locally but not claimed executed remotely; live model evaluations remain not run.
+- Removed ignored local configuration link prerequisites and rewrote the unbuilt
+  geodata specification to reject guessed endpoints and map-to-safety shortcuts.
+  No live geodata connector was implemented.
+
+**Observed verification:** 60 deterministic tests and 79 static source contracts
+passed. Skill lint: 25 skills, 0 errors, 19 existing unreviewed-status warnings.
+Dependency compatibility and whitespace checks passed. Regression fixtures are
+synthetic; no private project was read. The initial electrical description-colon
+error, retained legacy extraction-reference body and static matcher mismatch were
+corrected and rechecked rather than hidden.
+
+**Remaining:** qualified technical/standards/product review, broader drawing and
+CAD/BIM tests, live host behavior/permissions, hosted CI execution and maintainer
+resolution of root MIT versus Proprietary skill licensing. Existing source/history
+records remain; no license grants, private data, commits, sends or publication changed.
+
+---
+
+## 2026-09-11 — Agent Audit and Twelve-System Industry Research
+
+Added [docs/agent-audit-and-direction-2026-09-11.md](docs/agent-audit-and-direction-2026-09-11.md)
+and [docs/industry-agent-research-2026-09-11.md](docs/industry-agent-research-2026-09-11.md).
+Reviewed 12 distinct industry agents/assistants: selected implementation files
+from six public projects and first-party descriptions of six commercial systems.
+Commercial claims, observed source mechanisms and BTBA recommendations are kept
+separate. No external system was installed, run or integrated; licensing and
+Norwegian applicability remain explicit adoption considerations.
+
+The repository audit recognizes evidence/authority separation, scoped lifecycle
+and tender workflows, and the tested local beam tool as strengths. It records
+source-checked room/energy guidance mismatches, an internal vapour-rule conflict,
+and synthetic observations of scale confirmation, DXF unit labeling, embedded
+example syntax and duplicate YAML-key behavior. These are **open findings**, not
+fixes or claims about a property's safety. Broader electrical/technical guidance,
+licensing consistency, reproducible setup and host enforcement require follow-up.
+
+Recommended direction: source and extractor reliability first, then a small
+evidence/element/detail schema and one wall–opening–window-well demonstration.
+An ordered B01–B09 backlog includes acceptance evidence rather than promising
+autonomous CAD or a large agent hierarchy. Existing README and roadmap now link
+to the audit; technical skills and implementation were not modified in this pass.
+
+**Observed checks:** 60 static contracts and 27 beam tests passed again; skill
+lint found 0 errors and the existing 23 unreviewed-status warnings. The targeted
+probes exposed the documented gaps despite that passing baseline. Checked 60
+local document links/ranges/anchors and exactly 12 research entries; no validation
+failures. Edited-document diagnostics and tracked whitespace checks were clean.
+No private project was opened, no packages installed, and nothing was staged,
+committed, sent or published. Findings and proposals remain local documents.
+
+---
+
+## 2026-09-11 — README Reality Check and Construction-Detail Direction
+
+Rewrote [README.md](README.md) around BTBA's purpose: a Norway-first assistant
+connecting project evidence, design decisions and construction planning. Replaced
+the stale 20-skill/version-2 completion list with the current 25-skill inventory,
+separating instruction workflows, implemented local tools, prototypes and unbuilt
+integrations. Removed blanket code-currency, professional-grade, mandatory-stamp,
+automatic-memory and completed-template claims. Retained the existing local
+beam-calculator work without changing its implementation.
+
+- [docs/readme-audit-2026-09-11.md](docs/readme-audit-2026-09-11.md) records the
+  evidence, corrections and unfinished extraction, source, template and connector
+  work. This was not a full technical review of all domain guidance.
+- [docs/construction-plans-roadmap.md](docs/construction-plans-roadmap.md) defines
+  the next stage: wall instances/types, layers, openings, window wells, junctions,
+  civil/site interfaces, quantities and review holds before CAD/BIM automation.
+- [templates/construction-detail-package.md](templates/construction-detail-package.md)
+  provides an original blank, source-linked draft. Added an optional procedure to
+  the existing execution skill and routing, not a new engineering engine. No
+  project dimensions, compliant default well size or construction release supplied.
+- Corrected the Quick Ask prompt's stale path/private-project fallback and aligned
+  directly relevant contributor guidance with current loading/evidence boundaries.
+- Reviewed the supplied public SmartPlansAI, civil-agent overview and SciML4StructEng
+  pages. SmartPlansAI's inspected tree contains no implementation. No external code
+  was adopted and no dataset or CAD/model accuracy was evaluated.
+
+**Observed validation:** 60 default static source-contract checks passed with no
+private-project argument; all 27 existing beam numerical/CLI tests passed in the
+existing isolated environment. The isolated environment lacked PyYAML for skill
+lint, so lint was rerun successfully with the existing system Python: 25 skills,
+0 errors and 23 unreviewed-status warnings. No package installation was needed.
+Edited-file diagnostics and tracked whitespace checks were clean.
+
+**Limits:** Source assertions are not behavioral evaluations. New detail-package
+examples are expected outcomes, not executed agent tests. Drawing extraction,
+MCP services, CAD output, engineering applicability and project conditions were
+not validated. All changes remain local; no private project files were opened,
+staged or published, and no send, move, deletion, commit or push was performed.
+
+---
+
 ## 2026-09-06 — Skill Authoring Primer Follow-Up
 
 Reviewed the public [Claude Skills for Construction primer](https://aiconstructionnews.com/blog/ai-primers/claude-skills-for-construction-what-they-are-and-how-to-use-them)

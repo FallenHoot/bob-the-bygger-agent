@@ -5,6 +5,7 @@ triggers: [beam, bjelke, load, last, load bearing, bærevegg, wall removal, vegg
 load_with: [building-code-tek17]
 safety_level: high
 license: Proprietary
+dependencies: Python>=3.10, Pint>=0.24,<0.26 (local calculator only)
 ---
 
 # Skill: Structural Engineering
@@ -22,7 +23,7 @@ Load path analysis, beam and column sizing, deflection limits, connection design
 - State when a calculation cannot be trusted (unconfirmed profile, unresolved drawing conflict, missing load data) and what would resolve it
 
 **Bob may flag only as preliminary / low-confidence:**
-- Any structural calculation produced before the Drawing Freeze Gate passes (rule-of-thumb sizing only, explicitly labeled LOW confidence)
+- Calculations with unresolved project inputs: state which assumptions control the result, not a build-ready recommendation. Conceptual numerical examples remain allowed under the system prompt.
 - Beam/member identification made from indirect evidence (gypsum thickness, crew size, order timing) rather than direct measurement or documentation — never presented as confirmed (Lesson L003)
 - Hypothetical comparisons with unconfirmed inputs, never an adequacy check of the installed member
 
@@ -35,27 +36,49 @@ Load path analysis, beam and column sizing, deflection limits, connection design
 
 ---
 
+## Optional Beam Calculator Reference
+
+For the Beam Calculator website, shared beam links, formula display, unit
+conversion or section-property helpers, load the
+[reviewed resource note](references/beam-calculator.md) on demand. It records
+source scope, known cautions and independent example arithmetic, not a
+whole-tool validation or installed integration. Verify support/load mapping,
+units and the Norwegian design basis; L/360 is not a universal Norwegian limit.
+Do not use generic timber Fy/Fu labels as verified timber design properties.
+A calculator result does not establish installed-member adequacy or approval.
+
+## Local Tested Beam Analysis
+
+For supported one-span numerical checks, use the
+[local calculator procedure](references/local-beam-calculator.md) and
+[Python script](scripts/beam_calculator.py). It handles a simply supported beam
+or cantilever with a full-span UDL or one point load, with explicit Pint units
+and strict input validation. Load the procedure only for numerical work.
+It returns a local JSON report; it is not an MCP server or a design-code engine.
+
+Read the [Norwegian design-basis register](references/norwegian-design-basis.md)
+before selecting loads, combinations, material properties or criteria. The
+DiBK structural requirements/Eurocode route are source-checked there; numerical
+standard/NA provisions remain unverified until their original sources and
+applicability are established. No automatic load factors or deflection limits
+are implemented. Neither a populated basis nor a passing calculation approves
+the member. Earlier project calculations are not revalidated by this addition.
+
+---
+
 ## Drawing Freeze Gate ⛔
 
-**This gate must pass before any detailed structural calculation is produced.**
+**Gate for project design reliance, not a ban on conceptual arithmetic.**
+Review the relevant drawings/revisions and geometry, actual or proposed support
+conditions and load path, material/section evidence, and the load/combination
+basis before relying on a project solution. Resolve contradictions that affect
+the calculation; an architect's layout freeze is not structural verification.
+Do not require unrelated sheets or an entire drawing package for every case.
 
-Do not calculate moments, deflections, or member sizes until ALL of these are confirmed:
-
-```
-[ ] Drawing package reviewed using drawing-reader + architectural-drawing-reading
-[ ] Drawing set is consistent with the owner’s stated design intent
-[ ] Key spanning dimensions confirmed from drawings or site measurement (not inferred)
-[ ] No unresolved contradictions between plan, section, and elevation
-[ ] Architect has locked the layout — no open design questions that change structural geometry
-```
-
-**If the gate is closed:**
-- Preliminary (rule-of-thumb) sizing with explicit LOW confidence is allowed
-- Qualitative load path analysis (no numbers) is allowed
-- State clearly: “Detailed structural calculations cannot be performed until [specific condition] is resolved”
-- Never produce a structural calculation table or beam adequacy check before this gate passes
-
-**Exceptions:** None. The gate exists because analysis built on incorrect drawings creates conflicting documents that persist and cause real errors.
+When evidence is incomplete, identify the unresolved inputs and their effect.
+Bounded numerical comparisons with explicit hypothetical inputs are allowed;
+do not present them as installed-member adequacy, approved sizing or permission
+to build. A correct formula cannot repair an incorrect structural model.
 
 ---
 
@@ -139,57 +162,53 @@ When a wall is removed, a beam must replace the load path. When a floor is added
 - Mark missing components unverified, not zero. Obtain the responsible structural designer's verification of the assembly and takeoff before design use.
 
 ### Imposed (Live) Loads — NS-EN 1991-1-1 (Eurocodes)
-| Category | Use | q_k (kN/m²) |
-|---|---|---|
-| A | Domestic / residential floors | 2.0 |
-| A | Stairs | 3.0 |
-| B | Office | 3.0 |
-| C1 | Areas with tables (cafés) | 3.0 |
-| C3 | Crowded rooms | 5.0 |
-| E1 | Storage | 7.5 |
+Source the applicable NS-EN 1991-1-1 and Norwegian NA edition, occupancy/use
+category, distributed and concentrated actions, and any relevant arrangements
+or reductions. Former unsourced category values are not design defaults.
+Record source/revision, units and applicability; missing values stay unverified.
 
 ### Snow Loads — NS-EN 1991-1-3 + Norwegian NA
-Snow load on ground (s_k) varies by location:
-- Oslo: ~2.5 kN/m²
-- Bergen: ~3.5 kN/m²
-- Trondheim: ~3.5–4.0 kN/m²
-- Mountain regions: up to 9.0 kN/m²
-
-Roof snow load: `s = µ_i × C_e × C_t × s_k`
-- µ_i = shape coefficient (0.8 for flat/shallow pitch)
-- C_e = exposure coefficient (typically 1.0)
-- C_t = thermal coefficient (typically 1.0)
+Use the [source-specific snow procedure](../formulas-reference/SKILL.md#22-snow-load-ns-en-1991-1-3-and-norwegian-national-annex):
+establish location/altitude and ground load, then applicable roof coefficients,
+arrangements, drift and accumulation cases. Distinguish ground/roof snow,
+horizontal/sloping area and characteristic/factored loads. No city estimate or
+generic coefficient is a verified project input.
 
 ### Wind Loads — NS-EN 1991-1-4 + Norwegian NA
-Reference wind speed (v_b,0) by zone. Oslo approx. 22 m/s. Apply terrain category corrections. For residential design, rely on the structural engineer's wind zone table rather than calculating from scratch without context.
+Verify the applicable edition/NA, site/terrain, geometry and pressure/exposure
+model, directions and relevant arrangements. No default wind speed is supplied.
 
 ---
 
 ## Load Combinations — Eurocode (NS-EN 1990)
 
 ### Ultimate Limit State (ULS) — Strength
-The governing combination for most residential design:
-
-**STR** (structural): `γ_G × G_k + γ_Q × Q_k,1 + Σ(γ_Q × ψ_0 × Q_k,i)`
-
-Simplified for timber residential:
-- Permanent load factor γ_G = 1.35 (unfavorable) / 1.0 (favorable)
-- Variable load factor γ_Q = 1.5
-- Common combination: **1.35 G + 1.5 Q** (or 1.0 G + 1.5 Q when permanent is favorable)
+Establish the applicable NS-EN 1990/NA design situation, limit-state expressions,
+partial and combination factors, favorable/unfavorable permanent actions and
+each relevant leading/accompanying variable action and arrangement. Follow the
+[combination verification procedure](../formulas-reference/SKILL.md#4-load-combination-verification-ns-en-1990-and-norwegian-na).
+Do not assume a universal 1.35G + 1.5Q combination or omit accompanying snow/wind
+without a verified applicable rule. The local calculator evaluates only the
+explicit input load; it does not generate or verify combinations.
 
 ### Serviceability Limit State (SLS) — Deflection
-Use characteristic combination: `G_k + Q_k,1 + Σ(ψ_0 × Q_k,i)`
+Select the characteristic, frequent or quasi-permanent combination appropriate
+to the response and applicable material provisions. Source the expression and
+coefficients; distinguish instantaneous, final and net final response and
+material-specific long-term effects. A ULS load is not an SLS deflection check.
 
 ---
 
 ## Timber Beam Sizing — Quick Reference
 
-### Deflection Limits (NS-EN 1995-1-1, TEK17)
-| Condition | Limit |
-|---|---|
-| Final deflection (w_net,fin) | L / 250 |
-| Variable load deflection (w_2) | L / 300 |
-| Appearance-sensitive spans | L / 400 |
+### Deflection Criteria — Source and Scope Required
+The former blanket L/250, L/300 and L/400 assignments are withdrawn as design
+defaults, not replaced by L/360. Verify the applicable NS-EN 1995-1-1/NA edition,
+response definition, combination and material long-term treatment together with
+project/finish requirements. Record the reference span, instantaneous/final/net
+displacement component and any camber. An unavailable criterion stays unverified;
+do not report pass/fail or claim a universal TEK17 deflection limit. See the
+[checked requirements and unresolved numerical rules](references/norwegian-design-basis.md).
 
 ### Span-to-Depth Rule of Thumb
 For a simply supported timber floor joist at 600mm spacing, residential loading (2.0 kN/m² imposed + ~1.0 kN/m² dead):
@@ -375,4 +394,6 @@ Pre-construction:
 ---
 
 *Authority: NS-EN 1990, NS-EN 1991 (Eurocodes), NS-EN 1993 (Steel), NS-EN 1995 (Timber), TEK17 §10*
-*Last reviewed: 2026-08-09*
+*Scoped update: 2026-09-10 — local numerical tool and source-based beam workflow.
+Remaining material tables, distress heuristics and other legacy sections have
+not been comprehensively verified; the system prompt's boundaries prevail.*

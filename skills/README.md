@@ -197,6 +197,12 @@ readiness. A heading match does not verify the adequacy of its contents.
 Static source inspection is not a substitute for running malformed-input
 regression tests when execution is permitted.
 
+Duplicate YAML keys are rejected rather than silently keeping the last value.
+[Configuration regressions](../tests/test_skill_validator.py) exercise malformed
+shapes, duplicate fields and invalid types. Use [the shared developer setup](../docs/development.md)
+for the same environment across lint and tests. Passing these cases is not host
+compatibility or technical certification.
+
 ```bash
 python skills/validate_skills.py                 # check all skills
 python skills/validate_skills.py --skill routing # check one skill

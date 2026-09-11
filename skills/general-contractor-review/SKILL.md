@@ -106,12 +106,12 @@ AFTER (wall removed, beam added):
 
 1. **Check floor-to-ceiling heights:**
    - If removing wall in upper floor, does beam depth eat into headroom?
-   - Minimum headroom per TEK17: 2.1 m (living areas), 2.0 m (kitchens), 1.9 m (corridors)
-   - Example: 8" steel beam (200 mm) may reduce headroom from 2.4 m to 2.2 m (acceptable, tight but OK)
+   - Verify actual room use and the applicable [room-height route](../building-code-tek17/references/verified-requirements.md#rooms).
+   - A beam reducing height is a geometry change, not automatically acceptable.
 
 2. **Opening sizes (if adding windows/doors in new location):**
-   - TEK17 fenestration: Minimum 5–10% of floor area for daylight
-   - Verify new opening doesn't reduce daylighting below minimum
+    - Verify the actual daylight method, glazing, transmission and external
+       obstructions, including window wells; no generic area-percentage pass.
 
 3. **Clearances around new structure:**
    - New posts/columns: Do they obstruct views, doors, circulation?
@@ -148,7 +148,7 @@ AFTER (wall removed, beam added):
 #### Plumbing
 
 - [ ] **Is there existing plumbing in the wall/floor being modified?** (Water supply, drain, vent stack?)
-- [ ] **Drainage routing:** If floor plan changes, do drain lines maintain 0.5–1.0% slope?
+- [ ] **Drainage routing:** Verify falls, inverts, capacity and venting against the actual design/product requirements.
 - [ ] **Traps & vents:** New fixtures need traps + vent connection (can use existing stack if nearby, or new vent required)
 - [ ] **Winterization:** Any new runs in unheated spaces? (Insulation, heat tape needed?)
 
@@ -160,7 +160,7 @@ AFTER (wall removed, beam added):
 
 - [ ] **Load paths verified?** (Existing supports sufficient or new beam/posts needed?)
 - [ ] **Connection details:** How does new beam/post connect to existing structure? (Bolted plate? Welded? Bearing pad?)
-- [ ] **Deflection & vibration:** Large opening or cantilever can cause floor movement (acceptable limit per Eurocode: L/250 to L/400 depending on use)
+- [ ] **Deflection & vibration:** Verify the applicable source, load combination and response component; no generic L/ratio default.
 - [ ] **Material compatibility:** If existing structure is timber + new beam is steel, how do they join? (Different thermal expansion)
 
 **Questions:**
@@ -169,7 +169,7 @@ AFTER (wall removed, beam added):
 
 #### Heritage (if applicable)
 
-- [ ] **Building listed (SEFRAK)?** If YES: Any modification to exterior, interior character, original materials requires Byantikvaren approval (see heritage-preservation skill)
+- [ ] **Heritage:** Verify actual protection decision/local plan and competent authority; SEFRAK alone is not formal protection or a universal consent requirement.
 - [ ] **Original structural elements visible/significant?** (Timber framing, stone walls, exposed beams — preserve if possible)
 - [ ] **Material matching:** If removing/replacing elements, must use compatible materials (color, texture, profile)
 
@@ -192,13 +192,13 @@ Example: **Wall Removal + Beam Addition**
 3. **Wall demolition:** Remove wall carefully (dust control, asbestos survey if old building?)
 4. **Foundation prep:** If new posts required, install footings (may require excavation, concrete pour, cure time)
 5. **Beam installation:** Once footings set (concrete cured), install beam + permanent posts
-6. **Remove temporary bracing:** Once beam load-tested
+6. **Remove temporary bracing:** Only against the verified removal sequence and designated competent person's release; no improvised load testing
 7. **Finishes:** Drywall, painting, flooring, trim
 8. **Utilities reinstallation:** New circuits, ducts, pipes in new locations
 
 **Critical dependencies:**
-- Footings must cure 7 days before beam weight applied
-- Temporary bracing must stay in place until beam fully installed + tested
+- Verify concrete strength and loading criteria against the design and actual conditions, not a generic seven-day wait
+- Temporary bracing remains until the required installation checks and authorized removal release are recorded
 - Utilities must be moved BEFORE wall removal (can't be done mid-work)
 
 #### Site Constraints
@@ -212,7 +212,7 @@ Example: **Wall Removal + Beam Addition**
 #### Equipment & Access
 
 - [ ] **Heavy equipment:** Beam installation may need crane, boom truck (access to site? width, height, weight limits?)
-- [ ] **Temporary support structures:** Shoring equipment rental cost (often $500–2k for major projects)
+- [ ] **Temporary support structures:** Obtain design-based equipment scope and actual supplier pricing; no generic rental allowance
 - [ ] **Safety systems:** Fall protection, dust barriers, temporary lighting (costs money; timeline impact)
 
 ---
@@ -255,7 +255,7 @@ Route bidder capacity and bid/no-bid questions to [Bidder Review Mode](../reside
 **Common pitfalls:**
 - Underestimating beam size (looks small; insufficient capacity)
 - Inadequate post support (not anchored to foundation; can shift)
-- Headroom lost due to beam depth (< 2.1 m minimum)
+- Headroom lost due to beam depth; verify the actual room-height requirement and scope
 - Electrical/plumbing in wall not relocated (delays construction, quality issues)
 
 **Questions to ask architect/engineer:**
@@ -290,7 +290,7 @@ Route bidder capacity and bid/no-bid questions to [Bidder Review Mode](../reside
 2. **Load redistribution:** Removing intermediate supports (posts, walls) → loads concentrate elsewhere
 3. **HVAC ductwork:** Does it run in ceiling? New ducting routing required? (May lose headroom)
 4. **Electrical conduit:** Runs in ceiling? Rerouting needed?
-5. **Accessibility:** Does new ceiling height meet minimum 2.1 m per TEK17?
+5. **Accessibility:** Does geometry meet the applicable room, access and clearance requirements for this measure?
 6. **Acoustics:** Open plan changes sound propagation (noise from kitchen to living room increases)
 
 **Timeline impact:** Significant; sequencing complex (support + ductwork + electrical + structural work all interdependent)
@@ -301,7 +301,7 @@ Route bidder capacity and bid/no-bid questions to [Bidder Review Mode](../reside
 
 **What to assess:**
 
-1. **Insulation value:** New opening reduces overall U-value; must comply with TEK17 Chapter 14 (max 1.2 W/m² for residential windows)
+1. **Energy:** Recalculate relevant heat loss/thermal bridges using actual product and assembly evidence; minimum levels and the complete energy route are separate
 2. **Weather protection:** New opening exposes interior to water, wind; flashing details critical
 3. **Thermal bridging:** Window frames, sills can transfer heat; design must minimize
 4. **Heritage concerns:** If building is SEFRAK-listed, modifications to exterior profile may require Byantikvaren approval
@@ -322,8 +322,8 @@ Route bidder capacity and bid/no-bid questions to [Bidder Review Mode](../reside
 - [ ] **Large openings in exterior walls** → Water infiltration + thermal performance risk
 - [ ] **Significant load redistribution** (removing posts, walls below roof) → Requires structural engineer
 - [ ] **Utility conflicts unresolved** (electrical panel moved, plumbing rerouted) → Safety + code violations
-- [ ] **Timeline compressed** (major work in < 4 weeks) → Quality/safety risk
-- [ ] **Building is SEFRAK-listed or heritage-protected** → Byantikvaren approval required before modification
+- [ ] **Timeline conflicts with evidenced design/inspection/product dependencies** → Resolve the specific constraint; no generic duration threshold
+- [ ] **Heritage constraints unresolved** → Verify the protection basis, affected work and appropriate authority
 - [ ] **Occupied during construction** → Phasing complexity, temporary systems needed
 - [ ] **Site access/logistics unclear** → Equipment, debris, staging strategy undefined
 - [ ] **Budget under-estimated** (no allowance for utilities, temporary support, testing) → Scope creep inevitable
@@ -371,8 +371,8 @@ Route bidder capacity and bid/no-bid questions to [Bidder Review Mode](../reside
 1. **"I don't see structural calcs for the beam. Who's designing it, and when?"** (Prevents gaps)
 2. **"Electrical panel stays in the same location? Outlets in the old wall will need new circuits?"** (Clarifies scope)
 3. **"HVAC ductwork currently runs above the wall being removed. Rerouting plan?"** (Identifies conflicts)
-4. **"Timeline shows 6 weeks total. Concrete footings need 7 days to cure before beam install. Realistic?"** (Challenges schedule)
-5. **"Budget is 200k NOK. Structural work alone (beam, posts, footings) typically 100k+. Where does testing, utilities, finishes fit?"** (Questions scope)
+4. **"Which strength and inspection evidence releases loading and temporary-support removal?"**
+5. **"Which quoted lines cover supports, foundations, utilities, testing and finishes, and what is still unpriced?"**
 6. **"Building was constructed 1920. Any asbestos survey scheduled before demolition?"** (Safety critical)
 
 **Outcome:** Good questions early prevent expensive changes mid-construction.
@@ -403,9 +403,9 @@ Bob cannot:
 - **TEK17** — Building code requirements (structural, accessibility, energy, fire)
 - **Eurocode 2/3/5** — Structural design (concrete, steel, timber)
 - **SINTEF Byggforsk** — Construction details, best practices
-- **NS 3940** — Energy installations (mechanical, electrical integration)
-- **DiBK Byggdetaljsamlingen** — Standard construction details
+- **NS 3940** — Area/volume measurement; verify applicable edition and scope
+- **SINTEF Byggforskserien** — Construction guidance; authorized detail/product applicability must be checked
 
 ---
 
-*"A good design review catches 90% of problems before a shovel hits the ground. A bad design review catches 0% and costs 10× as much to fix during construction."* — Experienced GC wisdom
+*Focused corrections 2026-09-11: no measured defect-detection or cost-saving rate is claimed. Remaining examples are review prompts, not design approval.*
